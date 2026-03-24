@@ -280,6 +280,22 @@
     .feat-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; }
     .feat-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
 
+    /* ── DEVICE STRIP ── */
+    .devices-strip {
+      background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 20px 24px; text-align: center;
+    }
+    .devices-strip-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 14px; }
+    .device-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .device-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; padding: 5px 14px; font-size: 0.78rem; color: #ccc;
+      white-space: nowrap;
+    }
+    .device-badge svg { opacity: 0.7; }
+    .device-badge-note { font-size: 0.72rem; color: var(--muted); margin-top: 12px; }
+
     /* ── WATCH SECTION ── */
     .watch-section { display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center; }
     .watch-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -655,7 +671,7 @@
     <div class="ticker-item"><div class="ticker-dot"></div>Dark Map Routes</div>
     <div class="ticker-item"><div class="ticker-dot"></div>HRV & Recovery Score</div>
     <div class="ticker-item"><div class="ticker-dot"></div>AI Nutrition Analysis</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>Apple Watch Sync</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Works with Any Smartwatch</div>
     <div class="ticker-item"><div class="ticker-dot"></div>Social Feed</div>
     <div class="ticker-item"><div class="ticker-dot"></div>Personal Records</div>
     <div class="ticker-item"><div class="ticker-dot"></div>Sleep Insights</div>
@@ -664,11 +680,55 @@
     <div class="ticker-item"><div class="ticker-dot"></div>Dark Map Routes</div>
     <div class="ticker-item"><div class="ticker-dot"></div>HRV & Recovery Score</div>
     <div class="ticker-item"><div class="ticker-dot"></div>AI Nutrition Analysis</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>Apple Watch Sync</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Works with Any Smartwatch</div>
     <div class="ticker-item"><div class="ticker-dot"></div>Social Feed</div>
     <div class="ticker-item"><div class="ticker-dot"></div>Personal Records</div>
     <div class="ticker-item"><div class="ticker-dot"></div>Sleep Insights</div>
   </div>
+</div>
+
+<!-- DEVICE COMPATIBILITY -->
+<div class="devices-strip">
+  <div class="devices-strip-label">Compatible with any device that syncs to Apple Health</div>
+  <div class="device-badges">
+    <span class="device-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#ccc"/><path d="M20 21a8 8 0 1 0-16 0" stroke="#ccc" stroke-width="2"/></svg>
+      Apple Watch
+    </span>
+    <span class="device-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#ccc"/><path d="M20 21a8 8 0 1 0-16 0" stroke="#ccc" stroke-width="2"/></svg>
+      Garmin
+    </span>
+    <span class="device-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#ccc"/><path d="M20 21a8 8 0 1 0-16 0" stroke="#ccc" stroke-width="2"/></svg>
+      Polar
+    </span>
+    <span class="device-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#ccc"/><path d="M20 21a8 8 0 1 0-16 0" stroke="#ccc" stroke-width="2"/></svg>
+      Fitbit
+    </span>
+    <span class="device-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#ccc"/><path d="M20 21a8 8 0 1 0-16 0" stroke="#ccc" stroke-width="2"/></svg>
+      Whoop
+    </span>
+    <span class="device-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#ccc"/><path d="M20 21a8 8 0 1 0-16 0" stroke="#ccc" stroke-width="2"/></svg>
+      Oura Ring
+    </span>
+    <span class="device-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#ccc"/><path d="M20 21a8 8 0 1 0-16 0" stroke="#ccc" stroke-width="2"/></svg>
+      Samsung Galaxy Watch
+    </span>
+    <span class="device-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#ccc"/><path d="M20 21a8 8 0 1 0-16 0" stroke="#ccc" stroke-width="2"/></svg>
+      Suunto
+    </span>
+    <span class="device-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#ccc"/><path d="M20 21a8 8 0 1 0-16 0" stroke="#ccc" stroke-width="2"/></svg>
+      COROS
+    </span>
+  </div>
+  <p class="device-badge-note">MyVitality reads from Apple Health — if your device syncs to Apple Health, it works automatically.</p>
 </div>
 
 <!-- ROUTES SECTION -->
@@ -1242,8 +1302,8 @@
     </div>
     <div class="feat-card">
       <div class="feat-icon">⌚</div>
-      <div class="feat-title">Apple Watch Sync</div>
-      <div class="feat-desc">Every metric — HRV, SpO2, body temperature, VO2 max, respiratory rate — auto-synced from HealthKit every 30 minutes.</div>
+      <div class="feat-title">Works with Any Smartwatch</div>
+      <div class="feat-desc">Apple Watch, Garmin, Polar, Whoop, Oura and more — every metric auto-synced via Apple Health every 30 minutes. No extra setup.</div>
     </div>
     <div class="feat-card">
       <div class="feat-icon">🏆</div>
@@ -1258,7 +1318,7 @@
   <div style="text-align:center">
     <span class="section-label">Getting started</span>
     <h2 class="section-title">Up and running in minutes.</h2>
-    <p class="section-sub" style="margin:0 auto">No subscriptions. No Whoop band required. Just your iPhone and Apple Watch.</p>
+    <p class="section-sub" style="margin:0 auto">No subscriptions. Works with any smartwatch — Apple Watch, Garmin, Polar, Whoop, Oura and more.</p>
   </div>
   <div class="steps">
     <div class="step">
@@ -1272,7 +1332,7 @@
       <div class="step-num">2</div>
       <div>
         <div class="step-title">Connect Apple Health once</div>
-        <div class="step-desc">Grant HealthKit permission and MyVitality takes over. HRV, sleep, heart rate, SpO2 and 20+ metrics — synced automatically every 30 minutes from your Apple Watch.</div>
+        <div class="step-desc">Grant HealthKit permission and MyVitality takes over. HRV, sleep, heart rate, SpO2 and 20+ metrics — synced automatically every 30 minutes from any device that writes to Apple Health (Apple Watch, Garmin, Polar, Whoop, Oura, Fitbit and more).</div>
       </div>
     </div>
     <div class="step">
