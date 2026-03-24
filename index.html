@@ -13,1214 +13,1370 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0a0a12;
-      --surface:   #12121e;
-      --card:      #1a1a2e;
-      --border:    rgba(255,255,255,0.08);
-      --orange:    #FC4C02;
-      --purple:    #7C6EFA;
-      --cyan:      #26C6DA;
-      --green:     #4CAF50;
-      --text:      #f0f0f8;
-      --muted:     #888899;
-      --radius:    20px;
+      --bg:      #08080f;
+      --surface: #0f0f1a;
+      --card:    #141425;
+      --border:  rgba(255,255,255,0.07);
+      --orange:  #FC4C02;
+      --purple:  #7C6EFA;
+      --cyan:    #26C6DA;
+      --green:   #4CAF50;
+      --text:    #f0f0f8;
+      --muted:   #777788;
+      --r:       16px;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* ── NAV ───────────────────────────────────────────────────────────── */
+    /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 40px;
-      background: rgba(10,10,18,0.7);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 48px;
+      background: rgba(8,8,15,0.75);
+      backdrop-filter: blur(24px);
       border-bottom: 1px solid var(--border);
     }
-
     .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text);
-      text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.1rem; font-weight: 800; color: var(--text); text-decoration: none;
     }
-
     .nav-logo-icon {
-      width: 32px; height: 32px;
-      background: linear-gradient(135deg, var(--orange), var(--purple));
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
+      width: 32px; height: 32px; border-radius: 9px;
+      background: var(--orange); display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
     }
-
-    .nav-links { display: flex; gap: 32px; align-items: center; }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color .2s; }
     .nav-links a:hover { color: var(--text); }
-
     .nav-cta {
-      background: var(--orange);
-      color: #fff !important;
-      padding: 8px 18px;
-      border-radius: 999px;
-      font-weight: 600 !important;
-      font-size: 0.85rem !important;
-      transition: opacity 0.2s !important;
+      background: var(--orange); color: #fff !important;
+      padding: 8px 20px; border-radius: 20px; font-weight: 600; font-size: 0.85rem !important;
     }
-    .nav-cta:hover { opacity: 0.85; }
 
-    /* ── HERO ──────────────────────────────────────────────────────────── */
+    /* ── HERO ── */
     .hero {
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 24px 80px;
-      position: relative;
-      overflow: hidden;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; gap: 60px;
+      padding: 120px 80px 80px;
+      position: relative; overflow: hidden;
     }
-
-    .hero-glow {
-      position: absolute;
-      border-radius: 50%;
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; right: -100px;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(252,76,2,0.12) 0%, transparent 70%);
       pointer-events: none;
-      filter: blur(80px);
     }
-    .hero-glow-1 {
-      width: 600px; height: 600px;
-      background: rgba(252,76,2,0.15);
-      top: -200px; left: -200px;
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -100px; left: 200px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,110,250,0.08) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .hero-glow-2 {
-      width: 500px; height: 500px;
-      background: rgba(124,110,250,0.12);
-      bottom: -150px; right: -150px;
-    }
-    .hero-glow-3 {
-      width: 400px; height: 400px;
-      background: rgba(38,198,218,0.08);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .hero-content { position: relative; z-index: 1; max-width: 720px; }
-
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(252,76,2,0.12);
-      border: 1px solid rgba(252,76,2,0.3);
-      color: var(--orange);
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 999px;
-      margin-bottom: 24px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(252,76,2,0.1); border: 1px solid rgba(252,76,2,0.3);
+      color: var(--orange); padding: 6px 14px; border-radius: 20px;
+      font-size: 0.8rem; font-weight: 600; margin-bottom: 24px;
     }
-
-    h1 {
-      font-size: clamp(2.4rem, 6vw, 4.2rem);
-      font-weight: 800;
-      line-height: 1.1;
+    .hero-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    .hero h1 {
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      font-weight: 900; line-height: 1.1; margin-bottom: 20px;
       letter-spacing: -0.02em;
-      margin-bottom: 20px;
     }
-
-    .hero-gradient {
-      background: linear-gradient(135deg, var(--orange) 0%, var(--purple) 60%, var(--cyan) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
-      color: var(--muted);
-      max-width: 520px;
-      margin: 0 auto 36px;
-      line-height: 1.7;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 60px;
-    }
-
+    .grad { background: linear-gradient(135deg, #FC4C02, #ff8c42); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 1.05rem; color: var(--muted); line-height: 1.7; margin-bottom: 36px; max-width: 480px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
     .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--orange);
-      color: #fff;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.95rem;
-      padding: 14px 28px;
-      border-radius: 14px;
-      transition: transform 0.2s, opacity 0.2s;
-      box-shadow: 0 8px 30px rgba(252,76,2,0.35);
+      display: flex; align-items: center; gap: 10px;
+      background: var(--orange); color: #fff;
+      padding: 14px 28px; border-radius: 14px; font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 8px 32px rgba(252,76,2,0.35);
     }
-    .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
-
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(252,76,2,0.45); }
     .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--border);
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      padding: 14px 28px;
-      border-radius: 14px;
-      transition: background 0.2s, transform 0.2s;
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+      color: var(--text); padding: 14px 24px; border-radius: 14px;
+      font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background .2s;
     }
-    .btn-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+    .hero-stats { display: flex; gap: 32px; }
+    .hero-stat { }
+    .hero-stat-num { font-size: 1.8rem; font-weight: 900; color: var(--text); }
+    .hero-stat-lbl { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
 
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 48px;
-      flex-wrap: wrap;
+    /* ── PHONES (unified) ── */
+    .hero-phone-wrap {
+      display: flex; justify-content: center; align-items: center;
+      position: relative; animation: floatY 5s ease-in-out infinite;
     }
-
-    .hero-stat-item {
-      text-align: center;
+    @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-18px)} }
+    .big-phone, .feature-phone {
+      width: 240px; height: 520px; border-radius: 52px;
+      background: #0a0a14;
+      border: 2px solid rgba(255,255,255,0.14);
+      box-shadow: 0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.08);
+      overflow: hidden; position: relative; flex-shrink: 0;
     }
-    .hero-stat-num {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: var(--text);
-    }
-    .hero-stat-label {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    /* ── PHONES MOCKUP ─────────────────────────────────────────────────── */
-    .phones {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      gap: -20px;
-      padding: 0 24px 80px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .phone-frame {
-      width: 220px;
-      background: #1a1a2e;
-      border-radius: 36px;
-      border: 1px solid rgba(255,255,255,0.12);
-      overflow: hidden;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
-      position: relative;
+    .feature-phone { margin: 0 auto; box-shadow: 0 40px 100px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.08); }
+    .phone-top {
+      height: 44px; background: #0a0a14;
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
-
-    .phone-frame.center {
-      width: 250px;
-      z-index: 2;
-      transform: translateY(-20px);
-      box-shadow: 0 50px 100px rgba(0,0,0,0.7), 0 0 60px rgba(124,110,250,0.15);
+    .dynamic-island {
+      width: 108px; height: 32px; background: #000;
+      border-radius: 22px;
     }
-
-    .phone-frame.side {
-      opacity: 0.7;
-      transform: translateY(10px) scale(0.95);
-    }
-
-    .phone-screen {
-      padding: 0;
-      background: #0a0a12;
-    }
-
-    .phone-notch {
-      height: 28px;
-      background: #1a1a2e;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .phone-notch-pill {
-      width: 80px;
-      height: 10px;
-      background: #0a0a12;
-      border-radius: 999px;
-    }
-
-    .screen-map {
-      height: 180px;
-      background: linear-gradient(180deg, #0d1117 0%, #0a1628 100%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .map-grid {
+    /* Carousel */
+    .phone-carousel { position: relative; height: 476px; overflow: hidden; }
+    .phone-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.7s ease; overflow: hidden; }
+    .phone-slide.active { opacity: 1; }
+    .carousel-dots { position: absolute; bottom: 8px; left: 0; right: 0; display: flex; justify-content: center; gap: 5px; z-index: 10; }
+    .carousel-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.25); transition: background .3s, width .3s; }
+    .carousel-dot.active { width: 16px; border-radius: 3px; background: #FC4C02; }
+    /* Feature phone content clipping */
+    .feature-screen { background: #0b0b16; height: 476px; overflow: hidden; }
+    /* Floating stat chips */
+    .float-chip {
       position: absolute;
-      inset: 0;
+      background: rgba(20,20,37,0.95);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px; padding: 10px 16px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .chip-label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+    .chip-val { font-size: 1.1rem; font-weight: 800; }
+    .chip-1 { top: 60px; left: -80px; }
+    .chip-2 { top: 180px; right: -90px; }
+    .chip-3 { bottom: 100px; left: -70px; }
+
+    /* ── MAP SCREEN (inside big phone) ── */
+    .map-screen { position: relative; height: 320px; background: #0b0b16; overflow: hidden; }
+    .map-status {
+      position: absolute; top: 0; left: 0; right: 0;
+      padding: 10px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(11,11,22,0.95), transparent);
+      z-index: 2;
+    }
+    .map-status-left { display: flex; align-items: center; gap: 8px; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #FC4C02; animation: pulse 1.5s infinite; }
+    .map-status-label { font-size: 0.65rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: .08em; }
+    .map-status-time { font-size: 0.65rem; color: rgba(255,255,255,0.5); }
+    .map-stats-bottom {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 12px 14px 14px;
+      background: linear-gradient(to top, rgba(11,11,22,1) 60%, transparent);
+      z-index: 2;
+    }
+    .map-stat-row { display: flex; gap: 8px; }
+    .map-stat-box {
+      flex: 1; background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 8px 6px; text-align: center;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .map-stat-v { font-size: 0.85rem; font-weight: 800; color: #fff; }
+    .map-stat-l { font-size: 0.45rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-top: 2px; }
+
+    /* ── TICKER ── */
+    .ticker { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 16px 0; background: var(--surface); }
+    .ticker-inner { display: flex; gap: 48px; animation: ticker 20s linear infinite; white-space: nowrap; }
+    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .ticker-item { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 600; color: var(--muted); flex-shrink: 0; }
+    .ticker-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 100px 80px; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+      color: var(--orange); margin-bottom: 14px;
+    }
+    .section-title { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; line-height: 1.15; letter-spacing: -.02em; margin-bottom: 16px; }
+    .section-sub { font-size: 1rem; color: var(--muted); line-height: 1.7; max-width: 520px; }
+
+    /* ── ROUTES SECTION ── */
+    .routes-section { background: var(--surface); border-top: 1px solid var(--border); }
+    .routes-header { text-align: center; margin-bottom: 60px; }
+    .routes-header .section-sub { margin: 0 auto; }
+    .routes-map-bg {
+      position: relative; border-radius: 24px; overflow: hidden;
+      background: #090910; border: 1px solid var(--border);
+      padding: 32px;
+    }
+    .routes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; position: relative; z-index: 1; }
+    .route-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+      overflow: hidden; cursor: pointer; transition: transform .25s, box-shadow .25s;
+    }
+    .route-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .route-map-preview { height: 120px; position: relative; background: #0a0a14; overflow: hidden; }
+    .route-card-info { padding: 12px 14px; }
+    .route-card-name { font-size: 0.8rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .route-card-meta { display: flex; gap: 12px; }
+    .route-card-meta span { font-size: 0.65rem; color: var(--muted); }
+    .route-card-meta strong { color: var(--text); font-weight: 600; }
+    .route-dist-badge {
+      position: absolute; top: 8px; right: 8px;
+      background: rgba(8,8,15,0.8); border: 1px solid rgba(255,255,255,0.1);
+      padding: 3px 8px; border-radius: 8px;
+      font-size: 0.6rem; font-weight: 700; color: #fff;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ── SPLIT SECTIONS ── */
+    .split { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 80px; }
+    .split.reverse { direction: rtl; }
+    .split.reverse > * { direction: ltr; }
+
+    /* feature-phone + feature-screen now defined in unified block above */
+
+    .feature-list { list-style: none; margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+    .feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+    .feature-list li::before { content: ''; width: 18px; height: 18px; min-width: 18px; border-radius: 50%; background: rgba(76,175,80,0.15); border: 1px solid rgba(76,175,80,0.4); display: flex; align-items: center; justify-content: center; margin-top: 1px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%234CAF50' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-size: 12px; background-repeat: no-repeat; background-position: center; }
+    .feature-list li strong { color: var(--text); }
+
+    /* ── SOCIAL SECTION ── */
+    .social-feed { display: flex; gap: 16px; margin-top: 48px; overflow: hidden; }
+    .social-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      overflow: hidden; min-width: 260px; flex-shrink: 0;
+    }
+    .social-card-header { display: flex; align-items: center; gap: 10px; padding: 14px 16px; }
+    .social-avatar { width: 36px; height: 36px; border-radius: 50%; }
+    .social-name { font-size: 0.8rem; font-weight: 700; color: var(--text); }
+    .social-time { font-size: 0.65rem; color: var(--muted); margin-top: 1px; }
+    .social-map { height: 140px; position: relative; background: #090910; overflow: hidden; }
+    .social-stats { display: flex; padding: 12px 16px; gap: 16px; border-top: 1px solid var(--border); }
+    .social-stat { font-size: 0.7rem; color: var(--muted); }
+    .social-stat strong { display: block; font-size: 0.9rem; font-weight: 800; color: var(--text); }
+    .social-actions { padding: 0 16px 14px; display: flex; gap: 16px; }
+    .social-action { font-size: 0.75rem; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+    .social-action-icon { font-size: 0.9rem; }
+
+    /* ── FEATURES GRID ── */
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
+    .feat-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 28px; transition: border-color .2s, transform .2s;
+    }
+    .feat-card:hover { border-color: rgba(252,76,2,0.3); transform: translateY(-3px); }
+    .feat-icon { font-size: 1.6rem; margin-bottom: 16px; }
+    .feat-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; }
+    .feat-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── WATCH SECTION ── */
+    .watch-section { display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center; }
+    .watch-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .watch-metric {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 20px; text-align: center;
+    }
+    .watch-metric-icon { font-size: 1.4rem; margin-bottom: 10px; }
+    .watch-metric-val { font-size: 1.3rem; font-weight: 900; margin-bottom: 4px; }
+    .watch-metric-lbl { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+
+    /* ── HOW IT WORKS ── */
+    .steps { max-width: 680px; margin: 56px auto 0; }
+    .step { display: flex; gap: 24px; margin-bottom: 40px; }
+    .step-num {
+      width: 42px; height: 42px; min-width: 42px; border-radius: 12px;
+      background: rgba(252,76,2,0.12); border: 1px solid rgba(252,76,2,0.3);
+      color: var(--orange); font-weight: 800; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center; margin-top: 2px;
+    }
+    .step-title { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .step-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── CTA ── */
+    .cta { text-align: center; position: relative; overflow: hidden; background: var(--surface); border-top: 1px solid var(--border); }
+    .cta::before {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 600px; height: 400px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(252,76,2,0.12) 0%, transparent 70%);
+    }
+    .cta h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; margin-bottom: 16px; letter-spacing: -.02em; position: relative; }
+    .cta p { color: var(--muted); margin-bottom: 40px; font-size: 1rem; position: relative; }
+    .appstore-btn {
+      display: inline-flex; align-items: center; gap: 14px;
+      background: var(--text); color: #000;
+      padding: 16px 32px; border-radius: 16px; text-decoration: none;
+      font-weight: 700; transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 8px 32px rgba(240,240,248,0.15); position: relative;
+    }
+    .appstore-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(240,240,248,0.2); }
+    .appstore-btn svg { width: 24px; height: 24px; }
+    .appstore-sub { text-align: left; }
+    .appstore-small { display: block; font-size: 0.65rem; font-weight: 500; letter-spacing: .04em; }
+    .appstore-big { display: block; font-size: 1.1rem; font-weight: 800; margin-top: 1px; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 80px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .footer-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--text); text-decoration: none; font-size: 1rem; }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color .2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { color: var(--muted); font-size: 0.8rem; }
+
+    /* ── MAP GRID BACKGROUND ── */
+    .map-grid-bg {
+      position: absolute; inset: 0; opacity: 0.15;
       background-image:
-        linear-gradient(rgba(124,110,250,0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(124,110,250,0.07) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
       background-size: 24px 24px;
     }
 
-    .map-route {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .screen-stats {
-      padding: 14px;
-      background: #0f0f1a;
-    }
-
-    .screen-stat-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .screen-stat-box {
-      flex: 1;
-      background: #1a1a2e;
-      border-radius: 10px;
-      padding: 8px;
-      text-align: center;
-    }
-
-    .screen-stat-val {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--orange);
-    }
-
-    .screen-stat-lbl {
-      font-size: 0.55rem;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .screen-recovery {
-      padding: 14px;
-      background: #0f0f1a;
-    }
-
-    .recovery-ring-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .recovery-score-big {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--green);
-    }
-
-    .recovery-label {
-      font-size: 0.65rem;
-      color: var(--muted);
-    }
-
-    .recovery-mini-stats {
-      display: flex;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .rms {
-      flex: 1;
-      background: #1a1a2e;
-      border-radius: 8px;
-      padding: 6px;
-      text-align: center;
-    }
-
-    .rms-val {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--cyan);
-    }
-
-    .rms-lbl {
-      font-size: 0.5rem;
-      color: var(--muted);
-    }
-
-    /* ── FEATURES ──────────────────────────────────────────────────────── */
-    section { padding: 100px 24px; }
-
-    .section-label {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-    }
-
-    .section-sub {
-      color: var(--muted);
-      font-size: 1.05rem;
-      max-width: 500px;
-      line-height: 1.7;
-    }
-
-    .features-grid {
-      max-width: 1100px;
-      margin: 64px auto 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
-    .feature-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      transition: transform 0.25s, border-color 0.25s;
-      cursor: default;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255,255,255,0.15);
-    }
-
-    .feature-icon {
-      width: 48px; height: 48px;
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
-      margin-bottom: 16px;
-    }
-
-    .feature-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--text);
-    }
-
-    .feature-desc {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    /* ── METRICS ROW ───────────────────────────────────────────────────── */
-    .metrics-section {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .metrics-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 0;
-    }
-
-    .metric-item {
-      text-align: center;
-      padding: 48px 24px;
-      border-right: 1px solid var(--border);
-    }
-
-    .metric-item:last-child { border-right: none; }
-
-    .metric-num {
-      font-size: 2.2rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--orange), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .metric-label {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    /* ── HOW IT WORKS ──────────────────────────────────────────────────── */
-    .steps {
-      max-width: 800px;
-      margin: 64px auto 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .step {
-      display: flex;
-      gap: 24px;
-      align-items: flex-start;
-      position: relative;
-      padding-bottom: 40px;
-    }
-
-    .step:last-child { padding-bottom: 0; }
-
-    .step-left {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex-shrink: 0;
-    }
-
-    .step-num {
-      width: 44px; height: 44px;
-      background: linear-gradient(135deg, var(--orange), var(--purple));
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800;
-      font-size: 1rem;
-      color: #fff;
-      flex-shrink: 0;
-    }
-
-    .step-line {
-      width: 2px;
-      flex: 1;
-      background: linear-gradient(var(--orange), var(--purple));
-      opacity: 0.3;
-      margin-top: 8px;
-      min-height: 40px;
-    }
-
-    .step:last-child .step-line { display: none; }
-
-    .step-content { padding-top: 8px; }
-
-    .step-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .step-desc {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    /* ── WATCH SECTION ─────────────────────────────────────────────────── */
-    .watch-section {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .watch-metrics {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .watch-metric-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-    }
-
-    .wmc-icon { font-size: 1.4rem; margin-bottom: 10px; }
-
-    .wmc-val {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    .wmc-label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    /* ── CTA ───────────────────────────────────────────────────────────── */
-    .cta-section {
-      text-align: center;
-      padding: 120px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-glow {
-      position: absolute;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: rgba(124,110,250,0.1);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      filter: blur(80px);
-      pointer-events: none;
-    }
-
-    .cta-section h2 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .cta-section p {
-      color: var(--muted);
-      font-size: 1.1rem;
-      margin-bottom: 40px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .appstore-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: #fff;
-      color: #000;
-      text-decoration: none;
-      padding: 14px 28px;
-      border-radius: 14px;
-      font-weight: 700;
-      font-size: 1rem;
-      transition: transform 0.2s, opacity 0.2s;
-      box-shadow: 0 8px 30px rgba(255,255,255,0.12);
-      position: relative;
-      z-index: 1;
-    }
-
-    .appstore-btn:hover { transform: translateY(-2px); opacity: 0.92; }
-
-    .appstore-btn svg { width: 24px; height: 24px; }
-
-    .appstore-btn-sub {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-    }
-
-    .appstore-btn-small { font-size: 0.7rem; font-weight: 500; opacity: 0.7; }
-    .appstore-btn-big { font-size: 1rem; font-weight: 800; }
-
-    /* ── FOOTER ────────────────────────────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: var(--text); }
-
-    .footer-copy {
-      color: var(--muted);
-      font-size: 0.8rem;
-      width: 100%;
-      text-align: center;
-      margin-top: 8px;
-    }
-
-    /* ── RESPONSIVE ────────────────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      nav { padding: 14px 20px; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 14px 24px; }
       .nav-links { display: none; }
-      .phones { gap: 12px; }
-      .phone-frame.side { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; text-align: center; }
+      .hero-btns { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-sub { margin: 0 auto 36px; }
+      .hero-phone-wrap { display: none; }
+      section { padding: 64px 24px; }
+      .split { grid-template-columns: 1fr; gap: 40px; }
+      .split.reverse { direction: ltr; }
+      .routes-grid { grid-template-columns: 1fr 1fr; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
       .watch-section { grid-template-columns: 1fr; }
-      .metrics-inner { grid-template-columns: 1fr 1fr; }
-      .metric-item:nth-child(2) { border-right: none; }
-      .metric-item:nth-child(3) { border-right: 1px solid var(--border); }
-      footer { flex-direction: column; align-items: flex-start; }
+      footer { padding: 24px; flex-direction: column; }
     }
-
-    @media (max-width: 480px) {
-      .metrics-inner { grid-template-columns: 1fr; }
-      .metric-item { border-right: none !important; border-bottom: 1px solid var(--border); }
-      .metric-item:last-child { border-bottom: none; }
+    @media (max-width: 540px) {
+      .routes-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .watch-metrics { grid-template-columns: 1fr 1fr; }
+      .social-feed { flex-direction: column; }
+      .social-card { min-width: auto; }
     }
-
-    /* ── ANIMATIONS ────────────────────────────────────────────────────── */
-    @keyframes float {
-      0%, 100% { transform: translateY(-20px); }
-      50% { transform: translateY(-24px); }
-    }
-
-    .phone-frame.center { animation: float 4s ease-in-out infinite; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-content { animation: fadeUp 0.7s ease both; }
-    .phones       { animation: fadeUp 0.7s 0.2s ease both; }
   </style>
 </head>
 <body>
 
-<!-- ── NAV ─────────────────────────────────────────────────────────────────── -->
+<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
     <div class="nav-logo-icon">⚡</div>
     MyVitality
   </a>
   <div class="nav-links">
+    <a href="#routes">Routes</a>
+    <a href="#recovery">Recovery</a>
+    <a href="#social">Social</a>
     <a href="#features">Features</a>
-    <a href="#watch">Apple Watch</a>
-    <a href="#how">How it works</a>
-    <a href="https://egemizrak1.github.io/myvitality-privacy" target="_blank">Privacy</a>
+    <a href="#privacy">Privacy</a>
     <a href="#download" class="nav-cta">Download</a>
   </div>
 </nav>
 
-<!-- ── HERO ────────────────────────────────────────────────────────────────── -->
-<section class="hero" id="top">
-  <div class="hero-glow hero-glow-1"></div>
-  <div class="hero-glow hero-glow-2"></div>
-  <div class="hero-glow hero-glow-3"></div>
-
+<!-- HERO -->
+<section class="hero">
   <div class="hero-content">
-    <div class="hero-badge">🏃 Now available on iOS</div>
-    <h1>
-      Train Smarter.<br>
-      <span class="hero-gradient">Recover Better.</span>
-    </h1>
+    <div class="hero-badge">Now available on iOS</div>
+    <h1>Train like<br>an <span class="grad">athlete.</span></h1>
     <p class="hero-sub">
-      Track runs with dark GPS maps. Monitor HRV &amp; recovery from your Apple Watch.
-      Log meals with AI. Share workouts socially. All in one app — no subscriptions.
+      GPS run tracking with cinematic dark maps. Apple Watch HRV & recovery. AI nutrition. Social sharing. Curated routes — all in one app.
     </p>
-    <div class="hero-buttons">
+    <div class="hero-btns">
       <a href="#download" class="btn-primary">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-        </svg>
-        Download on the App Store
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on App Store
       </a>
-      <a href="#features" class="btn-secondary">
-        See features →
-      </a>
+      <a href="#routes" class="btn-secondary">Explore routes →</a>
     </div>
     <div class="hero-stats">
-      <div class="hero-stat-item">
-        <div class="hero-stat-num">7</div>
-        <div class="hero-stat-label">Fitness Modules</div>
-      </div>
-      <div class="hero-stat-item">
+      <div class="hero-stat">
         <div class="hero-stat-num">20+</div>
-        <div class="hero-stat-label">Health Metrics</div>
+        <div class="hero-stat-lbl">Health metrics</div>
       </div>
-      <div class="hero-stat-item">
+      <div class="hero-stat">
         <div class="hero-stat-num">AI</div>
-        <div class="hero-stat-label">Nutrition Analysis</div>
+        <div class="hero-stat-lbl">Nutrition analysis</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">0</div>
+        <div class="hero-stat-lbl">Data sold</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO PHONE -->
+  <div class="hero-phone-wrap">
+    <!-- Floating chips -->
+    <div class="float-chip chip-1">
+      <div class="chip-label">Distance</div>
+      <div class="chip-val" style="color:#FC4C02">5.2 km</div>
+    </div>
+    <div class="float-chip chip-2">
+      <div class="chip-label">Heart Rate</div>
+      <div class="chip-val" style="color:#26C6DA">147 bpm</div>
+    </div>
+    <div class="float-chip chip-3">
+      <div class="chip-label">Recovery</div>
+      <div class="chip-val" style="color:#4CAF50">84%</div>
+    </div>
+
+    <div class="big-phone">
+      <div class="phone-top"><div class="dynamic-island"></div></div>
+      <div class="phone-carousel" id="heroCarousel">
+
+      <!-- SLIDE 1: GPS Tracker -->
+      <div class="phone-slide active" id="slide-0">
+      <div class="map-screen" style="height:476px">
+        <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 240 476" preserveAspectRatio="xMidYMid slice">
+          <!-- Building blocks -->
+          <rect x="0" y="0" width="28" height="60" fill="#111120" rx="2"/>
+          <rect x="32" y="10" width="22" height="42" fill="#0e0e1c" rx="2"/>
+          <rect x="0" y="68" width="28" height="38" fill="#111120" rx="2"/>
+          <rect x="32" y="72" width="18" height="30" fill="#0d0d1b" rx="2"/>
+          <rect x="68" y="0" width="36" height="30" fill="#111120" rx="2"/>
+          <rect x="68" y="36" width="22" height="24" fill="#0e0e1c" rx="2"/>
+          <rect x="110" y="8" width="24" height="28" fill="#111120" rx="2"/>
+          <rect x="110" y="44" width="16" height="20" fill="#0d0d1b" rx="2"/>
+          <!-- Park area -->
+          <rect x="148" y="0" width="92" height="52" fill="#081a0a" rx="3"/>
+          <rect x="155" y="6" width="30" height="18" fill="#0a1f0c" rx="2"/>
+          <rect x="192" y="8" width="24" height="14" fill="#0a1f0c" rx="2"/>
+          <!-- More buildings -->
+          <rect x="148" y="60" width="28" height="32" fill="#111120" rx="2"/>
+          <rect x="182" y="60" width="22" height="22" fill="#0e0e1c" rx="2"/>
+          <rect x="210" y="60" width="30" height="32" fill="#111120" rx="2"/>
+          <rect x="0" y="118" width="24" height="36" fill="#111120" rx="2"/>
+          <rect x="30" y="122" width="30" height="28" fill="#0d0d1b" rx="2"/>
+          <rect x="68" y="118" width="26" height="32" fill="#111120" rx="2"/>
+          <rect x="100" y="120" width="20" height="24" fill="#0e0e1c" rx="2"/>
+          <rect x="148" y="108" width="34" height="28" fill="#111120" rx="2"/>
+          <rect x="188" y="110" width="22" height="22" fill="#0d0d1b" rx="2"/>
+          <rect x="215" y="108" width="25" height="30" fill="#111120" rx="2"/>
+          <rect x="0" y="170" width="32" height="40" fill="#111120" rx="2"/>
+          <rect x="38" y="174" width="20" height="32" fill="#0e0e1c" rx="2"/>
+          <rect x="68" y="170" width="28" height="38" fill="#111120" rx="2"/>
+          <rect x="100" y="172" width="22" height="30" fill="#0d0d1b" rx="2"/>
+          <rect x="148" y="162" width="30" height="34" fill="#111120" rx="2"/>
+          <rect x="184" y="164" width="24" height="28" fill="#0e0e1c" rx="2"/>
+          <rect x="214" y="162" width="26" height="34" fill="#111120" rx="2"/>
+          <rect x="0" y="226" width="28" height="42" fill="#111120" rx="2"/>
+          <rect x="34" y="230" width="22" height="34" fill="#0d0d1b" rx="2"/>
+          <rect x="68" y="224" width="30" height="44" fill="#111120" rx="2"/>
+          <rect x="104" y="228" width="18" height="36" fill="#0e0e1c" rx="2"/>
+          <rect x="148" y="218" width="32" height="40" fill="#111120" rx="2"/>
+          <rect x="186" y="220" width="20" height="36" fill="#0d0d1b" rx="2"/>
+          <rect x="212" y="218" width="28" height="40" fill="#111120" rx="2"/>
+          <rect x="0" y="284" width="26" height="36" fill="#111120" rx="2"/>
+          <rect x="32" y="288" width="20" height="28" fill="#0e0e1c" rx="2"/>
+          <!-- Major roads -->
+          <line x1="0" y1="108" x2="240" y2="108" stroke="#1e1e32" stroke-width="7"/>
+          <line x1="0" y1="160" x2="240" y2="160" stroke="#1e1e32" stroke-width="7"/>
+          <line x1="0" y1="214" x2="240" y2="214" stroke="#1e1e32" stroke-width="7"/>
+          <line x1="0" y1="274" x2="240" y2="274" stroke="#1e1e32" stroke-width="5"/>
+          <line x1="58" y1="0" x2="58" y2="320" stroke="#1e1e32" stroke-width="7"/>
+          <line x1="136" y1="0" x2="136" y2="320" stroke="#1e1e32" stroke-width="7"/>
+          <line x1="204" y1="0" x2="204" y2="320" stroke="#1e1e32" stroke-width="5"/>
+          <!-- Minor roads -->
+          <line x1="0" y1="60" x2="58" y2="60" stroke="#171728" stroke-width="3"/>
+          <line x1="58" y1="32" x2="136" y2="32" stroke="#171728" stroke-width="3"/>
+          <line x1="136" y1="56" x2="204" y2="56" stroke="#171728" stroke-width="3"/>
+          <line x1="0" y1="156" x2="58" y2="156" stroke="#171728" stroke-width="3"/>
+          <line x1="58" y1="144" x2="136" y2="144" stroke="#171728" stroke-width="3"/>
+          <line x1="136" y1="150" x2="204" y2="150" stroke="#171728" stroke-width="3"/>
+          <line x1="0" y1="268" x2="58" y2="268" stroke="#171728" stroke-width="3"/>
+          <line x1="58" y1="256" x2="136" y2="256" stroke="#171728" stroke-width="3"/>
+          <line x1="96" y1="108" x2="96" y2="160" stroke="#171728" stroke-width="3"/>
+          <line x1="172" y1="108" x2="172" y2="160" stroke="#171728" stroke-width="3"/>
+          <line x1="96" y1="160" x2="96" y2="214" stroke="#171728" stroke-width="3"/>
+          <line x1="172" y1="160" x2="172" y2="214" stroke="#171728" stroke-width="3"/>
+          <!-- Road labels (tiny) -->
+          <!-- Glow route: outer -->
+          <path d="M28,295 L28,200 Q28,160 58,160 L136,160 Q136,108 136,108 Q136,80 160,65 L220,65" stroke="rgba(252,76,2,0.12)" stroke-width="20" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Glow route: mid -->
+          <path d="M28,295 L28,200 Q28,160 58,160 L136,160 Q136,108 136,108 Q136,80 160,65 L220,65" stroke="rgba(252,76,2,0.5)" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Glow route: core -->
+          <path d="M28,295 L28,200 Q28,160 58,160 L136,160 Q136,108 136,108 Q136,80 160,65 L220,65" stroke="#FC4C02" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Start dot -->
+          <circle cx="28" cy="295" r="8" fill="rgba(76,175,80,0.25)"/>
+          <circle cx="28" cy="295" r="4.5" fill="#4CAF50"/>
+          <!-- Current position pulse -->
+          <circle cx="220" cy="65" r="13" fill="rgba(252,76,2,0.15)"/>
+          <circle cx="220" cy="65" r="8" fill="rgba(252,76,2,0.4)"/>
+          <circle cx="220" cy="65" r="4" fill="#FC4C02"/>
+        </svg>
+        <!-- Status bar -->
+        <div class="map-status">
+          <div class="map-status-left">
+            <div class="live-dot"></div>
+            <span class="map-status-label">Running</span>
+          </div>
+          <span class="map-status-time">28:14</span>
+        </div>
+        <!-- Bottom stats -->
+        <div class="map-stats-bottom">
+          <div class="map-stat-row">
+            <div class="map-stat-box"><div class="map-stat-v" style="color:#FC4C02">5.2</div><div class="map-stat-l">km</div></div>
+            <div class="map-stat-box"><div class="map-stat-v" style="color:#4CAF50">5:25</div><div class="map-stat-l">/km</div></div>
+            <div class="map-stat-box"><div class="map-stat-v" style="color:#26C6DA">147</div><div class="map-stat-l">bpm</div></div>
+            <div class="map-stat-box"><div class="map-stat-v" style="color:#FFB300">312</div><div class="map-stat-l">kcal</div></div>
+          </div>
+        </div>
+      </div>
+      </div><!-- /slide-0 -->
+
+      <!-- SLIDE 2: Recovery -->
+      <div class="phone-slide" id="slide-1" style="background:#0b0b16">
+        <div style="padding:18px 16px 0">
+          <div style="font-size:0.5rem;color:#777788;text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:12px">Daily Readiness</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+            <div><div style="font-size:3rem;font-weight:900;color:#4CAF50;line-height:1">84<span style="font-size:1.1rem">%</span></div><div style="font-size:0.65rem;color:#4CAF50;font-weight:700;margin-top:4px">Optimal · Ready to train</div></div>
+            <svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="32" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="7"/><circle cx="40" cy="40" r="32" fill="none" stroke="#4CAF50" stroke-width="7" stroke-dasharray="169" stroke-dashoffset="27" stroke-linecap="round" transform="rotate(-90 40 40)"/><text x="40" y="46" text-anchor="middle" font-size="16" font-weight="900" fill="#4CAF50">84</text></svg>
+          </div>
+          <div style="display:flex;gap:0;border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden;margin-bottom:14px">
+            <div style="flex:1;padding:12px;text-align:center;border-right:1px solid rgba(255,255,255,0.06)"><div style="font-size:1rem;font-weight:800;color:#26C6DA">52ms</div><div style="font-size:0.5rem;color:#777788;text-transform:uppercase;margin-top:3px">HRV</div></div>
+            <div style="flex:1;padding:12px;text-align:center;border-right:1px solid rgba(255,255,255,0.06)"><div style="font-size:1rem;font-weight:800;color:#EF5350">52bpm</div><div style="font-size:0.5rem;color:#777788;text-transform:uppercase;margin-top:3px">Resting HR</div></div>
+            <div style="flex:1;padding:12px;text-align:center"><div style="font-size:1rem;font-weight:800;color:#7C6EFA">87%</div><div style="font-size:0.5rem;color:#777788;text-transform:uppercase;margin-top:3px">Sleep</div></div>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:14px;margin-bottom:14px">
+            <div style="font-size:0.5rem;color:#777788;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">14-Day HRV Trend</div>
+            <svg width="100%" height="56" viewBox="0 0 200 56"><defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#26C6DA" stop-opacity="0.3"/><stop offset="100%" stop-color="#26C6DA" stop-opacity="0"/></linearGradient></defs><path d="M0,42 22,32 44,38 66,24 88,28 110,18 132,22 154,14 176,19 200,12 L200,56 L0,56Z" fill="url(#hg)"/><path d="M0,42 22,32 44,38 66,24 88,28 110,18 132,22 154,14 176,19 200,12" fill="none" stroke="rgba(38,198,218,0.4)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M0,42 22,32 44,38 66,24 88,28 110,18 132,22 154,14 176,19 200,12" fill="none" stroke="#26C6DA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="0" y1="30" x2="200" y2="30" stroke="rgba(38,198,218,0.25)" stroke-width="1" stroke-dasharray="4,3"/></svg>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:14px">
+            <div style="font-size:0.5rem;color:#777788;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Last Night · 7h 20m</div>
+            <div style="height:10px;border-radius:5px;overflow:hidden;display:flex"><div style="width:22%;background:#1565C0"></div><div style="width:25%;background:#7C6EFA"></div><div style="width:53%;background:#37474F"></div></div>
+            <div style="display:flex;gap:10px;margin-top:8px"><span style="font-size:0.55rem;color:#777788;display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:2px;background:#1565C0;display:inline-block"></span>Deep 1h 37m</span><span style="font-size:0.55rem;color:#777788;display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:2px;background:#7C6EFA;display:inline-block"></span>REM 1h 50m</span><span style="font-size:0.55rem;color:#777788;display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:2px;background:#37474F;display:inline-block"></span>Light 3h 53m</span></div>
+          </div>
+        </div>
+      </div><!-- /slide-1 -->
+
+      <!-- SLIDE 3: Nutrition -->
+      <div class="phone-slide" id="slide-2" style="background:#0b0b16">
+        <div style="padding:18px 16px 0">
+          <div style="font-size:0.5rem;color:#777788;text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:10px">Today's Nutrition</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:8px">
+            <div><div style="font-size:2.6rem;font-weight:900;color:#FF9800;line-height:1">1,840</div><div style="font-size:0.5rem;color:#777788">kcal consumed</div></div>
+            <div style="text-align:right"><div style="font-size:1rem;font-weight:800;color:#4CAF50">160 left</div><div style="font-size:0.5rem;color:#777788">of 2,000 goal</div></div>
+          </div>
+          <div style="height:6px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden;margin-bottom:14px"><div style="width:92%;height:100%;background:linear-gradient(90deg,#FF9800,#FC4C02);border-radius:3px"></div></div>
+          <div style="display:flex;gap:8px;margin-bottom:14px">
+            <div style="flex:1;background:rgba(66,165,245,0.1);border:1px solid rgba(66,165,245,0.2);border-radius:12px;padding:12px"><div style="font-size:1rem;font-weight:800;color:#42A5F5">148g</div><div style="height:3px;background:rgba(66,165,245,0.15);border-radius:2px;margin:6px 0"><div style="width:99%;height:100%;background:#42A5F5;border-radius:2px"></div></div><div style="font-size:0.5rem;color:#777788">Protein</div></div>
+            <div style="flex:1;background:rgba(102,187,106,0.1);border:1px solid rgba(102,187,106,0.2);border-radius:12px;padding:12px"><div style="font-size:1rem;font-weight:800;color:#66BB6A">210g</div><div style="height:3px;background:rgba(102,187,106,0.15);border-radius:2px;margin:6px 0"><div style="width:84%;height:100%;background:#66BB6A;border-radius:2px"></div></div><div style="font-size:0.5rem;color:#777788">Carbs</div></div>
+            <div style="flex:1;background:rgba(255,202,40,0.1);border:1px solid rgba(255,202,40,0.2);border-radius:12px;padding:12px"><div style="font-size:1rem;font-weight:800;color:#FFCA28">58g</div><div style="height:3px;background:rgba(255,202,40,0.15);border-radius:2px;margin:6px 0"><div style="width:89%;height:100%;background:#FFCA28;border-radius:2px"></div></div><div style="font-size:0.5rem;color:#777788">Fat</div></div>
+          </div>
+          <div style="background:rgba(124,110,250,0.1);border:1px solid rgba(124,110,250,0.2);border-radius:12px;padding:12px;display:flex;align-items:flex-start;gap:8px;margin-bottom:14px"><span style="font-size:1rem">✨</span><div><div style="font-size:0.6rem;font-weight:700;color:#7C6EFA;margin-bottom:3px">AI Insight</div><div style="font-size:0.6rem;color:#777788;line-height:1.5">You're 2g short on protein. Add a Greek yogurt to hit your goal today.</div></div></div>
+          <div style="font-size:0.5rem;color:#777788;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Recent</div>
+          <div style="background:#141425;border-radius:12px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:0.75rem;font-weight:700;color:#f0f0f8">Grilled Chicken</div><div style="font-size:0.55rem;color:#777788">Lunch · 200g · 38g protein</div></div><div style="font-size:0.8rem;font-weight:800;color:#FF9800">330 kcal</div></div>
+          <div style="background:#141425;border-radius:12px;padding:12px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:0.75rem;font-weight:700;color:#f0f0f8">Oat Bowl + Banana</div><div style="font-size:0.55rem;color:#777788">Breakfast · AI scanned 📷</div></div><div style="font-size:0.8rem;font-weight:800;color:#FF9800">420 kcal</div></div>
+        </div>
+      </div><!-- /slide-2 -->
+
+      <!-- SLIDE 4: Social Feed -->
+      <div class="phone-slide" id="slide-3" style="background:#0b0b16">
+        <div style="padding:18px 16px 0">
+          <div style="font-size:0.5rem;color:#777788;text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:14px">Social Feed</div>
+          <div style="background:#141425;border:1px solid rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;margin-bottom:12px">
+            <div style="display:flex;align-items:center;gap:10px;padding:12px"><svg width="34" height="34" viewBox="0 0 34 34"><rect width="34" height="34" rx="17" fill="#1e1e3a"/><text x="17" y="23" text-anchor="middle" font-size="15" fill="#FC4C02" font-weight="800">A</text></svg><div><div style="font-size:0.75rem;font-weight:700;color:#f0f0f8">Alex M.</div><div style="font-size:0.6rem;color:#777788">Morning Run · 2h ago</div></div><div style="margin-left:auto;font-size:0.6rem;color:#4CAF50;background:rgba(76,175,80,0.1);padding:3px 7px;border-radius:7px;font-weight:700">🔥 5-day</div></div>
+            <div style="height:100px;position:relative;background:#090910;overflow:hidden"><svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 200 100"><rect x="0" y="0" width="20" height="32" fill="#111120" rx="1"/><rect x="24" y="4" width="16" height="24" fill="#0e0e1c" rx="1"/><rect x="44" y="0" width="22" height="32" fill="#0d0d1b" rx="1"/><rect x="70" y="0" width="18" height="32" fill="#111120" rx="1"/><rect x="92" y="2" width="24" height="28" fill="#0e0e1c" rx="1"/><rect x="120" y="0" width="20" height="32" fill="#0d0d1b" rx="1"/><rect x="144" y="2" width="24" height="28" fill="#111120" rx="1"/><rect x="172" y="0" width="28" height="32" fill="#0e0e1c" rx="1"/><rect x="0" y="44" width="20" height="26" fill="#111120" rx="1"/><rect x="24" y="46" width="16" height="20" fill="#0d0d1b" rx="1"/><rect x="44" y="44" width="22" height="26" fill="#0e0e1c" rx="1"/><rect x="70" y="44" width="18" height="26" fill="#111120" rx="1"/><rect x="92" y="46" width="24" height="22" fill="#0d0d1b" rx="1"/><rect x="120" y="44" width="20" height="26" fill="#111120" rx="1"/><rect x="144" y="44" width="24" height="26" fill="#0e0e1c" rx="1"/><rect x="172" y="44" width="28" height="26" fill="#0d0d1b" rx="1"/><rect x="0" y="80" width="20" height="20" fill="#111120" rx="1"/><rect x="44" y="78" width="22" height="22" fill="#0e0e1c" rx="1"/><rect x="92" y="78" width="24" height="22" fill="#0d0d1b" rx="1"/><rect x="144" y="78" width="24" height="22" fill="#111120" rx="1"/><line x1="0" y1="38" x2="200" y2="38" stroke="#1c1c2e" stroke-width="5"/><line x1="0" y1="76" x2="200" y2="76" stroke="#1c1c2e" stroke-width="5"/><line x1="42" y1="0" x2="42" y2="76" stroke="#1c1c2e" stroke-width="4"/><line x1="90" y1="0" x2="90" y2="76" stroke="#1c1c2e" stroke-width="4"/><line x1="142" y1="0" x2="142" y2="76" stroke="#1c1c2e" stroke-width="4"/><path d="M14,90 L14,76 Q14,38 42,38 L90,38 Q90,16 90,12 Q90,6 110,6 L160,6 Q160,38 160,38 L160,76 Q160,90 178,90 L196,90" stroke="rgba(252,76,2,0.14)" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M14,90 L14,76 Q14,38 42,38 L90,38 Q90,16 90,12 Q90,6 110,6 L160,6 Q160,38 160,38 L160,76 Q160,90 178,90 L196,90" stroke="rgba(252,76,2,0.5)" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M14,90 L14,76 Q14,38 42,38 L90,38 Q90,16 90,12 Q90,6 110,6 L160,6 Q160,38 160,38 L160,76 Q160,90 178,90 L196,90" stroke="#FC4C02" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="90" r="4" fill="#4CAF50"/><circle cx="196" cy="90" r="4" fill="#FC4C02"/></svg></div>
+            <div style="display:flex;padding:10px 12px;gap:14px;border-top:1px solid rgba(255,255,255,0.05)"><div style="font-size:0.65rem;color:#777788"><strong style="display:block;font-size:0.8rem;color:#f0f0f8">8.4 km</strong>Dist</div><div style="font-size:0.65rem;color:#777788"><strong style="display:block;font-size:0.8rem;color:#f0f0f8">42:18</strong>Time</div><div style="font-size:0.65rem;color:#777788"><strong style="display:block;font-size:0.8rem;color:#f0f0f8">5:02</strong>/km</div><div style="font-size:0.65rem;color:#777788"><strong style="display:block;font-size:0.8rem;color:#f0f0f8">487</strong>kcal</div></div>
+            <div style="padding:0 12px 10px;display:flex;gap:14px"><span style="font-size:0.7rem;color:#777788">🔥 12 kudos</span><span style="font-size:0.7rem;color:#777788">💬 3</span><span style="margin-left:auto;font-size:0.7rem;color:#777788">↗ Share</span></div>
+          </div>
+          <div style="background:#141425;border:1px solid rgba(255,255,255,0.06);border-radius:16px;overflow:hidden">
+            <div style="display:flex;align-items:center;gap:10px;padding:12px"><svg width="34" height="34" viewBox="0 0 34 34"><rect width="34" height="34" rx="17" fill="#1a1a3a"/><text x="17" y="23" text-anchor="middle" font-size="15" fill="#7C6EFA" font-weight="800">S</text></svg><div><div style="font-size:0.75rem;font-weight:700;color:#f0f0f8">Sara K.</div><div style="font-size:0.6rem;color:#777788">Evening Ride · 5h ago</div></div><div style="margin-left:auto;font-size:0.6rem;color:#7C6EFA;background:rgba(124,110,250,0.1);padding:3px 7px;border-radius:7px;font-weight:700">🏆 New PR!</div></div>
+            <div style="display:flex;padding:10px 12px;gap:14px"><div style="font-size:0.65rem;color:#777788"><strong style="display:block;font-size:0.8rem;color:#f0f0f8">22.1 km</strong>Dist</div><div style="font-size:0.65rem;color:#777788"><strong style="display:block;font-size:0.8rem;color:#f0f0f8">1:04:30</strong>Time</div><div style="font-size:0.65rem;color:#777788"><strong style="display:block;font-size:0.8rem;color:#f0f0f8">640</strong>kcal</div></div>
+          </div>
+        </div>
+      </div><!-- /slide-3 -->
+
+      <!-- SLIDE 5: Routes -->
+      <div class="phone-slide" id="slide-4" style="background:#0b0b16">
+        <div style="padding:18px 16px 0">
+          <div style="font-size:0.5rem;color:#777788;text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:14px">Nearby Routes</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="background:#141425;border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden"><div style="height:80px;position:relative;background:#090910"><svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 200 80"><rect x="0" y="0" width="16" height="24" fill="#111120" rx="1"/><rect x="20" y="2" width="12" height="18" fill="#0e0e1c" rx="1"/><rect x="36" y="0" width="16" height="24" fill="#111120" rx="1"/><rect x="56" y="2" width="14" height="20" fill="#0d0d1b" rx="1"/><rect x="74" y="0" width="16" height="24" fill="#111120" rx="1"/><rect x="94" y="2" width="12" height="20" fill="#0e0e1c" rx="1"/><rect x="110" y="0" width="16" height="24" fill="#0d0d1b" rx="1"/><rect x="130" y="0" width="14" height="24" fill="#111120" rx="1"/><rect x="148" y="2" width="16" height="20" fill="#0e0e1c" rx="1"/><rect x="168" y="0" width="18" height="24" fill="#0d0d1b" rx="1"/><rect x="190" y="2" width="10" height="22" fill="#111120" rx="1"/><rect x="0" y="46" width="16" height="34" fill="#0e0e1c" rx="1"/><rect x="20" y="48" width="12" height="28" fill="#111120" rx="1"/><rect x="36" y="46" width="16" height="34" fill="#0d0d1b" rx="1"/><rect x="56" y="48" width="14" height="28" fill="#111120" rx="1"/><rect x="74" y="46" width="16" height="34" fill="#0e0e1c" rx="1"/><rect x="94" y="48" width="12" height="28" fill="#0d0d1b" rx="1"/><rect x="110" y="46" width="16" height="34" fill="#111120" rx="1"/><rect x="130" y="46" width="14" height="34" fill="#0e0e1c" rx="1"/><rect x="148" y="48" width="16" height="30" fill="#0d0d1b" rx="1"/><rect x="168" y="46" width="18" height="34" fill="#111120" rx="1"/><line x1="0" y1="30" x2="200" y2="30" stroke="#1c1c2e" stroke-width="5"/><line x1="34" y1="0" x2="34" y2="30" stroke="#1c1c2e" stroke-width="4"/><line x1="92" y1="0" x2="92" y2="30" stroke="#1c1c2e" stroke-width="4"/><line x1="146" y1="0" x2="146" y2="30" stroke="#1c1c2e" stroke-width="4"/><path d="M10,68 L10,30 Q10,10 34,10 L92,10 Q92,30 92,30 Q92,50 116,50 L170,50" stroke="rgba(252,76,2,0.14)" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,68 L10,30 Q10,10 34,10 L92,10 Q92,30 92,30 Q92,50 116,50 L170,50" stroke="rgba(252,76,2,0.5)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,68 L10,30 Q10,10 34,10 L92,10 Q92,30 92,30 Q92,50 116,50 L170,50" stroke="#FC4C02" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="68" r="4" fill="#4CAF50"/><circle cx="170" cy="50" r="4" fill="#FC4C02"/></svg></div><div style="padding:10px 12px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:0.75rem;font-weight:700;color:#f0f0f8">Bosphorus Coastal Run</div><div style="font-size:0.6rem;color:#777788;margin-top:2px">5.4 km · ↑48m · ~28 min</div></div><div style="font-size:0.7rem;font-weight:700;color:#FC4C02;background:rgba(252,76,2,0.1);padding:4px 8px;border-radius:8px">Run</div></div></div>
+            <div style="background:#141425;border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden"><div style="height:80px;position:relative;background:#090910"><svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 200 80"><rect x="40" y="0" width="80" height="24" fill="#081a0a" rx="2"/><rect x="0" y="0" width="16" height="24" fill="#111120" rx="1"/><rect x="20" y="2" width="12" height="18" fill="#0e0e1c" rx="1"/><rect x="130" y="0" width="14" height="24" fill="#111120" rx="1"/><rect x="148" y="2" width="16" height="20" fill="#0e0e1c" rx="1"/><rect x="168" y="0" width="16" height="24" fill="#0d0d1b" rx="1"/><rect x="0" y="46" width="36" height="34" fill="#0e0e1c" rx="1"/><rect x="40" y="48" width="80" height="28" fill="#081a0a" rx="2"/><rect x="130" y="46" width="30" height="34" fill="#111120" rx="1"/><rect x="164" y="48" width="36" height="30" fill="#0d0d1b" rx="1"/><line x1="0" y1="30" x2="200" y2="30" stroke="#1c1c2e" stroke-width="5"/><line x1="38" y1="0" x2="38" y2="30" stroke="#1c1c2e" stroke-width="4"/><line x1="128" y1="0" x2="128" y2="30" stroke="#1c1c2e" stroke-width="4"/><path d="M18,58 L38,58 Q50,58 50,30 L50,14 L128,14 L128,30 Q128,50 110,50 L70,50 Q50,50 50,58 L18,58" stroke="rgba(124,110,250,0.14)" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M18,58 L38,58 Q50,58 50,30 L50,14 L128,14 L128,30 Q128,50 110,50 L70,50 Q50,50 50,58 L18,58" stroke="rgba(124,110,250,0.5)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M18,58 L38,58 Q50,58 50,30 L50,14 L128,14 L128,30 Q128,50 110,50 L70,50 Q50,50 50,58 L18,58" stroke="#7C6EFA" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="58" r="4" fill="#4CAF50"/></svg></div><div style="padding:10px 12px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:0.75rem;font-weight:700;color:#f0f0f8">Maçka Park Loop</div><div style="font-size:0.6rem;color:#777788;margin-top:2px">3.2 km · ↑22m · ~18 min</div></div><div style="font-size:0.7rem;font-weight:700;color:#7C6EFA;background:rgba(124,110,250,0.1);padding:4px 8px;border-radius:8px">Loop</div></div></div>
+            <div style="background:#141425;border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:12px;display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:0.75rem;font-weight:700;color:#f0f0f8">Belgrade Forest Trail</div><div style="font-size:0.6rem;color:#777788;margin-top:2px">10.5 km · ↑140m · ~58 min</div></div><div style="font-size:0.7rem;font-weight:700;color:#4CAF50;background:rgba(76,175,80,0.1);padding:4px 8px;border-radius:8px">Trail</div></div>
+          </div>
+        </div>
+      </div><!-- /slide-4 -->
+
+      <!-- Carousel dots -->
+      <div class="carousel-dots" id="carouselDots">
+        <div class="carousel-dot active"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+      </div>
+
+      </div><!-- /phone-carousel -->
+    </div><!-- /big-phone -->
+  </div>
+</section>
+
+<script>
+(function() {
+  var slides = document.querySelectorAll('#heroCarousel .phone-slide');
+  var dots = document.querySelectorAll('#carouselDots .carousel-dot');
+  var current = 0;
+  var labels = ['GPS Tracker','Recovery','Nutrition','Social','Routes'];
+  function go(n) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+  dots.forEach(function(d, i) { d.addEventListener('click', function() { go(i); clearInterval(timer); timer = setInterval(function(){ go(current + 1); }, 3000); }); });
+  var timer = setInterval(function() { go(current + 1); }, 3000);
+})();
+</script>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <div class="ticker-item"><div class="ticker-dot"></div>GPS Workout Tracking</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Dark Map Routes</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>HRV & Recovery Score</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>AI Nutrition Analysis</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Apple Watch Sync</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Social Feed</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Personal Records</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Sleep Insights</div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item"><div class="ticker-dot"></div>GPS Workout Tracking</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Dark Map Routes</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>HRV & Recovery Score</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>AI Nutrition Analysis</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Apple Watch Sync</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Social Feed</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Personal Records</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Sleep Insights</div>
+  </div>
+</div>
+
+<!-- ROUTES SECTION -->
+<section id="routes">
+  <div class="routes-header">
+    <span class="section-label">Route Maps</span>
+    <h2 class="section-title">Pick your route.<br>Then just go.</h2>
+    <p class="section-sub">Browse a library of curated running and cycling routes on a stunning dark map. Preview every path, distance and elevation before you head out.</p>
+  </div>
+  <div class="routes-map-bg">
+    <div style="position:absolute;inset:0;opacity:0.07;background-image:linear-gradient(rgba(255,255,255,0.4) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.4) 1px,transparent 1px);background-size:32px 32px;border-radius:24px;"></div>
+    <div class="routes-grid">
+
+      <!-- Route 1: Orange -->
+      <div class="route-card">
+        <div class="route-map-preview">
+          <div style="position:absolute;inset:0;background:#090910"></div>
+          <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 200 120">
+            <rect x="0" y="0" width="22" height="32" fill="#111120" rx="1"/><rect x="26" y="4" width="16" height="24" fill="#0e0e1c" rx="1"/>
+            <rect x="0" y="44" width="22" height="26" fill="#111120" rx="1"/><rect x="26" y="46" width="14" height="20" fill="#0d0d1b" rx="1"/>
+            <rect x="46" y="0" width="28" height="34" fill="#111120" rx="1"/><rect x="46" y="44" width="20" height="26" fill="#0e0e1c" rx="1"/>
+            <rect x="78" y="0" width="22" height="22" fill="#111120" rx="1"/><rect x="78" y="30" width="18" height="40" fill="#0d0d1b" rx="1"/>
+            <rect x="104" y="4" width="16" height="28" fill="#111120" rx="1"/>
+            <rect x="124" y="0" width="30" height="32" fill="#081a0a" rx="2"/>
+            <rect x="160" y="0" width="24" height="28" fill="#111120" rx="1"/><rect x="188" y="4" width="12" height="22" fill="#0e0e1c" rx="1"/>
+            <rect x="160" y="44" width="20" height="26" fill="#0d0d1b" rx="1"/><rect x="184" y="44" width="16" height="26" fill="#111120" rx="1"/>
+            <rect x="0" y="84" width="22" height="36" fill="#111120" rx="1"/><rect x="26" y="86" width="16" height="30" fill="#0e0e1c" rx="1"/>
+            <rect x="46" y="82" width="26" height="38" fill="#111120" rx="1"/><rect x="76" y="84" width="18" height="34" fill="#0d0d1b" rx="1"/>
+            <rect x="104" y="80" width="16" height="40" fill="#111120" rx="1"/>
+            <rect x="124" y="82" width="28" height="38" fill="#111120" rx="1"/><rect x="156" y="84" width="18" height="32" fill="#0e0e1c" rx="1"/>
+            <rect x="178" y="80" width="22" height="40" fill="#111120" rx="1"/>
+            <line x1="0" y1="40" x2="200" y2="40" stroke="#1c1c2e" stroke-width="6"/>
+            <line x1="0" y1="78" x2="200" y2="78" stroke="#1c1c2e" stroke-width="6"/>
+            <line x1="44" y1="0" x2="44" y2="78" stroke="#1c1c2e" stroke-width="5"/>
+            <line x1="122" y1="0" x2="122" y2="78" stroke="#1c1c2e" stroke-width="5"/>
+            <line x1="158" y1="0" x2="158" y2="78" stroke="#1c1c2e" stroke-width="4"/>
+            <line x1="100" y1="40" x2="100" y2="78" stroke="#171728" stroke-width="3"/>
+            <line x1="0" y1="60" x2="44" y2="60" stroke="#171728" stroke-width="3"/>
+            <path d="M18,108 L18,78 Q18,40 44,40 L100,40 Q100,20 100,12 Q100,6 122,6 L175,6" stroke="rgba(252,76,2,0.14)" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18,108 L18,78 Q18,40 44,40 L100,40 Q100,20 100,12 Q100,6 122,6 L175,6" stroke="rgba(252,76,2,0.55)" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18,108 L18,78 Q18,40 44,40 L100,40 Q100,20 100,12 Q100,6 122,6 L175,6" stroke="#FC4C02" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="18" cy="108" r="5" fill="rgba(76,175,80,0.3)"/><circle cx="18" cy="108" r="3" fill="#4CAF50"/>
+            <circle cx="175" cy="6" r="5" fill="rgba(252,76,2,0.4)"/><circle cx="175" cy="6" r="3" fill="#FC4C02"/>
+          </svg>
+          <div class="route-dist-badge">5.4 km</div>
+        </div>
+        <div class="route-card-info">
+          <div class="route-card-name">Bosphorus Coastal Run</div>
+          <div class="route-card-meta">
+            <span><strong>5.4 km</strong></span>
+            <span><strong>↑ 48m</strong></span>
+            <span>~28 min</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Route 2: Purple -->
+      <div class="route-card">
+        <div class="route-map-preview">
+          <div style="position:absolute;inset:0;background:#090910"></div>
+          <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 200 120">
+            <rect x="55" y="4" width="60" height="48" fill="#081a0a" rx="3"/>
+            <rect x="62" y="10" width="18" height="14" fill="#0a1f0c" rx="1"/><rect x="88" y="10" width="16" height="14" fill="#0a1f0c" rx="1"/>
+            <rect x="0" y="0" width="20" height="34" fill="#111120" rx="1"/><rect x="24" y="4" width="16" height="26" fill="#0e0e1c" rx="1"/>
+            <rect x="0" y="44" width="20" height="30" fill="#0d0d1b" rx="1"/><rect x="24" y="46" width="16" height="24" fill="#111120" rx="1"/>
+            <rect x="124" y="0" width="32" height="28" fill="#111120" rx="1"/><rect x="160" y="4" width="22" height="22" fill="#0e0e1c" rx="1"/><rect x="186" y="0" width="14" height="28" fill="#0d0d1b" rx="1"/>
+            <rect x="124" y="34" width="28" height="30" fill="#111120" rx="1"/><rect x="156" y="36" width="20" height="26" fill="#0e0e1c" rx="1"/>
+            <rect x="0" y="84" width="20" height="36" fill="#111120" rx="1"/><rect x="24" y="86" width="16" height="30" fill="#0d0d1b" rx="1"/>
+            <rect x="44" y="80" width="28" height="40" fill="#111120" rx="1"/><rect x="76" y="82" width="20" height="36" fill="#0e0e1c" rx="1"/>
+            <rect x="100" y="80" width="22" height="40" fill="#111120" rx="1"/><rect x="126" y="78" width="28" height="42" fill="#0d0d1b" rx="1"/>
+            <rect x="158" y="80" width="24" height="40" fill="#111120" rx="1"/><rect x="186" y="82" width="14" height="38" fill="#0e0e1c" rx="1"/>
+            <line x1="0" y1="40" x2="200" y2="40" stroke="#1c1c2e" stroke-width="6"/>
+            <line x1="0" y1="76" x2="200" y2="76" stroke="#1c1c2e" stroke-width="6"/>
+            <line x1="44" y1="0" x2="44" y2="76" stroke="#1c1c2e" stroke-width="5"/>
+            <line x1="120" y1="0" x2="120" y2="76" stroke="#1c1c2e" stroke-width="5"/>
+            <line x1="154" y1="0" x2="154" y2="76" stroke="#1c1c2e" stroke-width="4"/>
+            <line x1="44" y1="56" x2="120" y2="56" stroke="#171728" stroke-width="3"/>
+            <line x1="80" y1="40" x2="80" y2="76" stroke="#171728" stroke-width="3"/>
+            <path d="M22,58 L44,58 Q56,58 56,40 L56,16 L120,16 L120,76 Q120,96 102,96 L60,96 Q44,96 44,76 L44,58" stroke="rgba(124,110,250,0.14)" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22,58 L44,58 Q56,58 56,40 L56,16 L120,16 L120,76 Q120,96 102,96 L60,96 Q44,96 44,76 L44,58" stroke="rgba(124,110,250,0.55)" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22,58 L44,58 Q56,58 56,40 L56,16 L120,16 L120,76 Q120,96 102,96 L60,96 Q44,96 44,76 L44,58" stroke="#7C6EFA" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="22" cy="58" r="5" fill="rgba(76,175,80,0.3)"/><circle cx="22" cy="58" r="3" fill="#4CAF50"/>
+          </svg>
+          <div class="route-dist-badge">3.2 km</div>
+        </div>
+        <div class="route-card-info">
+          <div class="route-card-name">Maçka Park Loop</div>
+          <div class="route-card-meta">
+            <span><strong>3.2 km</strong></span>
+            <span><strong>↑ 22m</strong></span>
+            <span>~18 min</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Route 3: Cyan -->
+      <div class="route-card">
+        <div class="route-map-preview">
+          <div style="position:absolute;inset:0;background:#090910"></div>
+          <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 200 120">
+            <rect x="0" y="0" width="24" height="36" fill="#111120" rx="1"/><rect x="28" y="4" width="16" height="28" fill="#0e0e1c" rx="1"/>
+            <rect x="48" y="0" width="22" height="36" fill="#0d0d1b" rx="1"/><rect x="74" y="2" width="18" height="32" fill="#111120" rx="1"/>
+            <rect x="96" y="0" width="26" height="36" fill="#0e0e1c" rx="1"/><rect x="126" y="2" width="20" height="30" fill="#111120" rx="1"/>
+            <rect x="150" y="0" width="24" height="28" fill="#0d0d1b" rx="1"/><rect x="178" y="0" width="22" height="36" fill="#111120" rx="1"/>
+            <rect x="0" y="48" width="24" height="24" fill="#111120" rx="1"/><rect x="28" y="50" width="16" height="18" fill="#0e0e1c" rx="1"/>
+            <rect x="48" y="48" width="22" height="24" fill="#0d0d1b" rx="1"/><rect x="74" y="48" width="18" height="24" fill="#111120" rx="1"/>
+            <rect x="96" y="48" width="26" height="24" fill="#0e0e1c" rx="1"/><rect x="126" y="48" width="20" height="24" fill="#111120" rx="1"/>
+            <rect x="150" y="48" width="24" height="24" fill="#0d0d1b" rx="1"/><rect x="178" y="48" width="22" height="24" fill="#111120" rx="1"/>
+            <rect x="0" y="84" width="24" height="36" fill="#111120" rx="1"/><rect x="28" y="86" width="16" height="30" fill="#0e0e1c" rx="1"/>
+            <rect x="48" y="82" width="22" height="38" fill="#0d0d1b" rx="1"/><rect x="74" y="84" width="18" height="34" fill="#111120" rx="1"/>
+            <rect x="96" y="82" width="26" height="38" fill="#0e0e1c" rx="1"/><rect x="126" y="84" width="20" height="34" fill="#111120" rx="1"/>
+            <rect x="150" y="82" width="24" height="38" fill="#0d0d1b" rx="1"/><rect x="178" y="84" width="22" height="36" fill="#111120" rx="1"/>
+            <line x1="0" y1="40" x2="200" y2="40" stroke="#1c1c2e" stroke-width="6"/>
+            <line x1="0" y1="78" x2="200" y2="78" stroke="#1c1c2e" stroke-width="6"/>
+            <line x1="46" y1="0" x2="46" y2="78" stroke="#1c1c2e" stroke-width="5"/>
+            <line x1="94" y1="0" x2="94" y2="78" stroke="#1c1c2e" stroke-width="5"/>
+            <line x1="148" y1="0" x2="148" y2="78" stroke="#1c1c2e" stroke-width="5"/>
+            <line x1="0" y1="60" x2="46" y2="60" stroke="#171728" stroke-width="3"/>
+            <line x1="46" y1="60" x2="94" y2="60" stroke="#171728" stroke-width="3"/>
+            <path d="M8,78 L46,78 L46,40 L94,40 L94,78 L148,78 Q160,78 160,66 L160,18" stroke="rgba(38,198,218,0.14)" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8,78 L46,78 L46,40 L94,40 L94,78 L148,78 Q160,78 160,66 L160,18" stroke="rgba(38,198,218,0.55)" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8,78 L46,78 L46,40 L94,40 L94,78 L148,78 Q160,78 160,66 L160,18" stroke="#26C6DA" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="8" cy="78" r="5" fill="rgba(76,175,80,0.3)"/><circle cx="8" cy="78" r="3" fill="#4CAF50"/>
+            <circle cx="160" cy="18" r="5" fill="rgba(38,198,218,0.4)"/><circle cx="160" cy="18" r="3" fill="#26C6DA"/>
+          </svg>
+          <div class="route-dist-badge">8.1 km</div>
+        </div>
+        <div class="route-card-info">
+          <div class="route-card-name">City Center Circuit</div>
+          <div class="route-card-meta">
+            <span><strong>8.1 km</strong></span>
+            <span><strong>↑ 85m</strong></span>
+            <span>~42 min</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Route 4: Green (forest trail) -->
+      <div class="route-card">
+        <div class="route-map-preview">
+          <div style="position:absolute;inset:0;background:#07100a"></div>
+          <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 200 120">
+            <rect x="0" y="0" width="200" height="120" fill="#07100a"/>
+            <rect x="4" y="4" width="36" height="28" fill="#091408" rx="2"/><rect x="44" y="2" width="30" height="24" fill="#0a1609" rx="2"/>
+            <rect x="78" y="4" width="28" height="26" fill="#091408" rx="2"/><rect x="110" y="2" width="32" height="28" fill="#0a1609" rx="2"/>
+            <rect x="146" y="4" width="26" height="26" fill="#091408" rx="2"/><rect x="176" y="2" width="24" height="28" fill="#0a1609" rx="2"/>
+            <rect x="4" y="44" width="34" height="30" fill="#0a1609" rx="2"/><rect x="42" y="44" width="28" height="28" fill="#091408" rx="2"/>
+            <rect x="74" y="46" width="32" height="26" fill="#0a1609" rx="2"/><rect x="110" y="44" width="28" height="30" fill="#091408" rx="2"/>
+            <rect x="142" y="46" width="30" height="28" fill="#0a1609" rx="2"/><rect x="176" y="44" width="24" height="30" fill="#091408" rx="2"/>
+            <rect x="4" y="86" width="34" height="34" fill="#091408" rx="2"/><rect x="42" y="84" width="28" height="36" fill="#0a1609" rx="2"/>
+            <rect x="74" y="86" width="32" height="34" fill="#091408" rx="2"/><rect x="110" y="84" width="28" height="36" fill="#0a1609" rx="2"/>
+            <rect x="142" y="86" width="30" height="34" fill="#091408" rx="2"/><rect x="176" y="84" width="24" height="36" fill="#091408" rx="2"/>
+            <line x1="0" y1="36" x2="200" y2="36" stroke="#0d1a0e" stroke-width="6"/>
+            <line x1="0" y1="78" x2="200" y2="78" stroke="#0d1a0e" stroke-width="6"/>
+            <line x1="40" y1="0" x2="40" y2="78" stroke="#0d1a0e" stroke-width="5"/>
+            <line x1="106" y1="0" x2="106" y2="78" stroke="#0d1a0e" stroke-width="5"/>
+            <line x1="174" y1="0" x2="174" y2="78" stroke="#0d1a0e" stroke-width="4"/>
+            <line x1="72" y1="36" x2="72" y2="78" stroke="#0c180d" stroke-width="3"/>
+            <line x1="0" y1="56" x2="40" y2="56" stroke="#0c180d" stroke-width="3"/>
+            <path d="M16,108 Q36,68 52,50 Q70,30 106,24 Q140,18 152,36 Q164,54 140,68 Q118,80 112,96 L175,96" stroke="rgba(76,175,80,0.14)" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16,108 Q36,68 52,50 Q70,30 106,24 Q140,18 152,36 Q164,54 140,68 Q118,80 112,96 L175,96" stroke="rgba(76,175,80,0.55)" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16,108 Q36,68 52,50 Q70,30 106,24 Q140,18 152,36 Q164,54 140,68 Q118,80 112,96 L175,96" stroke="#4CAF50" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="16" cy="108" r="5" fill="rgba(76,175,80,0.3)"/><circle cx="16" cy="108" r="3" fill="#4CAF50"/>
+            <circle cx="175" cy="96" r="5" fill="rgba(76,175,80,0.3)"/><circle cx="175" cy="96" r="3" fill="#4CAF50"/>
+          </svg>
+          <div class="route-dist-badge">10.5 km</div>
+        </div>
+        <div class="route-card-info">
+          <div class="route-card-name">Belgrade Forest Trail</div>
+          <div class="route-card-meta">
+            <span><strong>10.5 km</strong></span>
+            <span><strong>↑ 140m</strong></span>
+            <span>~58 min</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RECOVERY SECTION -->
+<section id="recovery" style="background:var(--surface);border-top:1px solid var(--border)">
+  <div class="split">
+    <div>
+      <span class="section-label">Recovery & HRV</span>
+      <h2 class="section-title">Know when to push.<br>Know when to rest.</h2>
+      <p class="section-sub">Every morning, MyVitality calculates your readiness score from overnight HRV, resting heart rate and sleep quality. See your 14-day trend and act on real data — not guesswork.</p>
+      <ul class="feature-list">
+        <li><strong>Daily Readiness Score</strong> — green means go, red means recover</li>
+        <li><strong>14-day HRV Trend Chart</strong> with your personal baseline</li>
+        <li><strong>Sleep breakdown</strong> — Deep, REM and Light stages from Apple Watch</li>
+        <li><strong>Resting HR, SpO2 & Respiratory Rate</strong> synced automatically</li>
+      </ul>
+    </div>
+    <div style="display:flex;justify-content:center">
+      <div class="feature-phone">
+        <div class="phone-top"><div class="dynamic-island"></div></div>
+        <div class="feature-screen">
+          <!-- Recovery Score -->
+          <div style="padding:16px;background:#0b0b16;border-bottom:1px solid rgba(255,255,255,0.05)">
+            <div style="font-size:0.5rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:10px">Daily Readiness</div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div>
+                <div style="font-size:2.8rem;font-weight:900;color:#4CAF50;line-height:1">84<span style="font-size:1rem">%</span></div>
+                <div style="font-size:0.6rem;color:#4CAF50;font-weight:700;margin-top:3px">Optimal · Ready to train</div>
+              </div>
+              <svg width="70" height="70" viewBox="0 0 70 70">
+                <circle cx="35" cy="35" r="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/>
+                <circle cx="35" cy="35" r="28" fill="none" stroke="#4CAF50" stroke-width="6" stroke-dasharray="148" stroke-dashoffset="24" stroke-linecap="round" transform="rotate(-90 35 35)"/>
+                <text x="35" y="40" text-anchor="middle" font-size="14" font-weight="900" fill="#4CAF50">84</text>
+              </svg>
+            </div>
+          </div>
+          <!-- Mini stats -->
+          <div style="display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.05)">
+            <div style="flex:1;padding:12px;text-align:center;border-right:1px solid rgba(255,255,255,0.05)">
+              <div style="font-size:0.85rem;font-weight:800;color:#26C6DA">52ms</div>
+              <div style="font-size:0.5rem;color:var(--muted);text-transform:uppercase;margin-top:3px">HRV</div>
+            </div>
+            <div style="flex:1;padding:12px;text-align:center;border-right:1px solid rgba(255,255,255,0.05)">
+              <div style="font-size:0.85rem;font-weight:800;color:#EF5350">52</div>
+              <div style="font-size:0.5rem;color:var(--muted);text-transform:uppercase;margin-top:3px">Resting HR</div>
+            </div>
+            <div style="flex:1;padding:12px;text-align:center">
+              <div style="font-size:0.85rem;font-weight:800;color:#7C6EFA">87%</div>
+              <div style="font-size:0.5rem;color:var(--muted);text-transform:uppercase;margin-top:3px">Sleep</div>
+            </div>
+          </div>
+          <!-- HRV Chart -->
+          <div style="padding:14px">
+            <div style="font-size:0.5rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">14-Day HRV Trend</div>
+            <svg width="100%" height="48" viewBox="0 0 180 48">
+              <defs>
+                <linearGradient id="hrv-grad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#26C6DA" stop-opacity="0.3"/>
+                  <stop offset="100%" stop-color="#26C6DA" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,36 20,28 40,32 60,20 80,24 100,16 120,20 140,12 160,17 180,10 L180,48 L0,48 Z" fill="url(#hrv-grad)"/>
+              <path d="M0,36 20,28 40,32 60,20 80,24 100,16 120,20 140,12 160,17 180,10" fill="none" stroke="rgba(38,198,218,0.4)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M0,36 20,28 40,32 60,20 80,24 100,16 120,20 140,12 160,17 180,10" fill="none" stroke="#26C6DA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="0" y1="26" x2="180" y2="26" stroke="rgba(38,198,218,0.25)" stroke-width="1" stroke-dasharray="4,3"/>
+            </svg>
+          </div>
+          <!-- Sleep stages -->
+          <div style="padding:0 14px 14px">
+            <div style="font-size:0.5rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Last Night · 7h 20m</div>
+            <div style="height:10px;border-radius:5px;overflow:hidden;display:flex">
+              <div style="width:22%;background:#1565C0"></div>
+              <div style="width:25%;background:#7C6EFA"></div>
+              <div style="width:53%;background:#37474F"></div>
+            </div>
+            <div style="display:flex;gap:12px;margin-top:6px">
+              <div style="display:flex;align-items:center;gap:4px;font-size:0.5rem;color:var(--muted)"><span style="width:7px;height:7px;border-radius:2px;background:#1565C0;display:inline-block"></span>Deep 1h 37m</div>
+              <div style="display:flex;align-items:center;gap:4px;font-size:0.5rem;color:var(--muted)"><span style="width:7px;height:7px;border-radius:2px;background:#7C6EFA;display:inline-block"></span>REM 1h 50m</div>
+              <div style="display:flex;align-items:center;gap:4px;font-size:0.5rem;color:var(--muted)"><span style="width:7px;height:7px;border-radius:2px;background:#37474F;display:inline-block"></span>Light 3h 53m</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── PHONE MOCKUPS ────────────────────────────────────────────────────────── -->
-<div class="phones">
-  <!-- Left phone: Activity -->
-  <div class="phone-frame side">
-    <div class="phone-notch"><div class="phone-notch-pill"></div></div>
-    <div class="phone-screen">
-      <div class="screen-map">
-        <div class="map-grid"></div>
-        <svg class="map-route" width="120" height="80" viewBox="0 0 120 80">
-          <!-- Outer glow -->
-          <path d="M10,70 C20,40 40,20 60,30 S90,50 110,20" stroke="rgba(252,76,2,0.2)" stroke-width="10" fill="none" stroke-linecap="round"/>
-          <!-- Inner glow -->
-          <path d="M10,70 C20,40 40,20 60,30 S90,50 110,20" stroke="rgba(252,76,2,0.5)" stroke-width="5" fill="none" stroke-linecap="round"/>
-          <!-- Core -->
-          <path d="M10,70 C20,40 40,20 60,30 S90,50 110,20" stroke="#FC4C02" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <!-- Start dot -->
-          <circle cx="10" cy="70" r="5" fill="#4CAF50"/>
-          <!-- End dot (current pos) -->
-          <circle cx="110" cy="20" r="7" fill="rgba(252,76,2,0.3)"/>
-          <circle cx="110" cy="20" r="4" fill="#FC4C02"/>
+<!-- NUTRITION SECTION -->
+<section id="nutrition">
+  <div class="split reverse">
+    <div>
+      <span class="section-label">AI Nutrition</span>
+      <h2 class="section-title">Every macro.<br>Every meal.</h2>
+      <p class="section-sub">Take a photo of your plate and AI breaks down calories, protein, carbs and fat in seconds. Scan barcodes or search thousands of foods. Set your own macro goals and see exactly what you're missing.</p>
+      <ul class="feature-list">
+        <li><strong>Photo → macros in seconds</strong> with AI food recognition</li>
+        <li><strong>Custom protein, carbs & fat goals</strong> you can adjust anytime</li>
+        <li><strong>Barcode scanner</strong> for packaged foods</li>
+        <li><strong>Water intake tracking</strong> with daily reminders</li>
+      </ul>
+    </div>
+    <div style="display:flex;justify-content:center">
+      <div class="feature-phone">
+        <div class="phone-top"><div class="dynamic-island"></div></div>
+        <div class="feature-screen">
+          <div style="padding:16px 14px;background:#0b0b16">
+            <div style="font-size:0.5rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:10px">Today's Nutrition</div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:8px">
+              <div>
+                <div style="font-size:2.2rem;font-weight:900;color:#FF9800;line-height:1">1,840</div>
+                <div style="font-size:0.5rem;color:var(--muted)">kcal consumed</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:0.9rem;font-weight:800;color:#4CAF50">160 left</div>
+                <div style="font-size:0.5rem;color:var(--muted)">of 2,000 kcal goal</div>
+              </div>
+            </div>
+            <div style="height:5px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden;margin-bottom:14px">
+              <div style="width:92%;height:100%;background:linear-gradient(90deg,#FF9800,#FC4C02);border-radius:3px"></div>
+            </div>
+            <div style="display:flex;gap:8px;margin-bottom:14px">
+              <div style="flex:1;background:rgba(66,165,245,0.1);border:1px solid rgba(66,165,245,0.2);border-radius:12px;padding:10px">
+                <div style="font-size:0.9rem;font-weight:800;color:#42A5F5">148g</div>
+                <div style="height:3px;background:rgba(66,165,245,0.15);border-radius:2px;margin:5px 0">
+                  <div style="width:99%;height:100%;background:#42A5F5;border-radius:2px"></div>
+                </div>
+                <div style="font-size:0.5rem;color:var(--muted)">Protein / 150g</div>
+              </div>
+              <div style="flex:1;background:rgba(102,187,106,0.1);border:1px solid rgba(102,187,106,0.2);border-radius:12px;padding:10px">
+                <div style="font-size:0.9rem;font-weight:800;color:#66BB6A">210g</div>
+                <div style="height:3px;background:rgba(102,187,106,0.15);border-radius:2px;margin:5px 0">
+                  <div style="width:84%;height:100%;background:#66BB6A;border-radius:2px"></div>
+                </div>
+                <div style="font-size:0.5rem;color:var(--muted)">Carbs / 250g</div>
+              </div>
+              <div style="flex:1;background:rgba(255,202,40,0.1);border:1px solid rgba(255,202,40,0.2);border-radius:12px;padding:10px">
+                <div style="font-size:0.9rem;font-weight:800;color:#FFCA28">58g</div>
+                <div style="height:3px;background:rgba(255,202,40,0.15);border-radius:2px;margin:5px 0">
+                  <div style="width:89%;height:100%;background:#FFCA28;border-radius:2px"></div>
+                </div>
+                <div style="font-size:0.5rem;color:var(--muted)">Fat / 65g</div>
+              </div>
+            </div>
+            <!-- AI suggestion -->
+            <div style="background:rgba(124,110,250,0.1);border:1px solid rgba(124,110,250,0.2);border-radius:12px;padding:10px;display:flex;align-items:flex-start;gap:8px">
+              <span style="font-size:0.9rem">✨</span>
+              <div>
+                <div style="font-size:0.6rem;font-weight:700;color:#7C6EFA;margin-bottom:3px">AI Insight</div>
+                <div style="font-size:0.58rem;color:var(--muted);line-height:1.4">You're 2g short on protein. Add a Greek yogurt to hit your goal today.</div>
+              </div>
+            </div>
+          </div>
+          <!-- Meals list -->
+          <div style="padding:0 14px 14px;background:#0b0b16">
+            <div style="font-size:0.5rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;margin-top:10px">Today's Meals</div>
+            <div style="background:#141425;border-radius:10px;padding:10px 12px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font-size:0.7rem;font-weight:700;color:var(--text)">Grilled Chicken</div>
+                <div style="font-size:0.55rem;color:var(--muted)">Lunch · 200g · 38g protein</div>
+              </div>
+              <div style="font-size:0.75rem;font-weight:800;color:#FF9800">330 kcal</div>
+            </div>
+            <div style="background:#141425;border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font-size:0.7rem;font-weight:700;color:var(--text)">Oat Bowl + Banana</div>
+                <div style="font-size:0.55rem;color:var(--muted)">Breakfast · AI scanned 📷</div>
+              </div>
+              <div style="font-size:0.75rem;font-weight:800;color:#FF9800">420 kcal</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL SECTION -->
+<section id="social" style="background:var(--surface);border-top:1px solid var(--border)">
+  <div style="text-align:center;margin-bottom:56px">
+    <span class="section-label">Social Feed</span>
+    <h2 class="section-title">Share the run.<br>Celebrate together.</h2>
+    <p class="section-sub" style="margin:0 auto">Follow friends, react to their workouts and share your own with a stunning route card. One tap to Instagram or WhatsApp.</p>
+  </div>
+  <div class="social-feed">
+
+    <!-- Post 1 -->
+    <div class="social-card" style="flex:1;min-width:0">
+      <div class="social-card-header">
+        <svg class="social-avatar" viewBox="0 0 36 36">
+          <rect width="36" height="36" rx="18" fill="#1e1e3a"/>
+          <text x="18" y="24" text-anchor="middle" font-size="16" fill="#FC4C02" font-weight="800">A</text>
+        </svg>
+        <div>
+          <div class="social-name">Alex M.</div>
+          <div class="social-time">Morning Run · 2h ago</div>
+        </div>
+        <div style="margin-left:auto;font-size:0.7rem;color:#4CAF50;font-weight:700;background:rgba(76,175,80,0.1);padding:3px 8px;border-radius:8px">🔥 5-day streak</div>
+      </div>
+      <div class="social-map">
+        <div style="position:absolute;inset:0;background:#090910"></div>
+        <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 280 140">
+          <rect x="0" y="0" width="28" height="40" fill="#111120" rx="1"/><rect x="32" y="4" width="22" height="32" fill="#0e0e1c" rx="1"/>
+          <rect x="58" y="0" width="26" height="40" fill="#0d0d1b" rx="1"/><rect x="88" y="4" width="18" height="32" fill="#111120" rx="1"/>
+          <rect x="110" y="0" width="28" height="40" fill="#0e0e1c" rx="1"/><rect x="142" y="2" width="22" height="36" fill="#111120" rx="1"/>
+          <rect x="168" y="0" width="26" height="40" fill="#0d0d1b" rx="1"/><rect x="198" y="2" width="20" height="36" fill="#111120" rx="1"/>
+          <rect x="222" y="0" width="28" height="40" fill="#0e0e1c" rx="1"/><rect x="254" y="2" width="26" height="38" fill="#0d0d1b" rx="1"/>
+          <rect x="0" y="58" width="28" height="36" fill="#0e0e1c" rx="1"/><rect x="32" y="60" width="22" height="30" fill="#111120" rx="1"/>
+          <rect x="58" y="58" width="26" height="36" fill="#0d0d1b" rx="1"/><rect x="88" y="60" width="18" height="30" fill="#0e0e1c" rx="1"/>
+          <rect x="110" y="58" width="28" height="36" fill="#111120" rx="1"/><rect x="142" y="60" width="22" height="30" fill="#0d0d1b" rx="1"/>
+          <rect x="168" y="58" width="26" height="36" fill="#0e0e1c" rx="1"/><rect x="198" y="60" width="20" height="30" fill="#111120" rx="1"/>
+          <rect x="222" y="58" width="28" height="36" fill="#0d0d1b" rx="1"/><rect x="254" y="60" width="26" height="36" fill="#0e0e1c" rx="1"/>
+          <rect x="0" y="106" width="28" height="34" fill="#111120" rx="1"/><rect x="32" y="108" width="22" height="28" fill="#0d0d1b" rx="1"/>
+          <rect x="58" y="104" width="26" height="36" fill="#0e0e1c" rx="1"/><rect x="88" y="108" width="18" height="32" fill="#111120" rx="1"/>
+          <rect x="110" y="106" width="28" height="34" fill="#0d0d1b" rx="1"/><rect x="142" y="104" width="22" height="36" fill="#111120" rx="1"/>
+          <rect x="168" y="106" width="26" height="34" fill="#0e0e1c" rx="1"/><rect x="198" y="104" width="20" height="36" fill="#0d0d1b" rx="1"/>
+          <rect x="222" y="106" width="28" height="34" fill="#111120" rx="1"/><rect x="254" y="106" width="26" height="34" fill="#0e0e1c" rx="1"/>
+          <line x1="0" y1="46" x2="280" y2="46" stroke="#1c1c2e" stroke-width="7"/>
+          <line x1="0" y1="100" x2="280" y2="100" stroke="#1c1c2e" stroke-width="7"/>
+          <line x1="56" y1="0" x2="56" y2="100" stroke="#1c1c2e" stroke-width="6"/>
+          <line x1="108" y1="0" x2="108" y2="100" stroke="#1c1c2e" stroke-width="6"/>
+          <line x1="166" y1="0" x2="166" y2="100" stroke="#1c1c2e" stroke-width="6"/>
+          <line x1="220" y1="0" x2="220" y2="100" stroke="#1c1c2e" stroke-width="5"/>
+          <line x1="0" y1="70" x2="56" y2="70" stroke="#171728" stroke-width="3"/>
+          <line x1="56" y1="72" x2="108" y2="72" stroke="#171728" stroke-width="3"/>
+          <line x1="80" y1="46" x2="80" y2="100" stroke="#171728" stroke-width="3"/>
+          <line x1="140" y1="46" x2="140" y2="100" stroke="#171728" stroke-width="3"/>
+          <path d="M18,122 L18,100 Q18,46 56,46 L108,46 Q108,22 108,16 Q108,10 130,10 L180,10 Q180,46 180,46 L180,100 Q180,122 200,122 L255,122" stroke="rgba(252,76,2,0.12)" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18,122 L18,100 Q18,46 56,46 L108,46 Q108,22 108,16 Q108,10 130,10 L180,10 Q180,46 180,46 L180,100 Q180,122 200,122 L255,122" stroke="rgba(252,76,2,0.5)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18,122 L18,100 Q18,46 56,46 L108,46 Q108,22 108,16 Q108,10 130,10 L180,10 Q180,46 180,46 L180,100 Q180,122 200,122 L255,122" stroke="#FC4C02" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="18" cy="122" r="6" fill="rgba(76,175,80,0.3)"/><circle cx="18" cy="122" r="3.5" fill="#4CAF50"/>
+          <circle cx="255" cy="122" r="6" fill="rgba(252,76,2,0.35)"/><circle cx="255" cy="122" r="3.5" fill="#FC4C02"/>
         </svg>
       </div>
-      <div class="screen-stats">
-        <div style="font-size:0.6rem;color:var(--muted);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Live Tracking</div>
-        <div class="screen-stat-row">
-          <div class="screen-stat-box">
-            <div class="screen-stat-val">5.2</div>
-            <div class="screen-stat-lbl">km</div>
-          </div>
-          <div class="screen-stat-box">
-            <div class="screen-stat-val">28:14</div>
-            <div class="screen-stat-lbl">time</div>
-          </div>
-          <div class="screen-stat-box">
-            <div class="screen-stat-val" style="color:#4CAF50">5:25</div>
-            <div class="screen-stat-lbl">/km</div>
-          </div>
-        </div>
-        <div class="screen-stat-row">
-          <div class="screen-stat-box" style="flex:2">
-            <div class="screen-stat-val" style="color:var(--cyan)">147</div>
-            <div class="screen-stat-lbl">avg heart rate bpm</div>
-          </div>
-          <div class="screen-stat-box">
-            <div class="screen-stat-val" style="color:#FFB300">312</div>
-            <div class="screen-stat-lbl">kcal</div>
-          </div>
-        </div>
+      <div class="social-stats">
+        <div class="social-stat"><strong>8.4 km</strong>Distance</div>
+        <div class="social-stat"><strong>42:18</strong>Duration</div>
+        <div class="social-stat"><strong>5:02/km</strong>Avg Pace</div>
+        <div class="social-stat"><strong>487 kcal</strong>Burned</div>
+      </div>
+      <div class="social-actions">
+        <div class="social-action"><span class="social-action-icon">🔥</span> 12 kudos</div>
+        <div class="social-action"><span class="social-action-icon">💬</span> 3 comments</div>
+        <div class="social-action" style="margin-left:auto"><span class="social-action-icon">↗</span> Share</div>
       </div>
     </div>
-  </div>
 
-  <!-- Center phone: Recovery -->
-  <div class="phone-frame center">
-    <div class="phone-notch"><div class="phone-notch-pill"></div></div>
-    <div class="phone-screen">
-      <div style="padding:14px;background:#0f0f1a;border-bottom:1px solid rgba(255,255,255,0.05)">
-        <div style="font-size:0.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Daily Readiness</div>
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:6px">
-          <div>
-            <div style="font-size:2.4rem;font-weight:900;color:#4CAF50;line-height:1">84<span style="font-size:1rem">%</span></div>
-            <div style="font-size:0.65rem;color:#4CAF50;font-weight:600">Optimal</div>
-          </div>
-          <svg width="64" height="64" viewBox="0 0 64 64">
-            <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="5"/>
-            <circle cx="32" cy="32" r="26" fill="none" stroke="#4CAF50" stroke-width="5"
-              stroke-dasharray="137.4" stroke-dashoffset="22" stroke-linecap="round"
-              transform="rotate(-90 32 32)"/>
-            <text x="32" y="37" text-anchor="middle" font-size="12" font-weight="800" fill="#4CAF50">84</text>
-          </svg>
+    <!-- Post 2 -->
+    <div class="social-card" style="flex:1;min-width:0">
+      <div class="social-card-header">
+        <svg class="social-avatar" viewBox="0 0 36 36">
+          <rect width="36" height="36" rx="18" fill="#1a1a3a"/>
+          <text x="18" y="24" text-anchor="middle" font-size="16" fill="#7C6EFA" font-weight="800">S</text>
+        </svg>
+        <div>
+          <div class="social-name">Sara K.</div>
+          <div class="social-time">Evening Ride · 5h ago</div>
         </div>
+        <div style="margin-left:auto;font-size:0.65rem;color:#7C6EFA;font-weight:700;background:rgba(124,110,250,0.1);padding:3px 8px;border-radius:8px">🏆 New PR!</div>
       </div>
-      <div class="screen-recovery">
-        <div class="recovery-mini-stats">
-          <div class="rms">
-            <div class="rms-val">52ms</div>
-            <div class="rms-lbl">HRV</div>
-          </div>
-          <div class="rms">
-            <div class="rms-val" style="color:#EF5350">52</div>
-            <div class="rms-lbl">RHR</div>
-          </div>
-          <div class="rms">
-            <div class="rms-val" style="color:#7C4DFF">87%</div>
-            <div class="rms-lbl">Sleep</div>
-          </div>
-        </div>
-        <div style="margin-top:12px">
-          <div style="font-size:0.55rem;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.06em;">HRV Trend</div>
-          <svg width="100%" height="40" viewBox="0 0 180 40">
-            <polyline points="0,30 20,24 40,28 60,18 80,22 100,15 120,19 140,12 160,16 180,10"
-              fill="none" stroke="rgba(38,198,218,0.3)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-            <polyline points="0,30 20,24 40,28 60,18 80,22 100,15 120,19 140,12 160,16 180,10"
-              fill="none" stroke="#26C6DA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <line x1="0" y1="22" x2="180" y2="22" stroke="rgba(38,198,218,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
-          </svg>
-        </div>
+      <div class="social-map">
+        <div style="position:absolute;inset:0;background:#090910"></div>
+        <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 280 140">
+          <rect x="0" y="0" width="30" height="44" fill="#111120" rx="1"/><rect x="34" y="4" width="24" height="36" fill="#0e0e1c" rx="1"/>
+          <rect x="62" y="0" width="28" height="44" fill="#0d0d1b" rx="1"/><rect x="94" y="2" width="22" height="40" fill="#111120" rx="1"/>
+          <rect x="120" y="0" width="26" height="44" fill="#0e0e1c" rx="1"/><rect x="150" y="2" width="24" height="40" fill="#0d0d1b" rx="1"/>
+          <rect x="178" y="0" width="28" height="44" fill="#111120" rx="1"/><rect x="210" y="2" width="22" height="40" fill="#0e0e1c" rx="1"/>
+          <rect x="236" y="0" width="26" height="44" fill="#0d0d1b" rx="1"/><rect x="266" y="0" width="14" height="44" fill="#111120" rx="1"/>
+          <rect x="0" y="62" width="30" height="32" fill="#0e0e1c" rx="1"/><rect x="34" y="64" width="24" height="26" fill="#111120" rx="1"/>
+          <rect x="62" y="62" width="28" height="32" fill="#0d0d1b" rx="1"/><rect x="94" y="64" width="22" height="26" fill="#0e0e1c" rx="1"/>
+          <rect x="120" y="62" width="26" height="32" fill="#111120" rx="1"/><rect x="150" y="64" width="24" height="26" fill="#0d0d1b" rx="1"/>
+          <rect x="178" y="62" width="28" height="32" fill="#0e0e1c" rx="1"/><rect x="210" y="64" width="22" height="26" fill="#111120" rx="1"/>
+          <rect x="236" y="62" width="26" height="32" fill="#0d0d1b" rx="1"/><rect x="266" y="62" width="14" height="32" fill="#0e0e1c" rx="1"/>
+          <rect x="0" y="106" width="30" height="34" fill="#111120" rx="1"/><rect x="34" y="108" width="24" height="28" fill="#0e0e1c" rx="1"/>
+          <rect x="62" y="104" width="28" height="36" fill="#0d0d1b" rx="1"/><rect x="94" y="108" width="22" height="32" fill="#111120" rx="1"/>
+          <rect x="120" y="106" width="26" height="34" fill="#0e0e1c" rx="1"/><rect x="150" y="104" width="24" height="36" fill="#0d0d1b" rx="1"/>
+          <rect x="178" y="106" width="28" height="34" fill="#111120" rx="1"/><rect x="210" y="104" width="22" height="36" fill="#0e0e1c" rx="1"/>
+          <rect x="236" y="106" width="26" height="34" fill="#0d0d1b" rx="1"/><rect x="266" y="104" width="14" height="36" fill="#111120" rx="1"/>
+          <line x1="0" y1="50" x2="280" y2="50" stroke="#1c1c2e" stroke-width="7"/>
+          <line x1="0" y1="98" x2="280" y2="98" stroke="#1c1c2e" stroke-width="7"/>
+          <line x1="60" y1="0" x2="60" y2="98" stroke="#1c1c2e" stroke-width="6"/>
+          <line x1="118" y1="0" x2="118" y2="98" stroke="#1c1c2e" stroke-width="6"/>
+          <line x1="176" y1="0" x2="176" y2="98" stroke="#1c1c2e" stroke-width="6"/>
+          <line x1="234" y1="0" x2="234" y2="98" stroke="#1c1c2e" stroke-width="5"/>
+          <line x1="0" y1="74" x2="60" y2="74" stroke="#171728" stroke-width="3"/>
+          <line x1="88" y1="50" x2="88" y2="98" stroke="#171728" stroke-width="3"/>
+          <line x1="147" y1="50" x2="147" y2="98" stroke="#171728" stroke-width="3"/>
+          <path d="M12,74 L60,74 Q80,74 80,50 L80,18 L118,18 L118,98 Q118,118 138,118 L200,118 Q220,118 234,106 L234,50" stroke="rgba(124,110,250,0.12)" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12,74 L60,74 Q80,74 80,50 L80,18 L118,18 L118,98 Q118,118 138,118 L200,118 Q220,118 234,106 L234,50" stroke="rgba(124,110,250,0.5)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12,74 L60,74 Q80,74 80,50 L80,18 L118,18 L118,98 Q118,118 138,118 L200,118 Q220,118 234,106 L234,50" stroke="#7C6EFA" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="74" r="6" fill="rgba(76,175,80,0.3)"/><circle cx="12" cy="74" r="3.5" fill="#4CAF50"/>
+          <circle cx="234" cy="50" r="6" fill="rgba(124,110,250,0.35)"/><circle cx="234" cy="50" r="3.5" fill="#7C6EFA"/>
+        </svg>
       </div>
-      <div style="padding:10px 14px 14px;background:#0f0f1a">
-        <div style="font-size:0.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Today</div>
-        <div style="display:flex;gap:6px">
-          <div style="flex:1;text-align:center;background:#1a1a2e;border-radius:8px;padding:8px">
-            <div style="font-size:0.75rem;font-weight:700;color:#FC4C02">8.4k</div>
-            <div style="font-size:0.5rem;color:var(--muted)">steps</div>
-          </div>
-          <div style="flex:1;text-align:center;background:#1a1a2e;border-radius:8px;padding:8px">
-            <div style="font-size:0.75rem;font-weight:700;color:#7C6EFA">7h 20m</div>
-            <div style="font-size:0.5rem;color:var(--muted)">sleep</div>
-          </div>
-          <div style="flex:1;text-align:center;background:#1a1a2e;border-radius:8px;padding:8px">
-            <div style="font-size:0.75rem;font-weight:700;color:#FFB300">1840</div>
-            <div style="font-size:0.5rem;color:var(--muted)">kcal</div>
-          </div>
-        </div>
+      <div class="social-stats">
+        <div class="social-stat"><strong>22.1 km</strong>Distance</div>
+        <div class="social-stat"><strong>1:04:30</strong>Duration</div>
+        <div class="social-stat"><strong>2:55/km</strong>Avg Pace</div>
+        <div class="social-stat"><strong>640 kcal</strong>Burned</div>
+      </div>
+      <div class="social-actions">
+        <div class="social-action"><span class="social-action-icon">🔥</span> 28 kudos</div>
+        <div class="social-action"><span class="social-action-icon">💬</span> 7 comments</div>
+        <div class="social-action" style="margin-left:auto"><span class="social-action-icon">↗</span> Share</div>
       </div>
     </div>
-  </div>
 
-  <!-- Right phone: Nutrition -->
-  <div class="phone-frame side">
-    <div class="phone-notch"><div class="phone-notch-pill"></div></div>
-    <div class="phone-screen">
-      <div style="padding:14px;background:#0f0f1a">
-        <div style="font-size:0.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;margin-bottom:8px;">Nutrition</div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <div>
-            <div style="font-size:1.8rem;font-weight:900;color:#FF9800;line-height:1">1,840</div>
-            <div style="font-size:0.55rem;color:var(--muted)">kcal consumed</div>
-          </div>
-          <div style="text-align:right">
-            <div style="font-size:0.85rem;font-weight:700;color:#4CAF50">160</div>
-            <div style="font-size:0.5rem;color:var(--muted)">remaining</div>
-          </div>
-        </div>
-        <div style="height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;margin-bottom:12px">
-          <div style="width:92%;height:100%;background:linear-gradient(90deg,#FF9800,#FC4C02);border-radius:3px"></div>
-        </div>
-        <div style="display:flex;gap:6px">
-          <div style="flex:1;background:#1a1a2e;border-radius:10px;padding:10px">
-            <div style="font-size:0.85rem;font-weight:700;color:#42A5F5">148g</div>
-            <div style="height:4px;background:rgba(66,165,245,0.2);border-radius:2px;margin:4px 0">
-              <div style="width:99%;height:100%;background:#42A5F5;border-radius:2px"></div>
-            </div>
-            <div style="font-size:0.5rem;color:var(--muted)">Protein</div>
-          </div>
-          <div style="flex:1;background:#1a1a2e;border-radius:10px;padding:10px">
-            <div style="font-size:0.85rem;font-weight:700;color:#66BB6A">210g</div>
-            <div style="height:4px;background:rgba(102,187,106,0.2);border-radius:2px;margin:4px 0">
-              <div style="width:84%;height:100%;background:#66BB6A;border-radius:2px"></div>
-            </div>
-            <div style="font-size:0.5rem;color:var(--muted)">Carbs</div>
-          </div>
-          <div style="flex:1;background:#1a1a2e;border-radius:10px;padding:10px">
-            <div style="font-size:0.85rem;font-weight:700;color:#FFCA28">58g</div>
-            <div style="height:4px;background:rgba(255,202,40,0.2);border-radius:2px;margin:4px 0">
-              <div style="width:89%;height:100%;background:#FFCA28;border-radius:2px"></div>
-            </div>
-            <div style="font-size:0.5rem;color:var(--muted)">Fat</div>
-          </div>
+    <!-- Post 3 -->
+    <div class="social-card" style="flex:1;min-width:0">
+      <div class="social-card-header">
+        <svg class="social-avatar" viewBox="0 0 36 36">
+          <rect width="36" height="36" rx="18" fill="#1a2a1a"/>
+          <text x="18" y="24" text-anchor="middle" font-size="16" fill="#4CAF50" font-weight="800">J</text>
+        </svg>
+        <div>
+          <div class="social-name">James T.</div>
+          <div class="social-time">Trail Hike · Yesterday</div>
         </div>
       </div>
-      <div style="padding:0 14px 14px;background:#0f0f1a">
-        <div style="font-size:0.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Recent</div>
-        <div style="background:#1a1a2e;border-radius:10px;padding:10px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center">
-          <div>
-            <div style="font-size:0.7rem;font-weight:600;color:var(--text)">Grilled Chicken</div>
-            <div style="font-size:0.55rem;color:var(--muted)">Lunch · 200g</div>
-          </div>
-          <div style="font-size:0.75rem;font-weight:700;color:#FF9800">330 kcal</div>
-        </div>
-        <div style="background:#1a1a2e;border-radius:10px;padding:10px;display:flex;justify-content:space-between;align-items:center">
-          <div>
-            <div style="font-size:0.7rem;font-weight:600;color:var(--text)">Oat Bowl</div>
-            <div style="font-size:0.55rem;color:var(--muted)">Breakfast · 300g</div>
-          </div>
-          <div style="font-size:0.75rem;font-weight:700;color:#FF9800">420 kcal</div>
-        </div>
+      <div class="social-map">
+        <div style="position:absolute;inset:0;background:#07100a"></div>
+        <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 280 140">
+          <rect x="0" y="0" width="280" height="140" fill="#07100a"/>
+          <rect x="0" y="0" width="32" height="44" fill="#091408" rx="2"/><rect x="36" y="4" width="26" height="36" fill="#0a1609" rx="2"/>
+          <rect x="66" y="0" width="30" height="44" fill="#091408" rx="2"/><rect x="100" y="2" width="24" height="40" fill="#0a1609" rx="2"/>
+          <rect x="128" y="0" width="28" height="44" fill="#091408" rx="2"/><rect x="160" y="2" width="26" height="40" fill="#0a1609" rx="2"/>
+          <rect x="190" y="0" width="30" height="44" fill="#091408" rx="2"/><rect x="224" y="0" width="24" height="44" fill="#0a1609" rx="2"/><rect x="252" y="2" width="28" height="42" fill="#091408" rx="2"/>
+          <rect x="0" y="62" width="32" height="30" fill="#0a1609" rx="2"/><rect x="36" y="64" width="26" height="24" fill="#091408" rx="2"/>
+          <rect x="66" y="62" width="30" height="30" fill="#0a1609" rx="2"/><rect x="100" y="64" width="24" height="24" fill="#091408" rx="2"/>
+          <rect x="128" y="62" width="28" height="30" fill="#0a1609" rx="2"/><rect x="160" y="64" width="26" height="24" fill="#091408" rx="2"/>
+          <rect x="190" y="62" width="30" height="30" fill="#0a1609" rx="2"/><rect x="224" y="62" width="24" height="30" fill="#091408" rx="2"/><rect x="252" y="64" width="28" height="28" fill="#0a1609" rx="2"/>
+          <rect x="0" y="104" width="32" height="36" fill="#091408" rx="2"/><rect x="36" y="106" width="26" height="32" fill="#0a1609" rx="2"/>
+          <rect x="66" y="102" width="30" height="38" fill="#091408" rx="2"/><rect x="100" y="106" width="24" height="34" fill="#0a1609" rx="2"/>
+          <rect x="128" y="104" width="28" height="36" fill="#091408" rx="2"/><rect x="160" y="102" width="26" height="38" fill="#0a1609" rx="2"/>
+          <rect x="190" y="104" width="30" height="36" fill="#091408" rx="2"/><rect x="224" y="102" width="24" height="38" fill="#0a1609" rx="2"/>
+          <line x1="0" y1="50" x2="280" y2="50" stroke="#0d1a0e" stroke-width="7"/>
+          <line x1="0" y1="96" x2="280" y2="96" stroke="#0d1a0e" stroke-width="7"/>
+          <line x1="64" y1="0" x2="64" y2="96" stroke="#0d1a0e" stroke-width="6"/>
+          <line x1="126" y1="0" x2="126" y2="96" stroke="#0d1a0e" stroke-width="6"/>
+          <line x1="188" y1="0" x2="188" y2="96" stroke="#0d1a0e" stroke-width="6"/>
+          <line x1="250" y1="0" x2="250" y2="96" stroke="#0d1a0e" stroke-width="5"/>
+          <line x1="0" y1="74" x2="64" y2="74" stroke="#0c180d" stroke-width="3"/>
+          <line x1="94" y1="50" x2="94" y2="96" stroke="#0c180d" stroke-width="3"/>
+          <path d="M18,112 Q46,56 64,40 Q90,20 126,26 Q162,32 152,64 Q142,96 170,96 Q200,96 220,72 L254,34" stroke="rgba(76,175,80,0.12)" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18,112 Q46,56 64,40 Q90,20 126,26 Q162,32 152,64 Q142,96 170,96 Q200,96 220,72 L254,34" stroke="rgba(76,175,80,0.5)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18,112 Q46,56 64,40 Q90,20 126,26 Q162,32 152,64 Q142,96 170,96 Q200,96 220,72 L254,34" stroke="#4CAF50" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="20" cy="100" r="5" fill="#4CAF50"/>
+          <circle cx="260" cy="30" r="5" fill="#4CAF50"/>
+        </svg>
+      </div>
+      <div class="social-stats">
+        <div class="social-stat"><strong>14.2 km</strong>Distance</div>
+        <div class="social-stat"><strong>3:12:00</strong>Duration</div>
+        <div class="social-stat"><strong>↑ 620m</strong>Elevation</div>
+        <div class="social-stat"><strong>810 kcal</strong>Burned</div>
+      </div>
+      <div class="social-actions">
+        <div class="social-action"><span class="social-action-icon">🔥</span> 19 kudos</div>
+        <div class="social-action"><span class="social-action-icon">💬</span> 5 comments</div>
+        <div class="social-action" style="margin-left:auto"><span class="social-action-icon">↗</span> Share</div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- ── METRICS STRIP ─────────────────────────────────────────────────────────── -->
-<div class="metrics-section">
-  <div class="metrics-inner">
-    <div class="metric-item">
-      <div class="metric-num">20+</div>
-      <div class="metric-label">Health metrics tracked</div>
-    </div>
-    <div class="metric-item">
-      <div class="metric-num">30+</div>
-      <div class="metric-label">Workout types</div>
-    </div>
-    <div class="metric-item">
-      <div class="metric-num">AI</div>
-      <div class="metric-label">Nutrition from photos</div>
-    </div>
-    <div class="metric-item">
-      <div class="metric-num">0</div>
-      <div class="metric-label">Data sold to third parties</div>
-    </div>
   </div>
-</div>
+</section>
 
-<!-- ── FEATURES ──────────────────────────────────────────────────────────────── -->
-<section id="features" style="max-width:1100px;margin:0 auto">
-  <div style="text-align:center">
+<!-- FEATURES GRID -->
+<section id="features">
+  <div style="text-align:center;margin-bottom:0">
     <span class="section-label">Everything you need</span>
     <h2 class="section-title">One app. Full picture.</h2>
-    <p class="section-sub" style="margin:0 auto">
-      GPS tracking with dark maps. Apple Watch recovery. AI nutrition. Social sharing. Curated routes.
-      Everything you need — nothing you don't.
-    </p>
+    <p class="section-sub" style="margin:0 auto">GPS tracking with dark maps. Apple Watch recovery. AI nutrition. Social sharing. Curated routes. Everything you need — nothing you don't.</p>
   </div>
   <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon" style="background:rgba(252,76,2,0.12)">🗺️</div>
-      <div class="feature-title">GPS Workout Tracking</div>
-      <div class="feature-desc">
-        Start a run, ride or hike and watch your route trace itself on a cinematic dark map in real time.
-        Live pace, distance, heart rate, elevation and calorie burn — all on one screen.
-        When you finish, get a full summary with split times and a shareable route card.
-      </div>
+    <div class="feat-card">
+      <div class="feat-icon">🗺️</div>
+      <div class="feat-title">GPS Workout Tracking</div>
+      <div class="feat-desc">Real-time route on a cinematic dark map. Live pace, heart rate, elevation and splits. Finish with a shareable route card.</div>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon" style="background:rgba(76,175,80,0.12)">💚</div>
-      <div class="feature-title">Recovery & HRV</div>
-      <div class="feature-desc">
-        Wake up to a daily readiness score calculated from your HRV, resting heart rate and sleep quality.
-        A 14-day HRV trend chart shows your personal baseline so you know when to push and when to rest.
-        All pulled automatically from your Apple Watch — no manual input.
-      </div>
+    <div class="feat-card">
+      <div class="feat-icon">💚</div>
+      <div class="feat-title">Recovery & HRV</div>
+      <div class="feat-desc">Daily readiness score from your Apple Watch HRV, resting HR and sleep. 14-day trend chart with your personal baseline.</div>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon" style="background:rgba(255,152,0,0.12)">🥗</div>
-      <div class="feature-title">AI Nutrition</div>
-      <div class="feature-desc">
-        Take a photo of your meal and AI breaks down the calories, protein, carbs and fat in seconds.
-        Search thousands of foods or scan barcodes. Set your own macro goals.
-        The app tells you exactly what you're missing to hit your targets for the day.
-      </div>
+    <div class="feat-card">
+      <div class="feat-icon">🥗</div>
+      <div class="feat-title">AI Nutrition</div>
+      <div class="feat-desc">Photo → macros in seconds. Barcode scanner. Custom protein, carbs and fat goals. AI daily insights to keep you on track.</div>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon" style="background:rgba(124,110,250,0.12)">😴</div>
-      <div class="feature-title">Sleep Insights</div>
-      <div class="feature-desc">
-        See your Deep, REM and Light sleep breakdown each morning with a sleep efficiency score.
-        Track how your training load, nutrition and stress levels affect the quality of your sleep over time.
-        Understand your body's recovery patterns, not just the numbers.
-      </div>
+    <div class="feat-card">
+      <div class="feat-icon">😴</div>
+      <div class="feat-title">Sleep Insights</div>
+      <div class="feat-desc">Deep, REM and Light sleep breakdown every morning. Understand how training and nutrition affect your sleep quality.</div>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon" style="background:rgba(38,198,218,0.12)">⌚</div>
-      <div class="feature-title">Apple Watch Sync</div>
-      <div class="feature-desc">
-        Every metric your Apple Watch collects — HRV, SpO2, body temperature, VO2 max,
-        respiratory rate, workout calories, sleep stages — automatically synced to MyVitality
-        every 30 minutes. Grant permission once, never think about it again.
-      </div>
+    <div class="feat-card">
+      <div class="feat-icon">⌚</div>
+      <div class="feat-title">Apple Watch Sync</div>
+      <div class="feat-desc">Every metric — HRV, SpO2, body temperature, VO2 max, respiratory rate — auto-synced from HealthKit every 30 minutes.</div>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon" style="background:rgba(255,202,40,0.12)">🏆</div>
-      <div class="feature-title">Personal Records & Streaks</div>
-      <div class="feature-desc">
-        MyVitality automatically detects your fastest 1K, 5K, 10K, half and full marathon times.
-        A live activity streak tracks your consistency day by day.
-        Breaking your own records has never felt more satisfying.
-      </div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon" style="background:rgba(252,76,2,0.12)">👥</div>
-      <div class="feature-title">Social Feed & Sharing</div>
-      <div class="feature-desc">
-        Follow friends, react to their workouts and share your own with a beautifully designed
-        route card straight to Instagram, WhatsApp or anywhere else.
-        Join groups, post updates and keep each other accountable.
-      </div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon" style="background:rgba(33,150,243,0.12)">🛣️</div>
-      <div class="feature-title">Curated Route Maps</div>
-      <div class="feature-desc">
-        Browse a library of running and cycling routes on a stunning dark map.
-        Tap any route to preview the full path, distance, elevation and estimated time —
-        then head out knowing exactly where you're going.
-      </div>
+    <div class="feat-card">
+      <div class="feat-icon">🏆</div>
+      <div class="feat-title">Personal Records & Streaks</div>
+      <div class="feat-desc">Auto-detected PRs for 1K through marathon. Daily activity streak. Weekly summaries to stay motivated and consistent.</div>
     </div>
   </div>
 </section>
 
-<!-- ── APPLE WATCH ────────────────────────────────────────────────────────────── -->
-<section id="watch" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-  <div class="watch-section">
-    <div>
-      <span class="section-label">Apple Watch</span>
-      <h2 class="section-title">Your watch. Fully unlocked.</h2>
-      <p class="section-sub">
-        MyVitality reads everything your Apple Watch measures —
-        automatically, in the background, every 30 minutes.
-      </p>
-      <div style="margin-top:28px;display:flex;flex-direction:column;gap:12px">
-        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--muted)">
-          <span style="color:#4CAF50;font-size:1rem">✓</span> Heart Rate Variability (HRV)
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--muted)">
-          <span style="color:#4CAF50;font-size:1rem">✓</span> Resting Heart Rate & SpO2
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--muted)">
-          <span style="color:#4CAF50;font-size:1rem">✓</span> Respiratory Rate & Body Temperature
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--muted)">
-          <span style="color:#4CAF50;font-size:1rem">✓</span> Sleep Stages (Deep, REM, Light)
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--muted)">
-          <span style="color:#4CAF50;font-size:1rem">✓</span> Workouts, Steps & Active Calories
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--muted)">
-          <span style="color:#4CAF50;font-size:1rem">✓</span> VO2 Max & Exercise Minutes
-        </div>
-      </div>
-    </div>
-    <div class="watch-metrics">
-      <div class="watch-metric-card" style="border-color:rgba(38,198,218,0.25)">
-        <div class="wmc-icon">💙</div>
-        <div class="wmc-val" style="color:var(--cyan)">52ms</div>
-        <div class="wmc-label">HRV today</div>
-      </div>
-      <div class="watch-metric-card" style="border-color:rgba(239,83,80,0.25)">
-        <div class="wmc-icon">❤️</div>
-        <div class="wmc-val" style="color:#EF5350">52 bpm</div>
-        <div class="wmc-label">Resting HR</div>
-      </div>
-      <div class="watch-metric-card" style="border-color:rgba(76,175,80,0.25)">
-        <div class="wmc-icon">🫁</div>
-        <div class="wmc-val" style="color:#4CAF50">14.2</div>
-        <div class="wmc-label">Resp. rate /min</div>
-      </div>
-      <div class="watch-metric-card" style="border-color:rgba(255,202,40,0.25)">
-        <div class="wmc-icon">🌡️</div>
-        <div class="wmc-val" style="color:#FFCA28">36.4°C</div>
-        <div class="wmc-label">Wrist temp</div>
-      </div>
-    </div>
+<!-- HOW IT WORKS -->
+<section id="how" style="background:var(--surface);border-top:1px solid var(--border)">
+  <div style="text-align:center">
+    <span class="section-label">Getting started</span>
+    <h2 class="section-title">Up and running in minutes.</h2>
+    <p class="section-sub" style="margin:0 auto">No subscriptions. No Whoop band required. Just your iPhone and Apple Watch.</p>
   </div>
-</section>
-
-<!-- ── HOW IT WORKS ───────────────────────────────────────────────────────────── -->
-<section id="how" style="max-width:900px;margin:0 auto;text-align:center">
-  <span class="section-label">Getting started</span>
-  <h2 class="section-title">Up and running in minutes</h2>
-  <p class="section-sub" style="margin:0 auto">No subscriptions. No Whoop band required. Just your iPhone and Apple Watch.</p>
-
-  <div class="steps" style="text-align:left;margin-top:60px">
+  <div class="steps">
     <div class="step">
-      <div class="step-left">
-        <div class="step-num">1</div>
-        <div class="step-line"></div>
-      </div>
-      <div class="step-content">
+      <div class="step-num">1</div>
+      <div>
         <div class="step-title">Download & create account</div>
         <div class="step-desc">Sign up with your email or Google account in seconds. Your data is encrypted and stored securely — never sold to third parties.</div>
       </div>
     </div>
     <div class="step">
-      <div class="step-left">
-        <div class="step-num">2</div>
-        <div class="step-line"></div>
-      </div>
-      <div class="step-content">
+      <div class="step-num">2</div>
+      <div>
         <div class="step-title">Connect Apple Health once</div>
-        <div class="step-desc">Grant HealthKit permission and MyVitality takes over. HRV, sleep stages, heart rate, SpO2, body temperature and more — synced automatically every 30 minutes from your Apple Watch.</div>
+        <div class="step-desc">Grant HealthKit permission and MyVitality takes over. HRV, sleep, heart rate, SpO2 and 20+ metrics — synced automatically every 30 minutes from your Apple Watch.</div>
       </div>
     </div>
     <div class="step">
-      <div class="step-left">
-        <div class="step-num">3</div>
-        <div class="step-line"></div>
-      </div>
-      <div class="step-content">
+      <div class="step-num">3</div>
+      <div>
         <div class="step-title">Pick a route or start from scratch</div>
-        <div class="step-desc">Browse curated running and cycling routes on the dark map, or just hit Start and go. Your GPS route draws itself in real time with a glowing trail. When you're done, share the route card to Instagram or WhatsApp in one tap.</div>
+        <div class="step-desc">Browse curated running and cycling routes on the dark map, or just hit Start and go. Your GPS route draws itself in real time. When you're done, share the route card to Instagram or WhatsApp in one tap.</div>
       </div>
     </div>
     <div class="step">
-      <div class="step-left">
-        <div class="step-num">4</div>
-        <div class="step-line"></div>
-      </div>
-      <div class="step-content">
+      <div class="step-num">4</div>
+      <div>
         <div class="step-title">Log food, check recovery, connect with friends</div>
-        <div class="step-desc">Snap a photo of your meal for instant AI macro breakdown. Wake up each morning to your recovery score and HRV trend. Follow friends, react to their workouts and stay accountable together — all inside one app.</div>
+        <div class="step-desc">Snap a photo of your meal for instant AI macro breakdown. Wake up each morning to your recovery score and HRV trend. Follow friends, react to their workouts and stay accountable together.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── CTA ───────────────────────────────────────────────────────────────────── -->
-<section class="cta-section" id="download">
-  <div class="cta-glow"></div>
-  <h2>Ready to <span class="hero-gradient">train smarter?</span></h2>
+<!-- CTA -->
+<section class="cta" id="download">
+  <h2>Ready to train <span class="grad">smarter?</span></h2>
   <p>Free to download. No subscription required.</p>
   <a href="#" class="appstore-btn">
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-    </svg>
-    <div class="appstore-btn-sub">
-      <span class="appstore-btn-small">Download on the</span>
-      <span class="appstore-btn-big">App Store</span>
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+    <div class="appstore-sub">
+      <span class="appstore-small">Download on the</span>
+      <span class="appstore-big">App Store</span>
     </div>
   </a>
 </section>
 
-<!-- ── FOOTER ────────────────────────────────────────────────────────────────── -->
+<!-- PRIVACY -->
+<section id="privacy" style="background:var(--surface);border-top:1px solid var(--border)">
+  <div style="max-width:720px;margin:0 auto">
+    <span class="section-label">Legal</span>
+    <h2 class="section-title" style="margin-bottom:8px">Privacy Policy</h2>
+    <p style="color:var(--muted);font-size:0.85rem;margin-bottom:48px">Effective date: March 20, 2026</p>
+
+    <p style="color:#ccc;line-height:1.8;margin-bottom:24px">MyVitality ("we", "our", or "us") is committed to protecting your privacy. This policy explains what data we collect, why we collect it, and how it is used.</p>
+
+    <div style="display:flex;flex-direction:column;gap:32px">
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px">
+        <h3 style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);margin-bottom:16px">1. Data We Collect</h3>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:12px">
+          <li style="display:flex;gap:12px;color:#ccc;font-size:0.875rem;line-height:1.6"><span style="color:var(--orange);margin-top:2px">→</span><span><strong style="color:var(--text)">Health & Fitness Data</strong> — heart rate, HRV, blood oxygen (SpO2), step count, distance, active calories, sleep duration and stages, and workout sessions. Read from Apple Health with your explicit permission.</span></li>
+          <li style="display:flex;gap:12px;color:#ccc;font-size:0.875rem;line-height:1.6"><span style="color:var(--orange);margin-top:2px">→</span><span><strong style="color:var(--text)">Location Data</strong> — GPS coordinates collected only during an active workout session and only while the app is in use.</span></li>
+          <li style="display:flex;gap:12px;color:#ccc;font-size:0.875rem;line-height:1.6"><span style="color:var(--orange);margin-top:2px">→</span><span><strong style="color:var(--text)">Account Data</strong> — email address and password (stored as a hashed value) used to authenticate your account.</span></li>
+          <li style="display:flex;gap:12px;color:#ccc;font-size:0.875rem;line-height:1.6"><span style="color:var(--orange);margin-top:2px">→</span><span><strong style="color:var(--text)">Usage Data</strong> — app interactions and performance logs used to improve the app experience.</span></li>
+        </ul>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px">
+        <h3 style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);margin-bottom:16px">2. Health Data — Special Notice</h3>
+        <p style="color:#ccc;font-size:0.875rem;line-height:1.8;margin-bottom:16px">Health and fitness data obtained from Apple Health (HealthKit) is used <strong style="color:var(--text)">solely</strong> to provide features within MyVitality. This data is:</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="background:rgba(76,175,80,0.07);border:1px solid rgba(76,175,80,0.2);border-radius:12px;padding:14px;font-size:0.8rem;color:#ccc"><span style="color:#4CAF50;font-weight:700">✓</span> Never sold to third parties</div>
+          <div style="background:rgba(76,175,80,0.07);border:1px solid rgba(76,175,80,0.2);border-radius:12px;padding:14px;font-size:0.8rem;color:#ccc"><span style="color:#4CAF50;font-weight:700">✓</span> Never shared with advertisers</div>
+          <div style="background:rgba(76,175,80,0.07);border:1px solid rgba(76,175,80,0.2);border-radius:12px;padding:14px;font-size:0.8rem;color:#ccc"><span style="color:#4CAF50;font-weight:700">✓</span> Never used for marketing</div>
+          <div style="background:rgba(76,175,80,0.07);border:1px solid rgba(76,175,80,0.2);border-radius:12px;padding:14px;font-size:0.8rem;color:#ccc"><span style="color:#4CAF50;font-weight:700">✓</span> Accessible only by you</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px">
+          <h3 style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);margin-bottom:14px">3. Data Storage & Security</h3>
+          <p style="color:#ccc;font-size:0.875rem;line-height:1.7">Your data is stored on secure servers with HTTPS/TLS encryption in transit and at rest. Passwords are never stored in plain text. Authentication uses short-lived JWT tokens.</p>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px">
+          <h3 style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);margin-bottom:14px">4. Third-Party Services</h3>
+          <p style="color:#ccc;font-size:0.875rem;line-height:1.7"><strong style="color:var(--text)">OpenStreetMap</strong> — map tiles (no personal data sent).<br><br><strong style="color:var(--text)">Google Sign-In</strong> — optional auth (governed by Google's Privacy Policy).</p>
+        </div>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px">
+        <h3 style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);margin-bottom:16px">5. Your Rights</h3>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:12px;color:#ccc;font-size:0.875rem;line-height:1.6"><span style="color:var(--orange)">→</span> Access the personal data we hold about you</div>
+          <div style="display:flex;gap:12px;color:#ccc;font-size:0.875rem;line-height:1.6"><span style="color:var(--orange)">→</span> Correct inaccurate data or request deletion</div>
+          <div style="display:flex;gap:12px;color:#ccc;font-size:0.875rem;line-height:1.6"><span style="color:var(--orange)">→</span> Revoke Health permissions anytime via iPhone Settings → Privacy & Security → Health</div>
+          <div style="display:flex;gap:12px;color:#ccc;font-size:0.875rem;line-height:1.6"><span style="color:var(--orange)">→</span> Contact us at <a href="mailto:egemizrak@icloud.com" style="color:var(--orange)">egemizrak@icloud.com</a> for any questions</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <a href="#top" class="footer-logo">
-    <div class="nav-logo-icon" style="width:26px;height:26px;font-size:13px">⚡</div>
+  <a href="#" class="footer-logo">
+    <div class="nav-logo-icon" style="width:28px;height:28px;font-size:13px">⚡</div>
     MyVitality
   </a>
   <div class="footer-links">
+    <a href="#routes">Routes</a>
+    <a href="#recovery">Recovery</a>
+    <a href="#social">Social</a>
     <a href="#features">Features</a>
-    <a href="#watch">Apple Watch</a>
-    <a href="https://egemizrak1.github.io/myvitality-privacy" target="_blank">Privacy Policy</a>
+    <a href="#privacy">Privacy Policy</a>
     <a href="mailto:support@fitsync.app">Support</a>
   </div>
-  <div class="footer-copy">© 2025 MyVitality. All rights reserved.</div>
+  <div class="footer-copy">© 2026 MyVitality. All rights reserved.</div>
 </footer>
 
 </body>
