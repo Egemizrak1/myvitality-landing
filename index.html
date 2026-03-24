@@ -411,7 +411,32 @@
 <section class="hero">
   <div class="hero-content">
     <div class="hero-badge">Now available on iOS</div>
-    <h1>Train like<br>an <span class="grad">athlete.</span></h1>
+    <h1 id="heroHeadline">Train like<br>an <span class="grad">athlete.</span></h1>
+    <style>
+      #heroHeadline { transition: opacity 0.5s ease; }
+      #heroHeadline.fade { opacity: 0; }
+    </style>
+    <script>
+    (function(){
+      var lines = [
+        ['Train like', 'an', 'athlete.'],
+        ['Improve', 'your', 'life.'],
+        ['Know your', '', 'recovery.'],
+        ['Fuel your', '', 'performance.'],
+      ];
+      var el = document.getElementById('heroHeadline');
+      var i = 0;
+      setInterval(function(){
+        el.classList.add('fade');
+        setTimeout(function(){
+          i = (i + 1) % lines.length;
+          var l = lines[i];
+          el.innerHTML = l[0] + (l[1] ? '<br>' + l[1] + ' ' : '<br>') + '<span class="grad">' + l[2] + '</span>';
+          el.classList.remove('fade');
+        }, 500);
+      }, 3000);
+    })();
+    </script>
     <p class="hero-sub">
       GPS run tracking with cinematic dark maps. Apple Watch HRV & recovery. AI nutrition. Social sharing. Curated routes — all in one app.
     </p>
