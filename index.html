@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyVitality – Train Smarter. Recover Better.</title>
+  <meta name="description" content="MyVitality combines GPS workout tracking, Apple Watch recovery metrics, AI nutrition analysis and sleep insights into one powerful fitness app." />
+  <meta property="og:title" content="MyVitality – Train Smarter. Recover Better." />
+  <meta property="og:description" content="GPS tracking, HRV recovery, AI nutrition and sleep insights — all in one app." />
+  <meta property="og:type" content="website" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0a12;
+      --surface:   #12121e;
+      --card:      #1a1a2e;
+      --border:    rgba(255,255,255,0.08);
+      --orange:    #FC4C02;
+      --purple:    #7C6EFA;
+      --cyan:      #26C6DA;
+      --green:     #4CAF50;
+      --text:      #f0f0f8;
+      --muted:     #888899;
+      --radius:    20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ───────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      background: rgba(10,10,18,0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--orange), var(--purple));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--orange);
+      color: #fff !important;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-weight: 600 !important;
+      font-size: 0.85rem !important;
+      transition: opacity 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ──────────────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+    }
+    .hero-glow-1 {
+      width: 600px; height: 600px;
+      background: rgba(252,76,2,0.15);
+      top: -200px; left: -200px;
+    }
+    .hero-glow-2 {
+      width: 500px; height: 500px;
+      background: rgba(124,110,250,0.12);
+      bottom: -150px; right: -150px;
+    }
+    .hero-glow-3 {
+      width: 400px; height: 400px;
+      background: rgba(38,198,218,0.08);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 720px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(252,76,2,0.12);
+      border: 1px solid rgba(252,76,2,0.3);
+      color: var(--orange);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--purple) 60%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--orange);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 14px 28px;
+      border-radius: 14px;
+      transition: transform 0.2s, opacity 0.2s;
+      box-shadow: 0 8px 30px rgba(252,76,2,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 14px 28px;
+      border-radius: 14px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat-item {
+      text-align: center;
+    }
+    .hero-stat-num {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── PHONES MOCKUP ─────────────────────────────────────────────────── */
+    .phones {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: -20px;
+      padding: 0 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .phone-frame {
+      width: 220px;
+      background: #1a1a2e;
+      border-radius: 36px;
+      border: 1px solid rgba(255,255,255,0.12);
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .phone-frame.center {
+      width: 250px;
+      z-index: 2;
+      transform: translateY(-20px);
+      box-shadow: 0 50px 100px rgba(0,0,0,0.7), 0 0 60px rgba(124,110,250,0.15);
+    }
+
+    .phone-frame.side {
+      opacity: 0.7;
+      transform: translateY(10px) scale(0.95);
+    }
+
+    .phone-screen {
+      padding: 0;
+      background: #0a0a12;
+    }
+
+    .phone-notch {
+      height: 28px;
+      background: #1a1a2e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-notch-pill {
+      width: 80px;
+      height: 10px;
+      background: #0a0a12;
+      border-radius: 999px;
+    }
+
+    .screen-map {
+      height: 180px;
+      background: linear-gradient(180deg, #0d1117 0%, #0a1628 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(124,110,250,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,110,250,0.07) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .map-route {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .screen-stats {
+      padding: 14px;
+      background: #0f0f1a;
+    }
+
+    .screen-stat-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .screen-stat-box {
+      flex: 1;
+      background: #1a1a2e;
+      border-radius: 10px;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .screen-stat-val {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--orange);
+    }
+
+    .screen-stat-lbl {
+      font-size: 0.55rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .screen-recovery {
+      padding: 14px;
+      background: #0f0f1a;
+    }
+
+    .recovery-ring-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .recovery-score-big {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    .recovery-label {
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+
+    .recovery-mini-stats {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .rms {
+      flex: 1;
+      background: #1a1a2e;
+      border-radius: 8px;
+      padding: 6px;
+      text-align: center;
+    }
+
+    .rms-val {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+
+    .rms-lbl {
+      font-size: 0.5rem;
+      color: var(--muted);
+    }
+
+    /* ── FEATURES ──────────────────────────────────────────────────────── */
+    section { padding: 100px 24px; }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 500px;
+      line-height: 1.7;
+    }
+
+    .features-grid {
+      max-width: 1100px;
+      margin: 64px auto 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: transform 0.25s, border-color 0.25s;
+      cursor: default;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .feature-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .feature-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── METRICS ROW ───────────────────────────────────────────────────── */
+    .metrics-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .metrics-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0;
+    }
+
+    .metric-item {
+      text-align: center;
+      padding: 48px 24px;
+      border-right: 1px solid var(--border);
+    }
+
+    .metric-item:last-child { border-right: none; }
+
+    .metric-num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--orange), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .metric-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* ── HOW IT WORKS ──────────────────────────────────────────────────── */
+    .steps {
+      max-width: 800px;
+      margin: 64px auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      position: relative;
+      padding-bottom: 40px;
+    }
+
+    .step:last-child { padding-bottom: 0; }
+
+    .step-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .step-num {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--orange), var(--purple));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .step-line {
+      width: 2px;
+      flex: 1;
+      background: linear-gradient(var(--orange), var(--purple));
+      opacity: 0.3;
+      margin-top: 8px;
+      min-height: 40px;
+    }
+
+    .step:last-child .step-line { display: none; }
+
+    .step-content { padding-top: 8px; }
+
+    .step-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .step-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── WATCH SECTION ─────────────────────────────────────────────────── */
+    .watch-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .watch-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .watch-metric-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .wmc-icon { font-size: 1.4rem; margin-bottom: 10px; }
+
+    .wmc-val {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .wmc-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── CTA ───────────────────────────────────────────────────────────── */
+    .cta-section {
+      text-align: center;
+      padding: 120px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: rgba(124,110,250,0.1);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-section p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .appstore-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #fff;
+      color: #000;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: transform 0.2s, opacity 0.2s;
+      box-shadow: 0 8px 30px rgba(255,255,255,0.12);
+      position: relative;
+      z-index: 1;
+    }
+
+    .appstore-btn:hover { transform: translateY(-2px); opacity: 0.92; }
+
+    .appstore-btn svg { width: 24px; height: 24px; }
+
+    .appstore-btn-sub {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .appstore-btn-small { font-size: 0.7rem; font-weight: 500; opacity: 0.7; }
+    .appstore-btn-big { font-size: 1rem; font-weight: 800; }
+
+    /* ── FOOTER ────────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: 0.8rem;
+      width: 100%;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .phones { gap: 12px; }
+      .phone-frame.side { display: none; }
+      .watch-section { grid-template-columns: 1fr; }
+      .metrics-inner { grid-template-columns: 1fr 1fr; }
+      .metric-item:nth-child(2) { border-right: none; }
+      .metric-item:nth-child(3) { border-right: 1px solid var(--border); }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .metrics-inner { grid-template-columns: 1fr; }
+      .metric-item { border-right: none !important; border-bottom: 1px solid var(--border); }
+      .metric-item:last-child { border-bottom: none; }
+    }
+
+    /* ── ANIMATIONS ────────────────────────────────────────────────────── */
+    @keyframes float {
+      0%, 100% { transform: translateY(-20px); }
+      50% { transform: translateY(-24px); }
+    }
+
+    .phone-frame.center { animation: float 4s ease-in-out infinite; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-content { animation: fadeUp 0.7s ease both; }
+    .phones       { animation: fadeUp 0.7s 0.2s ease both; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────────────────────────────── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">⚡</div>
+    MyVitality
+  </a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#watch">Apple Watch</a>
+    <a href="#how">How it works</a>
+    <a href="https://egemizrak1.github.io/fitsync-privacy" target="_blank">Privacy</a>
+    <a href="#download" class="nav-cta">Download</a>
+  </div>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────────────────────────────────── -->
+<section class="hero" id="top">
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-glow hero-glow-3"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">🏃 Now available on iOS</div>
+    <h1>
+      Train Smarter.<br>
+      <span class="hero-gradient">Recover Better.</span>
+    </h1>
+    <p class="hero-sub">
+      GPS workout tracking, Apple Watch recovery metrics, AI nutrition analysis
+      and sleep insights — all in one beautifully designed app.
+    </p>
+    <div class="hero-buttons">
+      <a href="#download" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+        Download on the App Store
+      </a>
+      <a href="#features" class="btn-secondary">
+        See features →
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat-item">
+        <div class="hero-stat-num">7</div>
+        <div class="hero-stat-label">Fitness Modules</div>
+      </div>
+      <div class="hero-stat-item">
+        <div class="hero-stat-num">20+</div>
+        <div class="hero-stat-label">Health Metrics</div>
+      </div>
+      <div class="hero-stat-item">
+        <div class="hero-stat-num">AI</div>
+        <div class="hero-stat-label">Nutrition Analysis</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PHONE MOCKUPS ────────────────────────────────────────────────────────── -->
+<div class="phones">
+  <!-- Left phone: Activity -->
+  <div class="phone-frame side">
+    <div class="phone-notch"><div class="phone-notch-pill"></div></div>
+    <div class="phone-screen">
+      <div class="screen-map">
+        <div class="map-grid"></div>
+        <svg class="map-route" width="120" height="80" viewBox="0 0 120 80">
+          <!-- Outer glow -->
+          <path d="M10,70 C20,40 40,20 60,30 S90,50 110,20" stroke="rgba(252,76,2,0.2)" stroke-width="10" fill="none" stroke-linecap="round"/>
+          <!-- Inner glow -->
+          <path d="M10,70 C20,40 40,20 60,30 S90,50 110,20" stroke="rgba(252,76,2,0.5)" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <!-- Core -->
+          <path d="M10,70 C20,40 40,20 60,30 S90,50 110,20" stroke="#FC4C02" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Start dot -->
+          <circle cx="10" cy="70" r="5" fill="#4CAF50"/>
+          <!-- End dot (current pos) -->
+          <circle cx="110" cy="20" r="7" fill="rgba(252,76,2,0.3)"/>
+          <circle cx="110" cy="20" r="4" fill="#FC4C02"/>
+        </svg>
+      </div>
+      <div class="screen-stats">
+        <div style="font-size:0.6rem;color:var(--muted);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Live Tracking</div>
+        <div class="screen-stat-row">
+          <div class="screen-stat-box">
+            <div class="screen-stat-val">5.2</div>
+            <div class="screen-stat-lbl">km</div>
+          </div>
+          <div class="screen-stat-box">
+            <div class="screen-stat-val">28:14</div>
+            <div class="screen-stat-lbl">time</div>
+          </div>
+          <div class="screen-stat-box">
+            <div class="screen-stat-val" style="color:#4CAF50">5:25</div>
+            <div class="screen-stat-lbl">/km</div>
+          </div>
+        </div>
+        <div class="screen-stat-row">
+          <div class="screen-stat-box" style="flex:2">
+            <div class="screen-stat-val" style="color:var(--cyan)">147</div>
+            <div class="screen-stat-lbl">avg heart rate bpm</div>
+          </div>
+          <div class="screen-stat-box">
+            <div class="screen-stat-val" style="color:#FFB300">312</div>
+            <div class="screen-stat-lbl">kcal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Center phone: Recovery -->
+  <div class="phone-frame center">
+    <div class="phone-notch"><div class="phone-notch-pill"></div></div>
+    <div class="phone-screen">
+      <div style="padding:14px;background:#0f0f1a;border-bottom:1px solid rgba(255,255,255,0.05)">
+        <div style="font-size:0.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Daily Readiness</div>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:6px">
+          <div>
+            <div style="font-size:2.4rem;font-weight:900;color:#4CAF50;line-height:1">84<span style="font-size:1rem">%</span></div>
+            <div style="font-size:0.65rem;color:#4CAF50;font-weight:600">Optimal</div>
+          </div>
+          <svg width="64" height="64" viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="5"/>
+            <circle cx="32" cy="32" r="26" fill="none" stroke="#4CAF50" stroke-width="5"
+              stroke-dasharray="137.4" stroke-dashoffset="22" stroke-linecap="round"
+              transform="rotate(-90 32 32)"/>
+            <text x="32" y="37" text-anchor="middle" font-size="12" font-weight="800" fill="#4CAF50">84</text>
+          </svg>
+        </div>
+      </div>
+      <div class="screen-recovery">
+        <div class="recovery-mini-stats">
+          <div class="rms">
+            <div class="rms-val">52ms</div>
+            <div class="rms-lbl">HRV</div>
+          </div>
+          <div class="rms">
+            <div class="rms-val" style="color:#EF5350">52</div>
+            <div class="rms-lbl">RHR</div>
+          </div>
+          <div class="rms">
+            <div class="rms-val" style="color:#7C4DFF">87%</div>
+            <div class="rms-lbl">Sleep</div>
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <div style="font-size:0.55rem;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.06em;">HRV Trend</div>
+          <svg width="100%" height="40" viewBox="0 0 180 40">
+            <polyline points="0,30 20,24 40,28 60,18 80,22 100,15 120,19 140,12 160,16 180,10"
+              fill="none" stroke="rgba(38,198,218,0.3)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="0,30 20,24 40,28 60,18 80,22 100,15 120,19 140,12 160,16 180,10"
+              fill="none" stroke="#26C6DA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="0" y1="22" x2="180" y2="22" stroke="rgba(38,198,218,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+          </svg>
+        </div>
+      </div>
+      <div style="padding:10px 14px 14px;background:#0f0f1a">
+        <div style="font-size:0.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Today</div>
+        <div style="display:flex;gap:6px">
+          <div style="flex:1;text-align:center;background:#1a1a2e;border-radius:8px;padding:8px">
+            <div style="font-size:0.75rem;font-weight:700;color:#FC4C02">8.4k</div>
+            <div style="font-size:0.5rem;color:var(--muted)">steps</div>
+          </div>
+          <div style="flex:1;text-align:center;background:#1a1a2e;border-radius:8px;padding:8px">
+            <div style="font-size:0.75rem;font-weight:700;color:#7C6EFA">7h 20m</div>
+            <div style="font-size:0.5rem;color:var(--muted)">sleep</div>
+          </div>
+          <div style="flex:1;text-align:center;background:#1a1a2e;border-radius:8px;padding:8px">
+            <div style="font-size:0.75rem;font-weight:700;color:#FFB300">1840</div>
+            <div style="font-size:0.5rem;color:var(--muted)">kcal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right phone: Nutrition -->
+  <div class="phone-frame side">
+    <div class="phone-notch"><div class="phone-notch-pill"></div></div>
+    <div class="phone-screen">
+      <div style="padding:14px;background:#0f0f1a">
+        <div style="font-size:0.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;margin-bottom:8px;">Nutrition</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div>
+            <div style="font-size:1.8rem;font-weight:900;color:#FF9800;line-height:1">1,840</div>
+            <div style="font-size:0.55rem;color:var(--muted)">kcal consumed</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:0.85rem;font-weight:700;color:#4CAF50">160</div>
+            <div style="font-size:0.5rem;color:var(--muted)">remaining</div>
+          </div>
+        </div>
+        <div style="height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;margin-bottom:12px">
+          <div style="width:92%;height:100%;background:linear-gradient(90deg,#FF9800,#FC4C02);border-radius:3px"></div>
+        </div>
+        <div style="display:flex;gap:6px">
+          <div style="flex:1;background:#1a1a2e;border-radius:10px;padding:10px">
+            <div style="font-size:0.85rem;font-weight:700;color:#42A5F5">148g</div>
+            <div style="height:4px;background:rgba(66,165,245,0.2);border-radius:2px;margin:4px 0">
+              <div style="width:99%;height:100%;background:#42A5F5;border-radius:2px"></div>
+            </div>
+            <div style="font-size:0.5rem;color:var(--muted)">Protein</div>
+          </div>
+          <div style="flex:1;background:#1a1a2e;border-radius:10px;padding:10px">
+            <div style="font-size:0.85rem;font-weight:700;color:#66BB6A">210g</div>
+            <div style="height:4px;background:rgba(102,187,106,0.2);border-radius:2px;margin:4px 0">
+              <div style="width:84%;height:100%;background:#66BB6A;border-radius:2px"></div>
+            </div>
+            <div style="font-size:0.5rem;color:var(--muted)">Carbs</div>
+          </div>
+          <div style="flex:1;background:#1a1a2e;border-radius:10px;padding:10px">
+            <div style="font-size:0.85rem;font-weight:700;color:#FFCA28">58g</div>
+            <div style="height:4px;background:rgba(255,202,40,0.2);border-radius:2px;margin:4px 0">
+              <div style="width:89%;height:100%;background:#FFCA28;border-radius:2px"></div>
+            </div>
+            <div style="font-size:0.5rem;color:var(--muted)">Fat</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:0 14px 14px;background:#0f0f1a">
+        <div style="font-size:0.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Recent</div>
+        <div style="background:#1a1a2e;border-radius:10px;padding:10px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:0.7rem;font-weight:600;color:var(--text)">Grilled Chicken</div>
+            <div style="font-size:0.55rem;color:var(--muted)">Lunch · 200g</div>
+          </div>
+          <div style="font-size:0.75rem;font-weight:700;color:#FF9800">330 kcal</div>
+        </div>
+        <div style="background:#1a1a2e;border-radius:10px;padding:10px;display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:0.7rem;font-weight:600;color:var(--text)">Oat Bowl</div>
+            <div style="font-size:0.55rem;color:var(--muted)">Breakfast · 300g</div>
+          </div>
+          <div style="font-size:0.75rem;font-weight:700;color:#FF9800">420 kcal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── METRICS STRIP ─────────────────────────────────────────────────────────── -->
+<div class="metrics-section">
+  <div class="metrics-inner">
+    <div class="metric-item">
+      <div class="metric-num">20+</div>
+      <div class="metric-label">Health metrics tracked</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-num">30+</div>
+      <div class="metric-label">Workout types</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-num">AI</div>
+      <div class="metric-label">Nutrition from photos</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-num">0</div>
+      <div class="metric-label">Data sold to third parties</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FEATURES ──────────────────────────────────────────────────────────────── -->
+<section id="features" style="max-width:1100px;margin:0 auto">
+  <div style="text-align:center">
+    <span class="section-label">Everything you need</span>
+    <h2 class="section-title">One app. Full picture.</h2>
+    <p class="section-sub" style="margin:0 auto">
+      MyVitality combines the best of Strava, Whoop and MyFitnessPal into a single,
+      privacy-first fitness companion.
+    </p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(252,76,2,0.12)">🗺️</div>
+      <div class="feature-title">GPS Workout Tracking</div>
+      <div class="feature-desc">
+        Real-time GPS with dark map tiles, animated glow route, pace zones,
+        elevation and auto-detected activity type — run, ride, hike and more.
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(76,175,80,0.12)">💚</div>
+      <div class="feature-title">Recovery & HRV</div>
+      <div class="feature-desc">
+        Daily recovery score, HRV trend chart with personal baseline, resting heart rate,
+        sleep stages, SpO2 and respiratory rate — all from your Apple Watch.
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(255,152,0,0.12)">🥗</div>
+      <div class="feature-title">AI Nutrition</div>
+      <div class="feature-desc">
+        Log meals by photo, barcode scan or search. AI estimates calories and macros instantly.
+        Set custom protein, carbs and fat goals. Track water intake.
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(124,110,250,0.12)">😴</div>
+      <div class="feature-title">Sleep Insights</div>
+      <div class="feature-desc">
+        Deep, REM and Light sleep breakdown, sleep efficiency ring, biological markers
+        and lifestyle correlations — does late caffeine actually hurt your sleep?
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(38,198,218,0.12)">⌚</div>
+      <div class="feature-title">Apple Watch Sync</div>
+      <div class="feature-desc">
+        Automatic HealthKit sync for heart rate, HRV, body temperature, VO2 max,
+        workouts, sleep and 20+ other metrics directly from your watch.
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(255,202,40,0.12)">🏆</div>
+      <div class="feature-title">Personal Records</div>
+      <div class="feature-desc">
+        Auto-detected PRs for 1K, 5K, 10K, Half and Full Marathon. Activity streaks,
+        daily goals and weekly summaries to keep you motivated.
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(252,76,2,0.12)">👥</div>
+      <div class="feature-title">Social & Groups</div>
+      <div class="feature-desc">
+        Share workouts with friends, join groups and cheer each other on.
+        Privacy controls let you choose exactly what to share.
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(33,150,243,0.12)">🗾</div>
+      <div class="feature-title">Route Maps</div>
+      <div class="feature-desc">
+        Explore curated running and cycling routes. Preview routes on a dark,
+        beautiful map before you head out. Satellite toggle for trail runs.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── APPLE WATCH ────────────────────────────────────────────────────────────── -->
+<section id="watch" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="watch-section">
+    <div>
+      <span class="section-label">Apple Watch</span>
+      <h2 class="section-title">Your watch. Fully unlocked.</h2>
+      <p class="section-sub">
+        MyVitality reads everything your Apple Watch measures —
+        automatically, in the background, every 30 minutes.
+      </p>
+      <div style="margin-top:28px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--muted)">
+          <span style="color:#4CAF50;font-size:1rem">✓</span> Heart Rate Variability (HRV)
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--muted)">
+          <span style="color:#4CAF50;font-size:1rem">✓</span> Resting Heart Rate & SpO2
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--muted)">
+          <span style="color:#4CAF50;font-size:1rem">✓</span> Respiratory Rate & Body Temperature
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--muted)">
+          <span style="color:#4CAF50;font-size:1rem">✓</span> Sleep Stages (Deep, REM, Light)
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--muted)">
+          <span style="color:#4CAF50;font-size:1rem">✓</span> Workouts, Steps & Active Calories
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:var(--muted)">
+          <span style="color:#4CAF50;font-size:1rem">✓</span> VO2 Max & Exercise Minutes
+        </div>
+      </div>
+    </div>
+    <div class="watch-metrics">
+      <div class="watch-metric-card" style="border-color:rgba(38,198,218,0.25)">
+        <div class="wmc-icon">💙</div>
+        <div class="wmc-val" style="color:var(--cyan)">52ms</div>
+        <div class="wmc-label">HRV today</div>
+      </div>
+      <div class="watch-metric-card" style="border-color:rgba(239,83,80,0.25)">
+        <div class="wmc-icon">❤️</div>
+        <div class="wmc-val" style="color:#EF5350">52 bpm</div>
+        <div class="wmc-label">Resting HR</div>
+      </div>
+      <div class="watch-metric-card" style="border-color:rgba(76,175,80,0.25)">
+        <div class="wmc-icon">🫁</div>
+        <div class="wmc-val" style="color:#4CAF50">14.2</div>
+        <div class="wmc-label">Resp. rate /min</div>
+      </div>
+      <div class="watch-metric-card" style="border-color:rgba(255,202,40,0.25)">
+        <div class="wmc-icon">🌡️</div>
+        <div class="wmc-val" style="color:#FFCA28">36.4°C</div>
+        <div class="wmc-label">Wrist temp</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ───────────────────────────────────────────────────────────── -->
+<section id="how" style="max-width:900px;margin:0 auto;text-align:center">
+  <span class="section-label">Getting started</span>
+  <h2 class="section-title">Up and running in minutes</h2>
+  <p class="section-sub" style="margin:0 auto">No subscriptions. No Whoop band required. Just your iPhone and Apple Watch.</p>
+
+  <div class="steps" style="text-align:left;margin-top:60px">
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">1</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-title">Download & create account</div>
+        <div class="step-desc">Sign up with email or Google. Your data stays on your device and our secure servers — never sold.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">2</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-title">Connect Apple Health</div>
+        <div class="step-desc">Grant HealthKit permission once. MyVitality automatically pulls your Apple Watch data — HRV, sleep, heart rate and more — every 30 minutes.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">3</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="step-title">Start your first workout</div>
+        <div class="step-desc">Hit the GPS tracker, go for a run or ride, and watch your route paint itself on the dark map in real time.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">4</div>
+      </div>
+      <div class="step-content">
+        <div class="step-title">Track your recovery</div>
+        <div class="step-desc">Each morning, check your daily readiness score, HRV trend and sleep analysis to know exactly how hard to push today.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ───────────────────────────────────────────────────────────────────── -->
+<section class="cta-section" id="download">
+  <div class="cta-glow"></div>
+  <h2>Ready to <span class="hero-gradient">train smarter?</span></h2>
+  <p>Free to download. No subscription required.</p>
+  <a href="#" class="appstore-btn">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+    </svg>
+    <div class="appstore-btn-sub">
+      <span class="appstore-btn-small">Download on the</span>
+      <span class="appstore-btn-big">App Store</span>
+    </div>
+  </a>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────────────────────────────────── -->
+<footer>
+  <a href="#top" class="footer-logo">
+    <div class="nav-logo-icon" style="width:26px;height:26px;font-size:13px">⚡</div>
+    MyVitality
+  </a>
+  <div class="footer-links">
+    <a href="#features">Features</a>
+    <a href="#watch">Apple Watch</a>
+    <a href="https://egemizrak1.github.io/fitsync-privacy" target="_blank">Privacy Policy</a>
+    <a href="mailto:support@fitsync.app">Support</a>
+  </div>
+  <div class="footer-copy">© 2025 MyVitality. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
