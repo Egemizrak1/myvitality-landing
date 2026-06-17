@@ -59,18 +59,25 @@
     .home-hero::after { content:''; position:absolute; bottom:-280px; left:-200px; width:680px; height:680px; border-radius:50%; background: radial-gradient(circle, rgba(58,107,181,0.18) 0%, transparent 70%); pointer-events:none; animation: heroDrift2 26s ease-in-out infinite; }
     @keyframes heroDrift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-50px,38px)} }
     @keyframes heroDrift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(56px,-32px)} }
-    /* No-FOUC: hide hero content before the entrance animation (only when JS is on) */
-    html.js .home-hero .grid > div:first-child > * { opacity: 0; }
-    html.js .home-hero .phone-wrap { opacity: 0; }
+    /* Hero entrance — PURE CSS so the hero always appears (never gated on the
+       GSAP script loading). Staggered via nth-child delays. */
+    .home-hero .grid > div:first-child > * { opacity: 0; animation: heroIn .7s cubic-bezier(.2,.7,.2,1) forwards; }
+    .home-hero .grid > div:first-child > *:nth-child(1) { animation-delay: .05s; }
+    .home-hero .grid > div:first-child > *:nth-child(2) { animation-delay: .13s; }
+    .home-hero .grid > div:first-child > *:nth-child(3) { animation-delay: .21s; }
+    .home-hero .grid > div:first-child > *:nth-child(4) { animation-delay: .29s; }
+    .home-hero .grid > div:first-child > *:nth-child(5) { animation-delay: .37s; }
+    .home-hero .grid > div:first-child > *:nth-child(6) { animation-delay: .45s; }
+    @keyframes heroIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
     @media (prefers-reduced-motion: reduce) {
       .home-hero::before, .home-hero::after { animation: none; }
-      html.js .home-hero .grid > div:first-child > *, html.js .home-hero .phone-wrap { opacity: 1; }
+      .home-hero .grid > div:first-child > * { opacity: 1; animation: none; }
     }
     .home-hero .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; position: relative; }
     .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(91,157,255,0.1); border:1px solid rgba(91,157,255,0.3); color:var(--accent); padding:6px 14px; border-radius:20px; font-size:0.8rem; font-weight:600; margin-bottom:22px; }
     .hero-badge::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--accent); animation:pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-    .home-hero h1 { font-size: clamp(2.6rem, 5.2vw, 4rem); font-weight: 900; line-height: 1.04; letter-spacing: -0.035em; margin-bottom: 20px; }
+    .home-hero h1 { font-size: clamp(2rem, 6.2vw, 4rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 20px; overflow-wrap: break-word; }
     .home-hero .lede { font-size: 1.08rem; color: var(--text-2); line-height: 1.7; max-width: 480px; margin-bottom: 28px; }
     .hero-stats { display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
     .hero-stat { padding:14px 20px; border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015)); border:1px solid rgba(255,255,255,0.08); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); min-width:98px; transition:border-color .25s, transform .25s; }
@@ -470,24 +477,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 (function () {
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var heroLeft = document.querySelectorAll('.home-hero .grid > div:first-child > *');
-  var phone = document.querySelector('.home-hero .phone-wrap');
-
-  // Fallback: GSAP missing or reduced motion -> just show everything, no FOUC.
-  if (!window.gsap || reduce) {
-    heroLeft.forEach(function (el) { el.style.opacity = 1; });
-    if (phone) phone.style.opacity = 1;
-    return;
+  // Nav gains weight + shadow after the hero — independent of motion settings.
+  var nav = document.querySelector('.site-nav');
+  if (nav) {
+    var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 60); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
-  gsap.registerPlugin(ScrollTrigger);
 
-  // Hero entrance — staggered on load.
-  gsap.set(heroLeft, { opacity: 0, y: 22 });
-  if (phone) gsap.set(phone, { opacity: 0 }); // opacity only — floatY keeps the vertical drift
-  var tl = gsap.timeline({ delay: 0.12 });
-  tl.to(heroLeft, { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out', stagger: 0.085 });
-  if (phone) tl.to(phone, { opacity: 1, duration: 0.9, ease: 'power2.out' }, 0.3);
+  // Hero entrance is pure CSS; below-fold sections stay visible without JS.
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!window.gsap || reduce) return;
+  gsap.registerPlugin(ScrollTrigger);
 
   // Count-up stats (0 -> 20+).
   document.querySelectorAll('[data-count]').forEach(function (el) {
@@ -508,14 +509,6 @@
     gsap.to(el, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
       scrollTrigger: { trigger: el, start: 'top 86%', once: true } });
   });
-
-  // Nav gains weight + shadow after the hero.
-  var nav = document.querySelector('.site-nav');
-  if (nav) {
-    var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 60); };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
 })();
 </script>
 
