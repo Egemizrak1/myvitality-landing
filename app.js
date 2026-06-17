@@ -129,6 +129,56 @@
       }
     }
 
+    /* ── Localized pricing ──
+     * Any element with [data-price] gets its symbol+amount swapped for the
+     * visitor's region. Default markup ships USD so SEO + no-JS see a price. */
+    var priceEls = d.querySelectorAll('[data-price]');
+    if (priceEls.length) {
+      var EURO = ['AT','BE','HR','CY','EE','FI','FR','DE','GR','IE','IT','LV',
+                  'LT','LU','MT','NL','PT','SK','SI','ES'];
+      var PRICE = {
+        USD: { sym: '$', amt: '6.99' },
+        GBP: { sym: '£', amt: '6.99' },
+        EUR: { sym: '€', amt: '6.99' },
+        TRY: { sym: '₺', amt: '300' }
+      };
+      var toCurrency = function (cc) {
+        cc = (cc || '').toUpperCase();
+        if (cc === 'TR') return 'TRY';
+        if (cc === 'GB') return 'GBP';
+        if (EURO.indexOf(cc) >= 0) return 'EUR';
+        return 'USD';
+      };
+      var applyPrice = function (cur) {
+        var p = PRICE[cur] || PRICE.USD;
+        priceEls.forEach(function (el) { el.textContent = p.sym + p.amt; });
+      };
+      var localeFallback = function () {
+        var cc = '';
+        try {
+          var langs = navigator.languages || [navigator.language || ''];
+          for (var i = 0; i < langs.length; i++) {
+            var part = (langs[i] || '').split('-')[1];
+            if (part) { cc = part; break; }
+          }
+          if (!cc) {
+            var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+            if (/Istanbul/.test(tz)) cc = 'TR';
+            else if (/London/.test(tz)) cc = 'GB';
+            else if (/Paris|Berlin|Madrid|Rome|Amsterdam|Brussels|Lisbon|Vienna|Dublin|Helsinki|Athens/.test(tz)) cc = 'FR';
+          }
+        } catch (e) {}
+        if (cc) applyPrice(toCurrency(cc));
+      };
+      fetch('https://api.country.is/', { cache: 'no-store' })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (j && j.country) applyPrice(toCurrency(j.country));
+          else localeFallback();
+        })
+        .catch(localeFallback);
+    }
+
     /* ── Waitlist capture ── */
     var API = 'https://fitsync-api-phi.vercel.app/api/waitlist';
     d.querySelectorAll('.waitlist-form').forEach(function (form) {
