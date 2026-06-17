@@ -529,6 +529,9 @@ const T = {
   "No spam. One email at launch. Unsubscribe anytime.": { tr:"Spam yok. Lansmanda tek e-posta. İstediğin zaman çık.", de:"Kein Spam. Eine E-Mail zum Start. Jederzeit abbestellbar.", es:"Sin spam. Un correo en el lanzamiento. Cancela cuando quieras.", fr:"Pas de spam. Un e-mail au lancement. Désabonnement à tout moment.", it:"Niente spam. Una mail al lancio. Disiscriviti quando vuoi.", ja:"スパムなし。公開時に1通のみ。いつでも解除できます。", ko:"스팸 없음. 출시 때 한 통만. 언제든 구독 해지 가능.", pt:"Sem spam. Um e-mail no lançamento. Cancele quando quiser.", ru:"Без спама. Одно письмо на старте. Отписка в любой момент.", zh:"无垃圾邮件。上线时仅发一封。可随时退订。", ar:"بلا رسائل مزعجة. بريد واحد عند الإطلاق. يمكنك إلغاء الاشتراك في أي وقت." }
 };
 
+// Blog post translations live in a separate module (large, appended in batches).
+try { Object.assign(T, require('./i18n-blog.js')); } catch (e) { /* not present yet */ }
+
 const out = {};
 LANGS.forEach(function (l) { out[l] = {}; });
 Object.keys(T).forEach(function (en) {
