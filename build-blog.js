@@ -129,6 +129,7 @@ ${p.html}
 
 ${FOOTER}
 
+<script src="/app.js" defer></script>
 </body>
 </html>
 `;
@@ -180,6 +181,7 @@ ${cards}
 
 ${FOOTER}
 
+<script src="/app.js" defer></script>
 </body>
 </html>
 `;

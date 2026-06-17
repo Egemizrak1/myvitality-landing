@@ -17,7 +17,6 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
 
   <script type="application/ld+json">
@@ -52,76 +51,104 @@
   </script>
 
   <style>
-    /* Homepage-specific layout */
-    .home-hero { position: relative; overflow: hidden; padding: 96px 0 76px; }
-    /* Animated dual-blob aurora — slow ice-blue drift behind the hero */
-    .home-hero::before { content:''; position:absolute; top:-220px; right:-140px; width:720px; height:720px; border-radius:50%; background: radial-gradient(circle, rgba(91,157,255,0.18) 0%, transparent 70%); pointer-events:none; animation: heroDrift1 20s ease-in-out infinite; }
-    .home-hero::after { content:''; position:absolute; bottom:-280px; left:-200px; width:680px; height:680px; border-radius:50%; background: radial-gradient(circle, rgba(58,107,181,0.18) 0%, transparent 70%); pointer-events:none; animation: heroDrift2 26s ease-in-out infinite; }
-    @keyframes heroDrift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-50px,38px)} }
-    @keyframes heroDrift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(56px,-32px)} }
-    /* Hero entrance — PURE CSS so the hero always appears (never gated on the
-       GSAP script loading). Staggered via nth-child delays. */
-    .home-hero .grid > div:first-child > * { opacity: 0; animation: heroIn .7s cubic-bezier(.2,.7,.2,1) forwards; }
-    .home-hero .grid > div:first-child > *:nth-child(1) { animation-delay: .05s; }
-    .home-hero .grid > div:first-child > *:nth-child(2) { animation-delay: .13s; }
-    .home-hero .grid > div:first-child > *:nth-child(3) { animation-delay: .21s; }
-    .home-hero .grid > div:first-child > *:nth-child(4) { animation-delay: .29s; }
-    .home-hero .grid > div:first-child > *:nth-child(5) { animation-delay: .37s; }
-    .home-hero .grid > div:first-child > *:nth-child(6) { animation-delay: .45s; }
-    @keyframes heroIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+    /* ── Homepage hero ── */
+    .home-hero { position: relative; overflow: hidden; padding: clamp(56px, 8vw, 104px) 0 clamp(48px, 7vw, 88px); }
+    .home-hero::before { content:''; position:absolute; top:-260px; right:-180px; width:760px; height:760px; border-radius:50%; background: radial-gradient(circle, rgba(91,157,255,0.13) 0%, transparent 66%); pointer-events:none; animation: drift1 22s ease-in-out infinite; }
+    .home-hero::after { content:''; position:absolute; bottom:-320px; left:-220px; width:680px; height:680px; border-radius:50%; background: radial-gradient(circle, rgba(58,107,181,0.14) 0%, transparent 68%); pointer-events:none; animation: drift2 28s ease-in-out infinite; }
+    @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-44px,34px)} }
+    @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(50px,-28px)} }
+    .home-hero .grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(40px,5vw,72px); align-items: center; position: relative; }
+    .hero-copy > * { opacity: 0; animation: heroIn .7s var(--ease) forwards; }
+    .hero-copy > *:nth-child(1){animation-delay:.05s} .hero-copy > *:nth-child(2){animation-delay:.12s}
+    .hero-copy > *:nth-child(3){animation-delay:.19s} .hero-copy > *:nth-child(4){animation-delay:.26s}
+    .hero-copy > *:nth-child(5){animation-delay:.33s} .hero-copy > *:nth-child(6){animation-delay:.40s}
+    @keyframes heroIn { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
+    .home-hero h1 { font-size: clamp(2.6rem, 1.4rem + 4.6vw, 4.4rem); font-weight: 600; line-height: 1.0; letter-spacing: -0.045em; margin-bottom: 22px; }
+    .home-hero h1 .grad { color: var(--accent); }
+    .home-hero .lede { font-size: 1.1rem; color: var(--text-2); line-height: 1.62; max-width: 500px; margin-bottom: 30px; }
+    .waitlist-form { display:flex; gap:10px; flex-wrap:wrap; max-width:470px; }
+    .waitlist-form input[type=email]{ flex:1; min-width:210px; padding:14px 16px; border-radius:var(--r-full); border:1px solid var(--border); background:var(--card); color:var(--text); font-size:.96rem; font-family:inherit; transition:border-color .15s, box-shadow .15s; }
+    .waitlist-form input[type=email]::placeholder{ color:var(--muted); }
+    .waitlist-form input[type=email]:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(91,157,255,.16); }
+    .waitlist-form .btn-primary{ white-space:nowrap; }
+    .waitlist-msg{ flex-basis:100%; font-size:.84rem; margin:4px 0 0; min-height:1.1em; }
+    .waitlist-msg.ok{ color:var(--success); font-weight:600; }
+    .waitlist-msg.err{ color:#ff6b6b; }
+    .waitlist-note{ font-size:.8rem; color:var(--muted); margin-top:16px; }
+    .waitlist-note a{ color:var(--accent); font-weight:600; }
+    /* hero meta row — mono, hairline-separated */
+    .hero-meta { display:flex; gap:26px; margin-top:34px; flex-wrap:wrap; }
+    .hero-meta > div { display:flex; flex-direction:column; gap:5px; padding-left:18px; border-left:1px solid var(--border); }
+    .hero-meta > div:first-child { padding-left:0; border-left:0; }
+    .hero-meta b { font-family:var(--font-display); font-size:1.55rem; font-weight:600; letter-spacing:-0.03em; line-height:1; font-variant-numeric:tabular-nums; }
+    .hero-meta span { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+
+    /* ── Readiness ring (signature) ── */
+    .ring-wrap { opacity:0; animation: heroIn .9s var(--ease) .3s forwards; }
+    .ring { position: relative; width: min(380px, 80vw); aspect-ratio: 1; margin: 0 auto; }
+    .ring::before { content:''; position:absolute; inset:-6%; background: radial-gradient(circle, rgba(91,157,255,0.18) 0%, transparent 60%); pointer-events:none; }
+    .ring-svg { width:100%; height:100%; transform: rotate(-90deg); position:relative; }
+    .ring-track { fill:none; stroke: rgba(255,255,255,0.07); stroke-width: 8; }
+    .ring-prog { fill:none; stroke: var(--accent); stroke-width: 8; stroke-linecap: round;
+      stroke-dasharray: 653.45; stroke-dashoffset: 653.45; filter: drop-shadow(0 0 9px rgba(91,157,255,.55));
+      animation: ringDraw 1.7s var(--ease) .35s forwards; }
+    @keyframes ringDraw { to { stroke-dashoffset: 91.5; } }
+    .ring-center { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+    .ring-num { font-family: var(--font-display); font-size: clamp(3.2rem, 13vw, 4.8rem); font-weight: 600; letter-spacing:-0.05em; line-height:1; }
+    .ring-cap { font-family: var(--font-mono); font-size:.7rem; letter-spacing:.34em; color: var(--accent); margin-top:12px; }
+    .ring-cap-sub { font-family: var(--font-mono); font-size:.62rem; letter-spacing:.16em; color: var(--muted); margin-top:6px; }
+    .ring-ticks { display:flex; justify-content:center; gap:9px; margin-top:30px; flex-wrap:wrap; }
+    .ring-tick { display:inline-flex; gap:7px; align-items:center; font-family:var(--font-mono); font-size:.72rem; letter-spacing:.03em; color:var(--muted); padding:8px 13px; border:1px solid var(--border); border-radius:var(--r-full); background:var(--card); }
+    .ring-tick b { color:var(--text); font-weight:600; }
+    .ring-tick .up { color:var(--accent); }
     @media (prefers-reduced-motion: reduce) {
-      .home-hero::before, .home-hero::after { animation: none; }
-      .home-hero .grid > div:first-child > * { opacity: 1; animation: none; }
+      .home-hero::before, .home-hero::after { animation:none; }
+      .hero-copy > *, .ring-wrap { opacity:1; animation:none; }
+      .ring-prog { animation:none; stroke-dashoffset:91.5; }
     }
-    .home-hero .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; position: relative; }
-    .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(91,157,255,0.1); border:1px solid rgba(91,157,255,0.3); color:var(--accent); padding:6px 14px; border-radius:20px; font-size:0.8rem; font-weight:600; margin-bottom:22px; }
-    .hero-badge::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--accent); animation:pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-    .home-hero h1 { font-size: clamp(2rem, 6.2vw, 4rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 20px; overflow-wrap: break-word; }
-    .home-hero .lede { font-size: 1.08rem; color: var(--text-2); line-height: 1.7; max-width: 480px; margin-bottom: 28px; }
-    .hero-stats { display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
-    .hero-stat { padding:14px 20px; border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015)); border:1px solid rgba(255,255,255,0.08); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); min-width:98px; transition:border-color .25s, transform .25s; }
-    .hero-stat:hover { border-color:rgba(91,157,255,0.32); transform:translateY(-2px); }
-    .hero-stat-num { font-size:1.75rem; font-weight:900; line-height:1; letter-spacing:-0.02em; font-variant-numeric:tabular-nums; }
-    .hero-stat-lbl { font-size:0.72rem; color:var(--muted); margin-top:7px; }
     @media (max-width: 900px) {
       .home-hero .grid { grid-template-columns: 1fr; text-align: center; }
       .home-hero .lede { margin-left:auto; margin-right:auto; }
-      .home-hero .btn-row, .hero-stats { justify-content: center; }
-      .home-hero .phone-wrap { display: none; }
+      .home-hero .waitlist-form, .home-hero .hero-meta { justify-content: center; margin-left:auto; margin-right:auto; }
+      .ring-wrap { margin-top: 8px; order: -1; }
+      .ring { width: min(300px, 72vw); }
     }
-    /* AI coach chat mockup */
-    .chat-screen { height: 496px; background: linear-gradient(180deg,#0c0e13,#0b0b12); display:flex; flex-direction:column; }
+
+    /* ── Feature line icons (homepage) ── */
+    .feat-icon svg { width:21px; height:21px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+    .feat-card .feat-icon { color: var(--text-2); transition: color .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease); }
+    .feat-card:hover .feat-icon { color: var(--accent); border-color: var(--accent-line); background: var(--accent-soft); }
+
+    /* ── App showcase split ── */
+    .showcase { background: var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .showcase .cap { font-family:var(--font-mono); font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-top:22px; }
+
+    /* ── AI coach chat mockup ── */
+    .chat-screen { height:496px; background: linear-gradient(180deg,#0c0e13,#0b0b12); display:flex; flex-direction:column; }
     .chat-head { display:flex; align-items:center; gap:10px; padding:14px 16px; border-bottom:1px solid var(--border); }
-    .chat-ava { width:32px; height:32px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:15px; }
-    .chat-name { font-size:0.85rem; font-weight:700; color:var(--text); }
-    .chat-status { font-size:0.6rem; color:var(--success); }
+    .chat-ava { width:32px; height:32px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; color:var(--ink); }
+    .chat-ava svg { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.7; }
+    .chat-name { font-size:.85rem; font-weight:600; color:var(--text); }
+    .chat-status { font-family:var(--font-mono); font-size:.58rem; letter-spacing:.06em; color:var(--success); }
     .chat-body { flex:1; padding:16px 14px; display:flex; flex-direction:column; gap:10px; overflow:hidden; }
-    .bubble { max-width:84%; padding:10px 13px; font-size:0.78rem; line-height:1.45; border-radius:16px; }
+    .bubble { max-width:84%; padding:10px 13px; font-size:.78rem; line-height:1.45; border-radius:15px; }
     .bubble.user { align-self:flex-end; background:var(--accent); color:var(--ink); border-bottom-right-radius:5px; font-weight:500; }
-    .bubble.coach { align-self:flex-start; background:rgba(255,255,255,0.06); color:var(--text-2); border-bottom-left-radius:5px; }
+    .bubble.coach { align-self:flex-start; background:rgba(255,255,255,0.05); color:var(--text-2); border-bottom-left-radius:5px; border:1px solid var(--border-soft); }
     .bubble.coach b { color:var(--text); }
-    .data-pills { display:flex; gap:6px; margin:8px 0 2px; flex-wrap:wrap; }
-    .data-pill { font-size:0.6rem; font-weight:700; padding:3px 8px; border-radius:8px; background:rgba(91,157,255,0.12); color:var(--accent); }
-    /* Testimonials */
-    .quote-card { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:24px; }
-    .quote-card p { color:var(--text-2); font-size:0.92rem; line-height:1.65; margin-bottom:16px; }
-    .quote-who { display:flex; align-items:center; gap:10px; }
-    .quote-ava { width:34px; height:34px; border-radius:50%; background:rgba(91,157,255,0.15); color:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.9rem; }
-    .quote-name { font-size:0.82rem; font-weight:700; color:var(--text); }
-    .quote-role { font-size:0.7rem; color:var(--muted); }
-    .beta-note { text-align:center; color:var(--muted); font-size:0.82rem; margin-top:22px; }
-    /* Waitlist / email capture */
-    .waitlist-form { display:flex; gap:10px; flex-wrap:wrap; max-width:460px; margin-top:6px; }
-    .waitlist-form input[type=email] { flex:1; min-width:210px; padding:14px 16px; border-radius:12px; border:1px solid var(--border); background:var(--card); color:var(--text); font-size:0.96rem; font-family:inherit; transition:border-color .15s, box-shadow .15s; }
-    .waitlist-form input[type=email]::placeholder { color:var(--muted); }
-    .waitlist-form input[type=email]:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(91,157,255,0.18); }
-    .waitlist-form .btn-primary { white-space:nowrap; }
-    .waitlist-msg { flex-basis:100%; font-size:0.84rem; margin:2px 0 0; min-height:1.1em; }
-    .waitlist-msg.ok { color:var(--success); font-weight:600; }
-    .waitlist-msg.err { color:#ff6b6b; }
-    .waitlist-note { font-size:0.78rem; color:var(--muted); margin-top:12px; }
-    @media (max-width: 900px) { .home-hero .waitlist-form { margin-left:auto; margin-right:auto; } }
+    .data-pills { display:flex; gap:6px; margin:9px 0 1px; flex-wrap:wrap; }
+    .data-pill { font-family:var(--font-mono); font-size:.58rem; font-weight:500; letter-spacing:.04em; padding:3px 8px; border-radius:6px; background:var(--accent-soft); color:var(--accent); border:1px solid var(--accent-line); }
+
+    /* ── Why band (statements) ── */
+    .why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
+    @media (max-width:760px){ .why-grid{ grid-template-columns:1fr; } }
+    .why-cell { padding:30px 28px; border-right:1px solid var(--border); }
+    .why-cell:last-child { border-right:0; }
+    @media (max-width:760px){ .why-cell{ border-right:0; border-bottom:1px solid var(--border); } .why-cell:last-child{border-bottom:0;} }
+    .why-cell .n { font-family:var(--font-mono); font-size:.74rem; letter-spacing:.1em; color:var(--accent); margin-bottom:14px; }
+    .why-cell h3 { font-size:1.08rem; font-weight:600; letter-spacing:-0.02em; margin-bottom:9px; }
+    .why-cell p { font-size:.92rem; color:var(--muted); line-height:1.62; }
+    .beta-note { text-align:center; color:var(--muted); font-size:.84rem; margin-top:28px; }
+    .beta-note a { color:var(--accent); font-weight:600; }
   </style>
 </head>
 <body>
@@ -146,62 +173,43 @@
 <header class="home-hero">
   <div class="container">
     <div class="grid">
-      <div>
-        <div class="hero-badge">Coming soon to iOS</div>
-        <h1>Track workouts, recovery, sleep and progress in <span class="grad">one app</span></h1>
-        <p class="lede">MyVitality brings GPS workout tracking, Apple Watch recovery, sleep and AI nutrition together with a coach that actually knows your data — so you can understand your body and stay consistent.</p>
+      <div class="hero-copy">
+        <span class="eyebrow">MyVitality · Coming to iOS</span>
+        <h1>Train with <span class="grad">clarity.</span></h1>
+        <p class="lede">GPS workouts, Apple Watch recovery, sleep and AI nutrition in one app — with a coach that reads your real data and tells you when to push and when to rest.</p>
         <form class="waitlist-form" data-source="home_hero">
           <input type="email" name="email" required placeholder="Enter your email" aria-label="Email address" autocomplete="email">
           <button type="submit" class="btn-primary">Get early access →</button>
           <p class="waitlist-msg" role="status" aria-live="polite"></p>
         </form>
-        <p class="waitlist-note">Free on iOS at launch · Be first in line · One email when it's live, no spam. &nbsp;<a href="/features/" style="color:var(--accent);text-decoration:none;font-weight:600">See all features →</a></p>
-        <div class="hero-stats">
-          <div class="hero-stat"><div class="hero-stat-num"><span data-count="20" data-suffix="+">20+</span></div><div class="hero-stat-lbl">Health metrics</div></div>
-          <div class="hero-stat"><div class="hero-stat-num">AI</div><div class="hero-stat-lbl">Coach &amp; nutrition</div></div>
-          <div class="hero-stat"><div class="hero-stat-num">0</div><div class="hero-stat-lbl">Data sold</div></div>
+        <p class="waitlist-note">Free on iOS at launch · One email when it's live, no spam. &nbsp;<a href="/features/">See all features →</a></p>
+        <div class="hero-meta">
+          <div><b data-count="20" data-suffix="+">20+</b><span>Health metrics</span></div>
+          <div><b>AI</b><span>Coach &amp; nutrition</span></div>
+          <div><b>0</b><span>Data sold</span></div>
         </div>
       </div>
-      <div class="phone-wrap phone-float">
-        <div class="big-phone">
-          <div class="phone-top"><div class="dynamic-island"></div></div>
-          <div class="phone-carousel" id="heroCarousel">
-            <div class="phone-slide active"><img src="/assets/fitness-tracking-app-dashboard.webp" alt="MyVitality fitness tracking app dashboard showing daily activity, recovery and nutrition" width="248" height="496"></div>
-            <div class="phone-slide"><img src="/assets/workout-tracker-gps-route-map.webp" alt="Workout tracker app showing curated GPS routes on a map" loading="lazy" width="248" height="496"></div>
-            <div class="phone-slide"><img src="/assets/recovery-sleep-hrv-tracker-screen.webp" alt="Recovery and HRV tracker screen with readiness score" loading="lazy" width="248" height="496"></div>
-            <div class="phone-slide"><img src="/assets/ai-nutrition-calorie-tracker-screen.webp" alt="AI nutrition and calorie tracker screen" loading="lazy" width="248" height="496"></div>
-            <div class="carousel-dots" id="carouselDots">
-              <div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div>
-            </div>
+      <div class="ring-wrap">
+        <div class="ring" role="img" aria-label="Recovery readiness score of 86 out of 100 — ready to train">
+          <svg class="ring-svg" viewBox="0 0 240 240" aria-hidden="true">
+            <circle class="ring-track" cx="120" cy="120" r="104"></circle>
+            <circle class="ring-prog" cx="120" cy="120" r="104"></circle>
+          </svg>
+          <div class="ring-center">
+            <div class="ring-num">86</div>
+            <div class="ring-cap">READY</div>
+            <div class="ring-cap-sub">RECOVERY SCORE</div>
           </div>
+        </div>
+        <div class="ring-ticks">
+          <span class="ring-tick"><b class="up">↑8%</b> HRV</span>
+          <span class="ring-tick"><b>7h42</b> Sleep</span>
+          <span class="ring-tick"><b>Optimal</b> Load</span>
         </div>
       </div>
     </div>
   </div>
 </header>
-
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <div class="ticker-item"><div class="ticker-dot"></div>Workout Tracker</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>Recovery &amp; HRV</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>Sleep Tracking</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>AI Nutrition</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>AI Coach</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>GPS Route Maps</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>Fitness Community</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>Works with Any Smartwatch</div>
-    <!-- duplicate for seamless loop -->
-    <div class="ticker-item"><div class="ticker-dot"></div>Workout Tracker</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>Recovery &amp; HRV</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>Sleep Tracking</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>AI Nutrition</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>AI Coach</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>GPS Route Maps</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>Fitness Community</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>Works with Any Smartwatch</div>
-  </div>
-</div>
 
 <!-- DEVICE COMPATIBILITY -->
 <div class="devices-strip">
@@ -219,18 +227,18 @@
   <p class="device-badge-note">MyVitality reads from Apple Health — if your device syncs to Apple Health, it works automatically.</p>
 </div>
 
-<!-- PROBLEM -->
+<!-- 01 · PROBLEM -->
 <section>
-  <div class="container center">
-    <span class="eyebrow">The problem</span>
+  <div class="container center" data-reveal>
+    <span class="eyebrow">01 — The problem</span>
     <h2 class="section-title">Tracking your fitness shouldn't be this hard</h2>
-    <p class="section-sub">Most people give up on tracking because the tools get in the way. Notes get messy, spreadsheets get abandoned, and five separate apps never talk to each other.</p>
+    <p class="section-sub">Most people quit tracking because the tools get in the way. Notes get messy, spreadsheets get abandoned, and five separate apps never talk to each other.</p>
   </div>
   <div class="container" style="margin-top:48px">
-    <div class="cards-3">
+    <div class="cards-3" data-reveal>
       <div class="problem-card">
         <div class="x">Scattered data</div>
-        <p>Runs in one app, sleep in another, food in a third. You never see the full picture of how training, recovery and nutrition connect.</p>
+        <p>Runs in one app, sleep in another, food in a third. You never see how training, recovery and nutrition actually connect.</p>
       </div>
       <div class="problem-card">
         <div class="x">No idea when to rest</div>
@@ -238,69 +246,101 @@
       </div>
       <div class="problem-card">
         <div class="x">Consistency fades</div>
-        <p>Motivation dips, you miss a few days, and the habit quietly disappears. There's nothing keeping you accountable.</p>
+        <p>Motivation dips, you miss a few days, and the habit quietly disappears. Nothing keeps you accountable.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FEATURES OVERVIEW -->
+<!-- 02 · FEATURES -->
 <section id="features" style="background:var(--surface);border-top:1px solid var(--border)">
-  <div class="container center">
-    <span class="eyebrow">Everything you need</span>
-    <h2 class="section-title">Fitness tracking, recovery and community in one app</h2>
-    <p class="section-sub">Six powerful tools, one simple app — each built to be useful on its own and better together.</p>
+  <div class="container center" data-reveal>
+    <span class="eyebrow">02 — Everything you need</span>
+    <h2 class="section-title">Six tools. One app.</h2>
+    <p class="section-sub">Each is useful on its own — and far more powerful when they all share the same data.</p>
   </div>
   <div class="container" style="margin-top:52px">
-    <div class="cards-3">
+    <div class="cards-3" data-reveal>
       <div class="feat-card">
-        <div class="feat-icon">🗺️</div>
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M9 20l-5 2V6l5-2 6 2 5-2v16l-5 2-6-2z"/><path d="M9 4v16M15 6v16"/></svg></div>
         <div class="feat-title"><a class="feat-title-link" href="/workout-tracker/">Workout Tracker</a></div>
-        <div class="feat-desc">Real-time GPS tracking on a clean, distraction-free map with live pace, heart rate, elevation and splits. Finish with a shareable route card.</div>
-        <a class="more" href="/workout-tracker/">Explore workout tracking →</a>
+        <div class="feat-desc">Real-time GPS on a clean, distraction-free map with live pace, heart rate, elevation and splits. Finish with a shareable route card.</div>
+        <a class="more" href="/workout-tracker/">Explore →</a>
       </div>
       <div class="feat-card">
-        <div class="feat-icon">💚</div>
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-9.2-8.4C1.1 8.3 2.8 5 6 5c2 0 3.2 1.2 4 2 .8-.8 2-2 4-2 3.2 0 4.9 3.3 3.2 6.6C19 15.4 12 20 12 20z"/></svg></div>
         <div class="feat-title"><a class="feat-title-link" href="/recovery-tracker/">Recovery &amp; HRV</a></div>
         <div class="feat-desc">A daily readiness score from your Apple Watch HRV, resting heart rate and sleep — so you know when to push and when to rest.</div>
-        <a class="more" href="/recovery-tracker/">Explore recovery tracking →</a>
+        <a class="more" href="/recovery-tracker/">Explore →</a>
       </div>
       <div class="feat-card">
-        <div class="feat-icon">😴</div>
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.6 6.6 0 0 0 21 12.8z"/></svg></div>
         <div class="feat-title"><a class="feat-title-link" href="/sleep-tracker/">Sleep Tracking</a></div>
-        <div class="feat-desc">Deep, REM and light sleep stages every morning. See how training and nutrition affect the quality of your rest.</div>
-        <a class="more" href="/sleep-tracker/">Explore sleep tracking →</a>
+        <div class="feat-desc">Deep, REM and light stages every morning. See how training and nutrition affect the quality of your rest.</div>
+        <a class="more" href="/sleep-tracker/">Explore →</a>
       </div>
       <div class="feat-card">
-        <div class="feat-icon">🥗</div>
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M5 21C4 12 9 4 20 4c0 11-8 16-15 14z"/><path d="M5 21c2-6 6-9 10-10"/></svg></div>
         <div class="feat-title">AI Nutrition</div>
         <div class="feat-desc">Snap a photo of your plate and AI breaks down calories, protein, carbs and fat. Scan barcodes and set your own macro goals.</div>
-        <a class="more" href="/features/">See all features →</a>
+        <a class="more" href="/features/">See all →</a>
       </div>
       <div class="feat-card">
-        <div class="feat-icon">🤖</div>
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 3l1.7 5L19 9.7l-5.3 1.6L12 17l-1.7-5.7L5 9.7 10.3 8z"/><path d="M19 14.5l.6 1.9 1.9.6-1.9.6-.6 1.9-.6-1.9-1.9-.6 1.9-.6z"/></svg></div>
         <div class="feat-title">AI Coach</div>
         <div class="feat-desc">Ask anything. Your coach reads your real recovery, training load and goals, then answers with your numbers — not generic tips.</div>
-        <a class="more" href="#coach">Meet your AI coach →</a>
+        <a class="more" href="#coach">Meet the coach →</a>
       </div>
       <div class="feat-card">
-        <div class="feat-icon">👥</div>
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 6.2a3 3 0 0 1 0 5.6M20.5 20a5.5 5.5 0 0 0-4-5.3"/></svg></div>
         <div class="feat-title"><a class="feat-title-link" href="/community/">Community</a></div>
         <div class="feat-desc">Follow friends, react to their workouts, join challenges and share your route card in one tap. Stay accountable together.</div>
-        <a class="more" href="/community/">Explore the community →</a>
+        <a class="more" href="/community/">Explore →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
+<!-- 03 · APP SHOWCASE -->
+<section class="showcase">
+  <div class="container">
+    <div class="split">
+      <div data-reveal>
+        <span class="eyebrow">03 — The app</span>
+        <h2 class="section-title">Designed to be glanced at</h2>
+        <p class="section-sub">Open it, get your answer, get on with your day. Every screen leads with the one number that matters — readiness, pace, calories left, tonight's sleep — and hides the rest until you ask.</p>
+        <ul class="feature-list">
+          <li><strong>One dashboard</strong> for training, recovery and nutrition</li>
+          <li><strong>Distraction-free GPS</strong> with live pace and clean route maps</li>
+          <li><strong>Recovery first</strong> — your readiness score, front and centre</li>
+        </ul>
+      </div>
+      <div class="phone-wrap phone-float" data-reveal>
+        <div class="big-phone">
+          <div class="phone-top"><div class="dynamic-island"></div></div>
+          <div class="phone-carousel" id="heroCarousel">
+            <div class="phone-slide active"><img src="/assets/fitness-tracking-app-dashboard.webp" alt="MyVitality fitness tracking app dashboard showing daily activity, recovery and nutrition" width="248" height="496"></div>
+            <div class="phone-slide"><img src="/assets/workout-tracker-gps-route-map.webp" alt="Workout tracker app showing a GPS route on a map" loading="lazy" width="248" height="496"></div>
+            <div class="phone-slide"><img src="/assets/recovery-sleep-hrv-tracker-screen.webp" alt="Recovery and HRV tracker screen with readiness score" loading="lazy" width="248" height="496"></div>
+            <div class="phone-slide"><img src="/assets/ai-nutrition-calorie-tracker-screen.webp" alt="AI nutrition and calorie tracker screen" loading="lazy" width="248" height="496"></div>
+            <div class="carousel-dots" id="carouselDots">
+              <div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 · HOW IT WORKS -->
 <section id="how">
-  <div class="container center">
-    <span class="eyebrow">How it works</span>
+  <div class="container center" data-reveal>
+    <span class="eyebrow">04 — How it works</span>
     <h2 class="section-title">Track → Understand → Improve</h2>
     <p class="section-sub">Up and running in minutes. No subscription. Works with any smartwatch that syncs to Apple Health.</p>
   </div>
-  <div class="steps">
+  <div class="steps" data-reveal>
     <div class="step">
       <div class="step-num">1</div>
       <div><div class="step-title">Track</div><div class="step-desc">Record GPS workouts in real time, or let MyVitality pull your runs, rides, sleep and heart rate automatically from Apple Health.</div></div>
@@ -316,13 +356,13 @@
   </div>
 </section>
 
-<!-- AI COACH SPOTLIGHT -->
+<!-- 05 · AI COACH -->
 <section id="coach" style="background:var(--surface);border-top:1px solid var(--border)">
   <div class="container">
     <div class="split">
-      <div>
-        <span class="eyebrow">AI Coach</span>
-        <h2 class="section-title">An AI coach that knows your data</h2>
+      <div data-reveal>
+        <span class="eyebrow">05 — AI coach</span>
+        <h2 class="section-title">A coach that knows your data</h2>
         <p class="section-sub">Ask anything. MyVitality's coach reads your real recovery, training load, recent runs and goals — then answers with your numbers, not canned advice.</p>
         <ul class="feature-list">
           <li><strong>Knows your HRV, sleep, training load &amp; goals</strong></li>
@@ -331,19 +371,19 @@
           <li><strong>Just ask in plain language,</strong> any time of day</li>
         </ul>
       </div>
-      <div class="phone-wrap">
+      <div class="phone-wrap" data-reveal>
         <div class="feature-phone">
           <div class="phone-top"><div class="dynamic-island"></div></div>
           <div class="chat-screen">
             <div class="chat-head">
-              <div class="chat-ava">✨</div>
-              <div><div class="chat-name">AI Coach</div><div class="chat-status">● Online</div></div>
+              <div class="chat-ava"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 5L19 9.7l-5.3 1.6L12 17l-1.7-5.7L5 9.7 10.3 8z"/></svg></div>
+              <div><div class="chat-name">AI Coach</div><div class="chat-status">● ONLINE</div></div>
             </div>
             <div class="chat-body">
               <div class="bubble user">Am I good for a hard run today?</div>
               <div class="bubble coach">
                 Your HRV is <b>8% above</b> your 14-day baseline and you slept <b>7h 42m</b>. Recovery is green — a tempo session is well within range today.
-                <div class="data-pills"><span class="data-pill">HRV ↑8%</span><span class="data-pill">Sleep 7h42</span><span class="data-pill">Recovery 86</span></div>
+                <div class="data-pills"><span class="data-pill">HRV ↑8%</span><span class="data-pill">SLEEP 7H42</span><span class="data-pill">RECOVERY 86</span></div>
               </div>
               <div class="bubble user">What pace should I target?</div>
               <div class="bubble coach">Based on your recent 5K (<b>22:40</b>), aim for <b>4:55–5:05 /km</b> on the tempo blocks and keep your heart rate under 168.</div>
@@ -355,38 +395,34 @@
   </div>
 </section>
 
-<!-- WHY IT WORKS -->
+<!-- 06 · WHY / COMPARISON -->
 <section>
-  <div class="container center">
-    <span class="eyebrow">Why it works</span>
+  <div class="container center" data-reveal>
+    <span class="eyebrow">06 — Why MyVitality</span>
     <h2 class="section-title">Made to be used every day</h2>
-    <p class="section-sub">Not another dashboard you check once and forget. MyVitality is built around three ideas that keep you coming back.</p>
+    <p class="section-sub">Not another dashboard you check once and forget. Three ideas keep you coming back.</p>
   </div>
-  <div class="container" style="margin-top:48px">
-    <div class="cards-3">
-      <div class="quote-card">
-        <p><strong>One app, not five.</strong> Your training, recovery, sleep and nutrition finally live in one place — so the connections between them are obvious.</p>
+  <div class="container" style="margin-top:46px;max-width:980px">
+    <div class="why-grid" data-reveal>
+      <div class="why-cell">
+        <div class="n">01</div>
+        <h3>One app, not five</h3>
+        <p>Training, recovery, sleep and nutrition finally live in one place — so the connections between them are obvious.</p>
       </div>
-      <div class="quote-card">
-        <p><strong>Decisions, not just data.</strong> A recovery score and an AI coach read your numbers and turn them into a clear answer: push today, or recover.</p>
+      <div class="why-cell">
+        <div class="n">02</div>
+        <h3>Decisions, not data</h3>
+        <p>A recovery score and an AI coach read your numbers and turn them into a clear answer: push today, or recover.</p>
       </div>
-      <div class="quote-card">
-        <p><strong>Accountability that sticks.</strong> Streaks, challenges and friends cheering you on keep you consistent long after motivation fades.</p>
+      <div class="why-cell">
+        <div class="n">03</div>
+        <h3>Accountability that sticks</h3>
+        <p>Streaks, challenges and friends cheering you on keep you consistent long after motivation fades.</p>
       </div>
     </div>
-    <p class="beta-note">MyVitality is in active development. Want to help shape it? <a href="mailto:egemizrak@icloud.com?subject=MyVitality%20beta">Join the beta →</a></p>
   </div>
-</section>
-
-<!-- COMPARISON -->
-<section style="background:var(--surface);border-top:1px solid var(--border)">
-  <div class="container center">
-    <span class="eyebrow">Why MyVitality</span>
-    <h2 class="section-title">Why not just use notes or spreadsheets?</h2>
-    <p class="section-sub">You can — but here's what you give up versus one app that connects everything.</p>
-  </div>
-  <div class="container" style="margin-top:44px;max-width:840px">
-    <div class="compare-wrap">
+  <div class="container" style="margin-top:44px;max-width:860px">
+    <div class="compare-wrap" data-reveal>
       <table class="compare">
         <thead>
           <tr><th scope="col">&nbsp;</th><th scope="col">Notes / Spreadsheet</th><th scope="col">Separate apps</th><th scope="col" class="us">MyVitality</th></tr>
@@ -401,16 +437,17 @@
         </tbody>
       </table>
     </div>
+    <p class="beta-note">MyVitality is in active development. Want to help shape it? <a href="mailto:egemizrak@icloud.com?subject=MyVitality%20beta">Join the beta →</a></p>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq">
-  <div class="container center">
+<section id="faq" style="background:var(--surface);border-top:1px solid var(--border)">
+  <div class="container center" data-reveal>
     <span class="eyebrow">FAQ</span>
     <h2 class="section-title">Frequently asked questions</h2>
   </div>
-  <div class="faq" style="margin-top:40px">
+  <div class="faq" style="margin-top:40px" data-reveal>
     <details open><summary>Is MyVitality free?</summary><p>Yes. MyVitality is free to download with no subscription required to track your workouts, recovery, sleep and nutrition. See the <a href="/pricing/">pricing page</a> for details.</p></details>
     <details><summary>Does it work on iPhone and Android?</summary><p>MyVitality launches first on iPhone and Apple Watch. An Android version is on the roadmap — <a href="mailto:egemizrak@icloud.com?subject=MyVitality%20Android">let us know</a> if you'd like to be notified.</p></details>
     <details><summary>Can I track workouts manually?</summary><p>Yes. You can record a GPS workout in real time or add one manually with distance, duration and activity type. Learn more on the <a href="/workout-tracker/">workout tracker page</a>.</p></details>
@@ -472,100 +509,6 @@
   </div>
 </footer>
 
-<!-- GSAP — premium scroll motion (only external deps besides Google Fonts) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script>
-(function () {
-  // Nav gains weight + shadow after the hero — independent of motion settings.
-  var nav = document.querySelector('.site-nav');
-  if (nav) {
-    var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 60); };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
-
-  // Hero entrance is pure CSS; below-fold sections stay visible without JS.
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!window.gsap || reduce) return;
-  gsap.registerPlugin(ScrollTrigger);
-
-  // Count-up stats (0 -> 20+).
-  document.querySelectorAll('[data-count]').forEach(function (el) {
-    var end = parseInt(el.getAttribute('data-count'), 10) || 0;
-    var suf = el.getAttribute('data-suffix') || '';
-    var o = { v: 0 };
-    gsap.to(o, { v: end, duration: 1.3, ease: 'power2.out', delay: 0.5,
-      onUpdate: function () { el.textContent = Math.round(o.v) + suf; } });
-  });
-
-  // Scroll reveals — elements that start below the fold rise in once.
-  var revealEls = document.querySelectorAll(
-    'section .container.center, .cards-3, .steps, .compare-wrap, .faq, #coach .split > div'
-  );
-  revealEls.forEach(function (el) {
-    if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return; // already in view
-    gsap.set(el, { opacity: 0, y: 30 });
-    gsap.to(el, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
-      scrollTrigger: { trigger: el, start: 'top 86%', once: true } });
-  });
-})();
-</script>
-
-<script>
-(function() {
-  var slides = document.querySelectorAll('#heroCarousel .phone-slide');
-  var dots = document.querySelectorAll('#carouselDots .carousel-dot');
-  if (!slides.length) return;
-  var current = 0;
-  function go(n) {
-    slides[current].classList.remove('active'); dots[current].classList.remove('active');
-    current = (n + slides.length) % slides.length;
-    slides[current].classList.add('active'); dots[current].classList.add('active');
-  }
-  var timer = setInterval(function(){ go(current + 1); }, 3200);
-  dots.forEach(function(d, i){ d.addEventListener('click', function(){ go(i); clearInterval(timer); timer = setInterval(function(){ go(current+1); }, 3200); }); });
-})();
-
-// Waitlist email capture — posts to the MyVitality API, inline success/error.
-(function() {
-  var API = 'https://fitsync-api-phi.vercel.app/api/waitlist';
-  document.querySelectorAll('.waitlist-form').forEach(function(form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var input = form.querySelector('input[type=email]');
-      var btn = form.querySelector('button');
-      var msg = form.querySelector('.waitlist-msg');
-      var email = (input.value || '').trim();
-      if (!email || !input.checkValidity()) { input.reportValidity(); return; }
-      var label = btn.textContent;
-      btn.disabled = true; btn.textContent = 'Joining…';
-      msg.className = 'waitlist-msg'; msg.textContent = '';
-      fetch(API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email, source: form.getAttribute('data-source') || 'home' })
-      }).then(function(res) {
-        return res.json().catch(function() { return {}; }).then(function(data) { return { ok: res.ok, data: data }; });
-      }).then(function(r) {
-        if (r.ok && r.data && r.data.success) {
-          msg.className = 'waitlist-msg ok';
-          msg.textContent = "✓ You're on the list — we'll email you at launch.";
-          input.disabled = true; input.value = ''; btn.style.display = 'none';
-        } else {
-          msg.className = 'waitlist-msg err';
-          msg.textContent = (r.data && r.data.message) || 'Something went wrong — please try again.';
-          btn.disabled = false; btn.textContent = label;
-        }
-      }).catch(function() {
-        msg.className = 'waitlist-msg err';
-        msg.textContent = 'Network error — please try again.';
-        btn.disabled = false; btn.textContent = label;
-      });
-    });
-  });
-})();
-</script>
-
+<script src="/app.js" defer></script>
 </body>
 </html>
