@@ -292,3 +292,67 @@ footer.site-footer { border-top: 1px solid var(--border); padding: 48px 0 32px; 
 .footer-bottom { max-width: var(--maxw); margin: 36px auto 0; padding: 20px 24px 0; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--muted); font-size: 0.8rem; }
 .footer-bottom a { color: var(--muted); text-decoration: none; }
 .footer-bottom a:hover { color: var(--text); }
+
+/* ==========================================================================
+   PREMIUM LAYER — motion-rich dark polish
+   Frosted surfaces, layered depth, ice-blue ambient glow, scroll reveals.
+   GPU-friendly only (transform + opacity). Single accent preserved.
+   ========================================================================== */
+
+/* Frosted-glass surfaces — translucent fills layered over the deep black,
+   so cards read as lifted panels instead of flat boxes. */
+.card, .feat-card, .problem-card, .quote-card, .post-card, .price-card,
+.article-cta, .faq details, .compare, .step-num {
+  background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.018));
+  backdrop-filter: blur(14px) saturate(135%);
+  -webkit-backdrop-filter: blur(14px) saturate(135%);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.step-num { background: linear-gradient(180deg, rgba(91,157,255,0.22), rgba(91,157,255,0.08)); border-color: rgba(91,157,255,0.32); }
+
+/* Premium hover — lift with an ice-blue ambient halo + a top hairline. */
+.feat-card, .post-card, .price-card {
+  position: relative; overflow: hidden;
+  transition: transform .32s cubic-bezier(.2,.7,.2,1), border-color .32s, box-shadow .32s;
+}
+.feat-card:hover, .post-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(91,157,255,0.42);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 12px 40px rgba(91,157,255,0.16);
+}
+.feat-card::before, .price-card::before {
+  content:''; position:absolute; inset:0 0 auto 0; height:1px;
+  background: linear-gradient(90deg, transparent, rgba(91,157,255,0.55), transparent);
+  opacity:0; transition: opacity .32s;
+}
+.feat-card:hover::before, .price-card.featured::before, .price-card:hover::before { opacity:1; }
+
+/* Buttons — a quiet light-sweep on hover (premium tactility). */
+.btn-primary { position: relative; overflow: hidden; }
+.btn-primary::after {
+  content:''; position:absolute; top:0; left:-65%; width:45%; height:100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.5), transparent);
+  transform: skewX(-18deg); transition: left .6s ease; pointer-events:none;
+}
+.btn-primary:hover::after { left:130%; }
+
+/* Nav — gains weight + shadow once you scroll past the hero. */
+.site-nav { transition: background .3s, box-shadow .3s; }
+.site-nav.scrolled { background: rgba(9,10,12,0.94); box-shadow: 0 10px 34px rgba(0,0,0,0.5); }
+
+/* Eyebrow — refined into a glass pill with a live dot. */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 13px; border-radius: 30px;
+  background: rgba(91,157,255,0.09); border: 1px solid rgba(91,157,255,0.2);
+}
+.eyebrow::before { content:''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px rgba(91,157,255,0.9); }
+
+/* Scroll reveal — initial state only when JS is on, so non-JS / non-GSAP
+   pages (which carry no [data-reveal]) are never hidden. No FOUC: html.js
+   is set in <head> before first paint. */
+html.js [data-reveal] { opacity: 0; transform: translateY(32px); will-change: transform, opacity; }
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .site-nav.scrolled { box-shadow: none; }
+}

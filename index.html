@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>document.documentElement.className += ' js';</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MyVitality — Fitness, Recovery &amp; Workout Tracking App</title>
@@ -52,17 +53,30 @@
 
   <style>
     /* Homepage-specific layout */
-    .home-hero { position: relative; overflow: hidden; padding: 72px 0 64px; }
-    .home-hero::before { content:''; position:absolute; top:-200px; right:-120px; width:680px; height:680px; border-radius:50%; background: radial-gradient(circle, rgba(91,157,255,0.12) 0%, transparent 70%); pointer-events:none; }
+    .home-hero { position: relative; overflow: hidden; padding: 96px 0 76px; }
+    /* Animated dual-blob aurora — slow ice-blue drift behind the hero */
+    .home-hero::before { content:''; position:absolute; top:-220px; right:-140px; width:720px; height:720px; border-radius:50%; background: radial-gradient(circle, rgba(91,157,255,0.18) 0%, transparent 70%); pointer-events:none; animation: heroDrift1 20s ease-in-out infinite; }
+    .home-hero::after { content:''; position:absolute; bottom:-280px; left:-200px; width:680px; height:680px; border-radius:50%; background: radial-gradient(circle, rgba(58,107,181,0.18) 0%, transparent 70%); pointer-events:none; animation: heroDrift2 26s ease-in-out infinite; }
+    @keyframes heroDrift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-50px,38px)} }
+    @keyframes heroDrift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(56px,-32px)} }
+    /* No-FOUC: hide hero content before the entrance animation (only when JS is on) */
+    html.js .home-hero .grid > div:first-child > * { opacity: 0; }
+    html.js .home-hero .phone-wrap { opacity: 0; }
+    @media (prefers-reduced-motion: reduce) {
+      .home-hero::before, .home-hero::after { animation: none; }
+      html.js .home-hero .grid > div:first-child > *, html.js .home-hero .phone-wrap { opacity: 1; }
+    }
     .home-hero .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; position: relative; }
     .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(91,157,255,0.1); border:1px solid rgba(91,157,255,0.3); color:var(--accent); padding:6px 14px; border-radius:20px; font-size:0.8rem; font-weight:600; margin-bottom:22px; }
     .hero-badge::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--accent); animation:pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-    .home-hero h1 { font-size: clamp(2.3rem, 4.4vw, 3.4rem); font-weight: 900; margin-bottom: 18px; }
+    .home-hero h1 { font-size: clamp(2.6rem, 5.2vw, 4rem); font-weight: 900; line-height: 1.04; letter-spacing: -0.035em; margin-bottom: 20px; }
     .home-hero .lede { font-size: 1.08rem; color: var(--text-2); line-height: 1.7; max-width: 480px; margin-bottom: 28px; }
-    .hero-stats { display:flex; gap:34px; margin-top:38px; }
-    .hero-stat-num { font-size:1.7rem; font-weight:900; }
-    .hero-stat-lbl { font-size:0.74rem; color:var(--muted); margin-top:2px; }
+    .hero-stats { display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
+    .hero-stat { padding:14px 20px; border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015)); border:1px solid rgba(255,255,255,0.08); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); min-width:98px; transition:border-color .25s, transform .25s; }
+    .hero-stat:hover { border-color:rgba(91,157,255,0.32); transform:translateY(-2px); }
+    .hero-stat-num { font-size:1.75rem; font-weight:900; line-height:1; letter-spacing:-0.02em; font-variant-numeric:tabular-nums; }
+    .hero-stat-lbl { font-size:0.72rem; color:var(--muted); margin-top:7px; }
     @media (max-width: 900px) {
       .home-hero .grid { grid-template-columns: 1fr; text-align: center; }
       .home-hero .lede { margin-left:auto; margin-right:auto; }
@@ -127,7 +141,7 @@
     <div class="grid">
       <div>
         <div class="hero-badge">Coming soon to iOS</div>
-        <h1>Track workouts, recovery, sleep and progress in one app</h1>
+        <h1>Track workouts, recovery, sleep and progress in <span class="grad">one app</span></h1>
         <p class="lede">MyVitality brings GPS workout tracking, Apple Watch recovery, sleep and AI nutrition together with a coach that actually knows your data — so you can understand your body and stay consistent.</p>
         <form class="waitlist-form" data-source="home_hero">
           <input type="email" name="email" required placeholder="Enter your email" aria-label="Email address" autocomplete="email">
@@ -136,9 +150,9 @@
         </form>
         <p class="waitlist-note">Free on iOS at launch · Be first in line · One email when it's live, no spam. &nbsp;<a href="/features/" style="color:var(--accent);text-decoration:none;font-weight:600">See all features →</a></p>
         <div class="hero-stats">
-          <div><div class="hero-stat-num">20+</div><div class="hero-stat-lbl">Health metrics</div></div>
-          <div><div class="hero-stat-num">AI</div><div class="hero-stat-lbl">Coach &amp; nutrition</div></div>
-          <div><div class="hero-stat-num">0</div><div class="hero-stat-lbl">Data sold</div></div>
+          <div class="hero-stat"><div class="hero-stat-num"><span data-count="20" data-suffix="+">20+</span></div><div class="hero-stat-lbl">Health metrics</div></div>
+          <div class="hero-stat"><div class="hero-stat-num">AI</div><div class="hero-stat-lbl">Coach &amp; nutrition</div></div>
+          <div class="hero-stat"><div class="hero-stat-num">0</div><div class="hero-stat-lbl">Data sold</div></div>
         </div>
       </div>
       <div class="phone-wrap phone-float">
@@ -450,6 +464,60 @@
     <span><a href="https://myvitality.fit">myvitality.fit</a></span>
   </div>
 </footer>
+
+<!-- GSAP — premium scroll motion (only external deps besides Google Fonts) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var heroLeft = document.querySelectorAll('.home-hero .grid > div:first-child > *');
+  var phone = document.querySelector('.home-hero .phone-wrap');
+
+  // Fallback: GSAP missing or reduced motion -> just show everything, no FOUC.
+  if (!window.gsap || reduce) {
+    heroLeft.forEach(function (el) { el.style.opacity = 1; });
+    if (phone) phone.style.opacity = 1;
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero entrance — staggered on load.
+  gsap.set(heroLeft, { opacity: 0, y: 22 });
+  if (phone) gsap.set(phone, { opacity: 0 }); // opacity only — floatY keeps the vertical drift
+  var tl = gsap.timeline({ delay: 0.12 });
+  tl.to(heroLeft, { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out', stagger: 0.085 });
+  if (phone) tl.to(phone, { opacity: 1, duration: 0.9, ease: 'power2.out' }, 0.3);
+
+  // Count-up stats (0 -> 20+).
+  document.querySelectorAll('[data-count]').forEach(function (el) {
+    var end = parseInt(el.getAttribute('data-count'), 10) || 0;
+    var suf = el.getAttribute('data-suffix') || '';
+    var o = { v: 0 };
+    gsap.to(o, { v: end, duration: 1.3, ease: 'power2.out', delay: 0.5,
+      onUpdate: function () { el.textContent = Math.round(o.v) + suf; } });
+  });
+
+  // Scroll reveals — elements that start below the fold rise in once.
+  var revealEls = document.querySelectorAll(
+    'section .container.center, .cards-3, .steps, .compare-wrap, .faq, #coach .split > div'
+  );
+  revealEls.forEach(function (el) {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return; // already in view
+    gsap.set(el, { opacity: 0, y: 30 });
+    gsap.to(el, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 86%', once: true } });
+  });
+
+  // Nav gains weight + shadow after the hero.
+  var nav = document.querySelector('.site-nav');
+  if (nav) {
+    var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 60); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+})();
+</script>
 
 <script>
 (function() {
