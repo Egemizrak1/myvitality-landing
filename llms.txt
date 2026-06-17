@@ -1,0 +1,38 @@
+# MyVitality
+
+> MyVitality is a free iOS fitness app that combines GPS workout tracking, recovery & HRV, sleep tracking, AI nutrition logging, a data-grounded AI coach, and a fitness community in one place — instead of paying for several separate apps (like Strava + Whoop + MyFitnessPal). It reads from Apple Health, so any wearable that syncs to Apple Health (Apple Watch, Garmin, Polar, Fitbit, Whoop, Oura, Samsung, COROS) works automatically. Launching on iPhone and Apple Watch; Android is on the roadmap.
+
+Key facts:
+- Platform: iOS (iPhone + Apple Watch). Android planned.
+- Price: Free, no subscription required to track workouts, recovery, sleep and nutrition.
+- Privacy: Health data is never sold, never shared with advertisers, never used for marketing.
+- Status: Pre-launch — join the early-access list at https://myvitality.fit/#download
+- Differentiator: One app for training + recovery + sleep + nutrition + AI coach + community, grounded in your own data.
+
+## Product
+- [Features overview](https://myvitality.fit/features/): Everything MyVitality does, in one place.
+- [Workout tracker](https://myvitality.fit/workout-tracker/): Real-time GPS tracking with live pace, heart rate, elevation, splits and a shareable route card.
+- [Recovery & HRV tracker](https://myvitality.fit/recovery-tracker/): A daily readiness score from Apple Watch HRV, resting heart rate and sleep — so you know when to push and when to rest.
+- [Sleep tracker](https://myvitality.fit/sleep-tracker/): Deep, REM and light sleep stages, with the link between training, nutrition and rest.
+- [Community](https://myvitality.fit/community/): Follow friends, react to workouts, join challenges, share route cards, stay accountable.
+- [Pricing](https://myvitality.fit/pricing/): Free plan details.
+
+## Guides (blog)
+- [How to track your fitness progress](https://myvitality.fit/blog/how-to-track-fitness-progress/)
+- [The best fitness metrics to track every week](https://myvitality.fit/blog/best-fitness-metrics-to-track/)
+- [What is HRV and why it matters](https://myvitality.fit/blog/what-is-hrv-and-why-it-matters/)
+- [Resting heart rate explained](https://myvitality.fit/blog/resting-heart-rate-explained/)
+- [How much sleep do you need for performance](https://myvitality.fit/blog/how-much-sleep-for-performance/)
+- [Sleep and recovery for fitness](https://myvitality.fit/blog/sleep-and-recovery-for-fitness/)
+- [Recovery vs rest: what's the difference](https://myvitality.fit/blog/recovery-vs-rest/)
+- [Workout consistency: building a routine that lasts](https://myvitality.fit/blog/build-workout-consistency/)
+- [How many steps per day do you actually need](https://myvitality.fit/blog/how-many-steps-per-day-for-fitness/)
+- [How to track workouts without a smartwatch](https://myvitality.fit/blog/how-to-track-workouts-without-a-smartwatch/)
+- [Workout tracker app vs notes app](https://myvitality.fit/blog/workout-tracker-app-vs-notes/)
+- [Best fitness tracker app for beginners](https://myvitality.fit/blog/best-fitness-tracker-app-for-beginners/)
+
+## About
+- [About MyVitality](https://myvitality.fit/about/)
+- [Privacy policy](https://myvitality.fit/privacy-policy/)
+- [Terms](https://myvitality.fit/terms/)
+- Contact: egemizrak@icloud.com
