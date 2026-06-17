@@ -5,6 +5,7 @@
   "description": "MyVitality marketing site + Markdown blog generator",
   "scripts": {
     "build": "node build-blog.js",
+    "i18n": "node i18n-build.js",
     "serve": "python3 -m http.server 8799"
   },
   "dependencies": {
