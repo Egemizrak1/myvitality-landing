@@ -4,15 +4,15 @@
   <script>document.documentElement.className += ' js';</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyVitality — Fitness, Recovery &amp; Workout Tracking App</title>
-  <meta name="description" content="Track workouts, sleep, recovery and progress in one fitness app. Build consistency, understand your body and stay connected with your fitness community.">
+  <title>MyVitality — All-in-One Fitness, Recovery &amp; Workout App for iPhone</title>
+  <meta name="description" content="All-in-one iPhone fitness app: GPS workouts, Apple Watch recovery &amp; HRV, sleep, AI nutrition and a data-grounded AI coach. One app instead of Strava + Whoop + MyFitnessPal. Join the free iOS beta waitlist.">
   <link rel="canonical" href="https://myvitality.fit/">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://myvitality.fit/">
-  <meta property="og:title" content="MyVitality — Fitness, Recovery &amp; Workout Tracking App">
-  <meta property="og:description" content="Track workouts, sleep, recovery and progress in one fitness app. Understand your body and stay consistent.">
+  <meta property="og:title" content="MyVitality — All-in-One Fitness, Recovery &amp; Workout App for iPhone">
+  <meta property="og:description" content="GPS workouts, Apple Watch recovery &amp; HRV, sleep, AI nutrition and a coach grounded in your data — in one iPhone app. Join the free iOS beta waitlist.">
   <meta property="og:image" content="https://myvitality.fit/assets/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,13 +39,13 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "How much does MyVitality cost?", "acceptedAnswer": { "@type": "Answer", "text": "MyVitality starts with a free trial, then $6.99 per month, shown in your local currency (for example £6.99 in the UK, €6.99 in Europe and ₺300 in Turkey). One subscription covers workouts, recovery, sleep, nutrition, the AI coach and community. Cancel anytime." } },
+      { "@type": "Question", "name": "How much does MyVitality cost?", "acceptedAnswer": { "@type": "Answer", "text": "Joining the beta waitlist is free. At launch MyVitality is one simple subscription, planned at $6.99 per month and shown in your local currency, starting with a free trial. It covers workouts, recovery, sleep, nutrition, the AI coach and community, with no ads. The trial is risk-free — cancel anytime before it ends and you won't be charged. Beta members get early-access pricing." } },
       { "@type": "Question", "name": "Does it work on iPhone and Android?", "acceptedAnswer": { "@type": "Answer", "text": "MyVitality launches first on iPhone and Apple Watch. An Android version is on the roadmap." } },
       { "@type": "Question", "name": "Can I track workouts manually?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can record a GPS workout in real time or add a workout manually with distance, duration and activity type." } },
       { "@type": "Question", "name": "Does it connect to Apple Health?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. MyVitality reads heart rate, HRV, sleep, steps and more from Apple Health, so any device that syncs to Apple Health works automatically." } },
       { "@type": "Question", "name": "Can I use it without a wearable?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can track GPS workouts with just your iPhone and log nutrition and weight manually. A smartwatch adds recovery, HRV and sleep data." } },
       { "@type": "Question", "name": "Is my health data private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your health data is never sold, never shared with advertisers and never used for marketing. It is used only to power features inside the app." } },
-      { "@type": "Question", "name": "How is this different from Strava or Whoop?", "acceptedAnswer": { "@type": "Answer", "text": "MyVitality combines GPS workout tracking, recovery and HRV, sleep, nutrition, an AI coach and community in one app — instead of paying for several separate apps." } }
+      { "@type": "Question", "name": "How is this different from Strava, Whoop or MyFitnessPal?", "acceptedAnswer": { "@type": "Answer", "text": "Strava tracks workouts, Whoop tracks recovery and MyFitnessPal tracks food. MyVitality combines GPS workouts, recovery and HRV, sleep, nutrition, an AI coach and community in one app — usually for less than any single one of them." } }
     ]
   }
   </script>
@@ -149,6 +149,73 @@
     .why-cell p { font-size:.92rem; color:var(--muted); line-height:1.62; }
     .beta-note { text-align:center; color:var(--muted); font-size:.84rem; margin-top:28px; }
     .beta-note a { color:var(--accent); font-weight:600; }
+
+    /* ── Hero device mockup + floating data cards (above the fold) ── */
+    .hero-visual { position: relative; display:flex; justify-content:center; align-items:center; min-height: 540px;
+      opacity:0; animation: heroIn .9s var(--ease) .28s forwards; }
+    .hero-visual::before { content:''; position:absolute; inset:6% 12%; border-radius:50%;
+      background: radial-gradient(circle, rgba(91,157,255,0.16) 0%, transparent 62%); pointer-events:none; }
+    .hero-visual .big-phone { position:relative; z-index:2; }
+    .float-card { position:absolute; z-index:3; display:flex; align-items:center; gap:12px;
+      background: rgba(15,18,23,0.74); backdrop-filter: blur(16px) saturate(150%); -webkit-backdrop-filter: blur(16px) saturate(150%);
+      border:1px solid var(--border-strong); border-radius:16px; padding:13px 15px;
+      box-shadow: 0 26px 64px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05); }
+    .float-readiness { top: 7%; right: -4%; animation: floatY 6.5s ease-in-out infinite; }
+    .float-hrv { bottom: 9%; left: -6%; flex-direction:column; align-items:stretch; gap:9px; animation: floatY 7.5s ease-in-out .4s infinite; }
+    @media (prefers-reduced-motion: reduce) { .float-card { animation:none !important; } }
+    .mini-ring { position:relative; width:54px; height:54px; flex-shrink:0; }
+    .mini-ring svg { width:100%; height:100%; transform: rotate(-90deg); }
+    .mini-ring .ring-track { fill:none; stroke: rgba(255,255,255,0.09); stroke-width: 14; }
+    .mini-ring .ring-prog { fill:none; stroke: var(--accent); stroke-width: 14; stroke-linecap: round;
+      stroke-dasharray: 653.45; stroke-dashoffset: 91.5; filter: drop-shadow(0 0 5px rgba(91,157,255,.55)); }
+    .mini-ring-num { position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+      font-family: var(--font-display); font-size:1.12rem; font-weight:600; letter-spacing:-0.04em; }
+    .fc-label { font-family:var(--font-mono); font-size:.58rem; letter-spacing:.16em; color:var(--muted); display:block; }
+    .fc-val { font-family:var(--font-display); font-size:1.06rem; font-weight:600; letter-spacing:-0.02em; color:var(--accent); }
+    .fc-row { display:flex; align-items:center; gap:9px; }
+    .fc-dot { width:6px; height:6px; border-radius:50%; background:var(--muted); flex-shrink:0; }
+    .fc-dot.up { background:var(--accent); box-shadow:0 0 8px rgba(91,157,255,.6); }
+    .fc-k { font-family:var(--font-mono); font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); min-width:42px; }
+    .fc-v { font-family:var(--font-display); font-size:.92rem; font-weight:600; letter-spacing:-0.02em; margin-left:auto; }
+    .fc-v.up { color:var(--accent); }
+    /* On phones the floating cards drop into a centred row under the device —
+       absolute overlap is a desktop flourish that risks clipping when narrow. */
+    @media (max-width: 900px) {
+      .hero-visual { order:-1; min-height:0; margin:0 auto 8px; flex-direction:column; gap:12px; }
+      .hero-visual::before { inset:2% 8%; }
+      .float-card { position:static; animation:none; width:max-content; max-width:92%; }
+      .float-readiness, .float-hrv { animation:none; }
+      .float-hrv { min-width:200px; }
+    }
+    @media (max-width: 460px) {
+      .float-card { padding:9px 11px; gap:9px; border-radius:13px; }
+      .mini-ring { width:46px; height:46px; }
+      .fc-val { font-size:.95rem; }
+    }
+
+    /* ── Trust band ── */
+    .trust-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+    @media (max-width:820px){ .trust-grid{ grid-template-columns:1fr 1fr; } }
+    @media (max-width:460px){ .trust-grid{ grid-template-columns:1fr; } }
+    .trust-cell { background:var(--card); border:1px solid var(--border); border-radius:var(--r); padding:24px 22px;
+      transition: border-color .25s var(--ease); }
+    .trust-cell:hover { border-color:var(--accent-line); }
+    .trust-ico { display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:11px;
+      background:var(--accent-soft); border:1px solid var(--accent-line); color:var(--accent); margin-bottom:15px; }
+    .trust-ico svg { width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+    .trust-cell h3 { font-size:1.0rem; font-weight:600; letter-spacing:-0.02em; margin-bottom:8px; }
+    .trust-cell p { font-size:.88rem; color:var(--muted); line-height:1.58; }
+    .trust-cell p a { color:var(--accent); }
+
+    /* ── Competitor table polish ── */
+    .compare caption { caption-side:bottom; text-align:left; font-size:.74rem; color:var(--faint); line-height:1.55; padding:14px 18px 0; }
+    .compare .partial { color:var(--text-2); font-weight:500; }
+    .compare thead th.us { background:var(--accent-soft); }
+    .compare td.us, .compare tbody td.us { background:rgba(91,157,255,0.05); }
+    .compare .price-cell { font-family:var(--font-mono); font-size:.82rem; }
+    .compare-links { text-align:center; margin-top:18px; font-size:.86rem; color:var(--muted); }
+    .compare-links a { color:var(--accent); font-weight:600; }
+    .compare-links .sep { color:var(--faint); margin:0 10px; }
   </style>
 </head>
 <body>
@@ -164,7 +231,7 @@
       <a href="/community/">Community</a>
       <a href="/pricing/">Pricing</a>
       <a href="/blog/">Blog</a>
-      <a href="/#download" class="nav-cta">Get the app</a>
+      <a href="/#download" class="nav-cta">Join the beta</a>
     </div>
   </div>
 </nav>
@@ -174,37 +241,41 @@
   <div class="container">
     <div class="grid">
       <div class="hero-copy">
-        <span class="eyebrow">MyVitality · Coming to iOS</span>
-        <h1>Train with <span class="grad">clarity.</span></h1>
-        <p class="lede">GPS workouts, Apple Watch recovery, sleep and AI nutrition in one app — with a coach that reads your real data and tells you when to push and when to rest.</p>
+        <span class="eyebrow">Now in private beta · iOS first</span>
+        <h1>Train with clarity, <span class="grad">not guesswork.</span></h1>
+        <p class="lede">MyVitality reads your Apple Watch recovery, GPS workouts, sleep and nutrition — then tells you, in plain language, whether today is a day to push or a day to rest.</p>
         <form class="waitlist-form" data-source="home_hero">
           <input type="email" name="email" required placeholder="Enter your email" aria-label="Email address" autocomplete="email">
-          <button type="submit" class="btn-primary">Get early access →</button>
+          <button type="submit" class="btn-primary">Join the iOS beta waitlist →</button>
           <p class="waitlist-msg" role="status" aria-live="polite"></p>
         </form>
-        <p class="waitlist-note">Free trial on iOS at launch · One email when it's live, no spam. &nbsp;<a href="/features/">See all features →</a></p>
+        <p class="waitlist-note">Free trial at launch · One email when the beta opens, no spam. &nbsp;<a href="/features/">See all features →</a></p>
         <div class="hero-meta">
-          <div><b data-count="20" data-suffix="+">20+</b><span>Health metrics</span></div>
+          <div><b data-count="20" data-suffix="+">20+</b><span>Metrics tracked</span></div>
           <div><b>AI</b><span>Coach &amp; nutrition</span></div>
           <div><b>0</b><span>Data sold</span></div>
         </div>
       </div>
-      <div class="ring-wrap">
-        <div class="ring" role="img" aria-label="Recovery readiness score of 86 out of 100 — ready to train">
-          <svg class="ring-svg" viewBox="0 0 240 240" aria-hidden="true">
-            <circle class="ring-track" cx="120" cy="120" r="104"></circle>
-            <circle class="ring-prog" cx="120" cy="120" r="104"></circle>
-          </svg>
-          <div class="ring-center">
-            <div class="ring-num">86</div>
-            <div class="ring-cap">READY</div>
-            <div class="ring-cap-sub">RECOVERY SCORE</div>
+      <div class="hero-visual">
+        <div class="big-phone phone-float">
+          <div class="phone-top"><div class="dynamic-island"></div></div>
+          <div class="phone-screen">
+            <img src="/assets/fitness-tracking-app-dashboard.webp" alt="MyVitality iPhone app dashboard showing recovery, training load and nutrition" width="248" height="496">
           </div>
         </div>
-        <div class="ring-ticks">
-          <span class="ring-tick"><b class="up">↑8%</b> HRV</span>
-          <span class="ring-tick"><b>7h42</b> Sleep</span>
-          <span class="ring-tick"><b>Optimal</b> Load</span>
+        <div class="float-card float-readiness" role="img" aria-label="Recovery readiness 86 out of 100 — ready to train">
+          <div class="mini-ring">
+            <svg viewBox="0 0 240 240" aria-hidden="true">
+              <circle class="ring-track" cx="120" cy="120" r="104"></circle>
+              <circle class="ring-prog" cx="120" cy="120" r="104"></circle>
+            </svg>
+            <div class="mini-ring-num">86</div>
+          </div>
+          <div><span class="fc-label">RECOVERY</span><b class="fc-val">Ready to train</b></div>
+        </div>
+        <div class="float-card float-hrv" aria-hidden="true">
+          <div class="fc-row"><span class="fc-dot up"></span><span class="fc-k">HRV</span><b class="fc-v up">↑8%</b></div>
+          <div class="fc-row"><span class="fc-dot"></span><span class="fc-k">Sleep</span><b class="fc-v">7h 42m</b></div>
         </div>
       </div>
     </div>
@@ -213,7 +284,7 @@
 
 <!-- DEVICE COMPATIBILITY -->
 <div class="devices-strip">
-  <div class="devices-strip-label">Works with any device that syncs to Apple Health</div>
+  <div class="devices-strip-label">At launch, MyVitality syncs through Apple Health</div>
   <div class="device-badges">
     <span class="device-badge">Apple Watch</span>
     <span class="device-badge">Garmin</span>
@@ -224,7 +295,7 @@
     <span class="device-badge">Samsung Galaxy Watch</span>
     <span class="device-badge">COROS</span>
   </div>
-  <p class="device-badge-note">MyVitality reads from Apple Health — if your device syncs to Apple Health, it works automatically.</p>
+  <p class="device-badge-note">Garmin, Fitbit, Whoop, Oura and others work at launch <strong>as long as they're set to sync to Apple Health</strong> — MyVitality reads the data from there. Direct integrations are on the roadmap.</p>
 </div>
 
 <!-- 01 · PROBLEM -->
@@ -282,7 +353,7 @@
       <div class="feat-card">
         <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M5 21C4 12 9 4 20 4c0 11-8 16-15 14z"/><path d="M5 21c2-6 6-9 10-10"/></svg></div>
         <div class="feat-title">AI Nutrition</div>
-        <div class="feat-desc">Snap a photo of your plate and AI breaks down calories, protein, carbs and fat. Scan barcodes and set your own macro goals.</div>
+        <div class="feat-desc">Snap a photo of your plate for a fast, editable estimate of calories, protein, carbs and fat. Tweak anything, scan barcodes and set your own macro goals.</div>
         <a class="more" href="/features/">See all →</a>
       </div>
       <div class="feat-card">
@@ -421,23 +492,93 @@
       </div>
     </div>
   </div>
-  <div class="container" style="margin-top:44px;max-width:860px">
+  <div class="container center" style="margin-top:64px" data-reveal>
+    <span class="eyebrow">How it compares</span>
+    <h2 class="section-title">One app instead of three subscriptions</h2>
+    <p class="section-sub">Strava tracks workouts. Whoop tracks recovery. MyFitnessPal tracks food. MyVitality brings all three together — for less than any one of them.</p>
+  </div>
+  <div class="container" style="margin-top:40px;max-width:900px">
     <div class="compare-wrap" data-reveal>
       <table class="compare">
+        <caption>Comparison reflects each app's standard consumer plans as of June 2026. Whoop requires its own wearable; *price includes the required membership. Prices and features vary by region and change over time. Strava, Whoop and MyFitnessPal are trademarks of their respective owners.</caption>
         <thead>
-          <tr><th scope="col">&nbsp;</th><th scope="col">Notes / Spreadsheet</th><th scope="col">Separate apps</th><th scope="col" class="us">MyVitality</th></tr>
+          <tr><th scope="col">&nbsp;</th><th scope="col">Strava</th><th scope="col">Whoop</th><th scope="col">MyFitnessPal</th><th scope="col" class="us">MyVitality</th></tr>
         </thead>
         <tbody>
-          <tr><td>Automatic GPS workout tracking</td><td class="no">—</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
-          <tr><td>Recovery &amp; HRV in context</td><td class="no">—</td><td class="no">Rarely</td><td class="yes">Yes</td></tr>
-          <tr><td>Training, sleep &amp; nutrition in one place</td><td class="no">—</td><td class="no">—</td><td class="yes">Yes</td></tr>
-          <tr><td>AI coach grounded in your data</td><td class="no">—</td><td class="no">—</td><td class="yes">Yes</td></tr>
-          <tr><td>Community &amp; accountability</td><td class="no">—</td><td class="no">Some</td><td class="yes">Yes</td></tr>
-          <tr><td>Monthly cost</td><td>Free, manual</td><td>Often $$$</td><td class="yes">One plan, <span data-price="amount">$6.99</span>/mo</td></tr>
+          <tr><td>GPS workouts &amp; route maps</td><td class="yes">Yes</td><td class="no">—</td><td class="no">—</td><td class="yes us">Yes</td></tr>
+          <tr><td>Recovery, HRV &amp; readiness</td><td class="no">—</td><td class="yes">Yes</td><td class="no">—</td><td class="yes us">Yes</td></tr>
+          <tr><td>Sleep tracking</td><td class="no">—</td><td class="yes">Yes</td><td class="no">—</td><td class="yes us">Yes</td></tr>
+          <tr><td>Nutrition &amp; calorie tracking</td><td class="no">—</td><td class="no">—</td><td class="yes">Yes</td><td class="yes us">Yes</td></tr>
+          <tr><td>AI coach grounded in your data</td><td class="no">—</td><td class="partial">Coach</td><td class="no">—</td><td class="yes us">Yes</td></tr>
+          <tr><td>Works without buying hardware</td><td class="yes">Yes</td><td class="partial">Band needed</td><td class="yes">Yes</td><td class="yes us">Yes</td></tr>
+          <tr><td>Training, recovery &amp; food in one app</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes us">Yes</td></tr>
+          <tr><td>Price per month</td><td class="price-cell">from $11.99</td><td class="price-cell">from $30*</td><td class="price-cell">from $19.99</td><td class="price-cell yes us">from <span data-price="amount">$6.99</span></td></tr>
         </tbody>
       </table>
     </div>
-    <p class="beta-note">MyVitality is in active development. Want to help shape it? <a href="mailto:egemizrak@icloud.com?subject=MyVitality%20beta">Join the beta →</a></p>
+    <p class="compare-links">Read the full breakdowns: <a href="/blog/strava-alternative-all-in-one/">MyVitality vs Strava</a><span class="sep">·</span><a href="/blog/free-whoop-alternative/">an affordable Whoop alternative</a></p>
+  </div>
+</section>
+
+<!-- 07 · TRUST -->
+<section id="privacy" style="background:var(--surface);border-top:1px solid var(--border)">
+  <div class="container center" data-reveal>
+    <span class="eyebrow">07 — Built on trust</span>
+    <h2 class="section-title">Your health data stays yours</h2>
+    <p class="section-sub">A fitness app sees your most personal data. We treat it that way — no ads, no data brokers, no fine print.</p>
+  </div>
+  <div class="container" style="margin-top:48px">
+    <div class="trust-grid" data-reveal>
+      <div class="trust-cell">
+        <div class="trust-ico"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Never sold</h3>
+        <p>Your health data is never sold or shared with advertisers, data brokers or third parties. Not now, not ever.</p>
+      </div>
+      <div class="trust-cell">
+        <div class="trust-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></div>
+        <h3>No ads</h3>
+        <p>No banners, no sponsored feeds, no tracking pixels. You're the member, not the product being sold.</p>
+      </div>
+      <div class="trust-cell">
+        <div class="trust-ico"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-9.2-8.4C1.1 8.3 2.8 5 6 5c2 0 3.2 1.2 4 2 .8-.8 2-2 4-2 3.2 0 4.9 3.3 3.2 6.6C19 15.4 12 20 12 20z"/></svg></div>
+        <h3>Apple Health-first</h3>
+        <p>MyVitality reads from Apple Health on your iPhone, and you choose exactly what to share. Revoke access any time.</p>
+      </div>
+      <div class="trust-cell">
+        <div class="trust-ico"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+        <h3>Private by design</h3>
+        <p>Your data is encrypted in transit and used only to power features inside the app. Read exactly how in our <a href="/privacy-policy/">privacy policy</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 · FROM THE BLOG -->
+<section id="learn">
+  <div class="container center" data-reveal>
+    <span class="eyebrow">08 — From the blog</span>
+    <h2 class="section-title">Learn the metrics that matter</h2>
+    <p class="section-sub">Plain-English guides to recovery, HRV and training — so the numbers in the app actually mean something.</p>
+  </div>
+  <div class="container" style="margin-top:48px;max-width:980px">
+    <div class="post-grid" data-reveal>
+      <a class="post-card" href="/blog/what-is-hrv-and-why-it-matters/">
+        <span class="tag">Recovery</span>
+        <h3>What is HRV and why it matters</h3>
+        <p>The single metric that tells you when your body is ready to train hard — and when to back off.</p>
+      </a>
+      <a class="post-card" href="/blog/strava-alternative-all-in-one/">
+        <span class="tag">Comparison</span>
+        <h3>The all-in-one Strava alternative</h3>
+        <p>Why runners and cyclists are trading three subscriptions for one app that ties it all together.</p>
+      </a>
+      <a class="post-card" href="/blog/best-fitness-metrics-to-track/">
+        <span class="tag">Guide</span>
+        <h3>The best fitness metrics to track</h3>
+        <p>Skip the vanity numbers. These are the few metrics worth checking every week to actually improve.</p>
+      </a>
+    </div>
+    <p class="beta-note"><a href="/blog/">Read all guides on the blog →</a></p>
   </div>
 </section>
 
@@ -448,28 +589,28 @@
     <h2 class="section-title">Frequently asked questions</h2>
   </div>
   <div class="faq" style="margin-top:40px" data-reveal>
-    <details open><summary>How much does MyVitality cost?</summary><p>MyVitality starts with a free trial, then $6.99/month — shown in your local currency (£6.99 in the UK, €6.99 in Europe, ₺300 in Turkey). One subscription covers everything, with no ads. See the <a href="/pricing/">pricing page</a> for details.</p></details>
+    <details open><summary>How much does MyVitality cost?</summary><p>MyVitality is free to start with a trial — no payment to join the beta waitlist. At launch it's one simple subscription (planned at $6.99/month, shown in your local currency), with no ads. The trial is risk-free — cancel anytime before it ends and you won't be charged. Beta members get early-access pricing. See the <a href="/pricing/">pricing page</a> for details.</p></details>
     <details><summary>Does it work on iPhone and Android?</summary><p>MyVitality launches first on iPhone and Apple Watch. An Android version is on the roadmap — <a href="mailto:egemizrak@icloud.com?subject=MyVitality%20Android">let us know</a> if you'd like to be notified.</p></details>
     <details><summary>Can I track workouts manually?</summary><p>Yes. You can record a GPS workout in real time or add one manually with distance, duration and activity type. Learn more on the <a href="/workout-tracker/">workout tracker page</a>.</p></details>
     <details><summary>Does it connect to Apple Health?</summary><p>Yes. MyVitality reads heart rate, HRV, sleep, steps and more from Apple Health, so any device that syncs to Apple Health works automatically.</p></details>
     <details><summary>Can I use it without a wearable?</summary><p>Yes. You can track GPS workouts with just your iPhone and log nutrition and weight manually. A smartwatch adds recovery, HRV and <a href="/sleep-tracker/">sleep</a> data.</p></details>
     <details><summary>What fitness metrics should I track?</summary><p>Start simple: workouts, sleep and a weekly check on <a href="/recovery-tracker/">recovery</a>. Our blog covers <a href="/blog/best-fitness-metrics-to-track/">the best fitness metrics to track every week</a>.</p></details>
     <details><summary>Is my health data private?</summary><p>Yes. Your health data is never sold, never shared with advertisers and never used for marketing. Read the full <a href="/privacy-policy/">privacy policy</a>.</p></details>
-    <details><summary>How is this different from Strava or Whoop?</summary><p>MyVitality combines GPS workout tracking, recovery and HRV, sleep, nutrition, an AI coach and community in one app — instead of paying for several separate subscriptions.</p></details>
+    <details><summary>How is this different from Strava, Whoop or MyFitnessPal?</summary><p>Strava tracks workouts, Whoop tracks recovery and MyFitnessPal tracks food. MyVitality combines GPS workouts, recovery and HRV, sleep, nutrition, an AI coach and community in one app — usually for less than any single one of them. See the <a href="/blog/strava-alternative-all-in-one/">full comparison</a>.</p></details>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="cta" id="download">
   <div class="container">
-    <h2>Ready to train <span class="grad">smarter?</span></h2>
-    <p>Free trial, then $6.99/month in your local currency — launching on iOS soon. Join the early-access list and we'll email you the moment it's live.</p>
+    <h2>Be first on the <span class="grad">iOS beta.</span></h2>
+    <p>MyVitality launches on iPhone with a free trial. Join the waitlist and you'll be first in when the beta opens — with early-access pricing for founding members.</p>
     <form class="waitlist-form" data-source="home_cta" style="margin:24px auto 0;justify-content:center">
       <input type="email" name="email" required placeholder="Enter your email" aria-label="Email address" autocomplete="email">
-      <button type="submit" class="btn-primary">Get early access →</button>
+      <button type="submit" class="btn-primary">Join the iOS beta waitlist →</button>
       <p class="waitlist-msg" role="status" aria-live="polite" style="text-align:center"></p>
     </form>
-    <p class="waitlist-note" style="text-align:center">No spam. One email at launch. Unsubscribe anytime.</p>
+    <p class="waitlist-note" style="text-align:center">Free to join · No spam · One email when the beta opens.</p>
   </div>
 </section>
 

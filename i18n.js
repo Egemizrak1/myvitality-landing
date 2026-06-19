@@ -28,7 +28,8 @@
     '.devices-strip-label', '.device-badge-note',
     '.feature-list li', '.step-title', '.step-desc',
     '.why-cell h3', '.why-cell p',
-    '.compare th', '.compare td', '.beta-note',
+    '.compare th', '.compare td', '.compare caption', '.compare-links', '.beta-note',
+    '.trust-cell h3', '.trust-cell p', '.fc-val',
     '.faq summary', '.faq p', '.price-name', '.price-amount small',
     '.cta h2', '.cta p', '.ring-cap', '.ring-cap-sub',
     '.article-cta h2', '.article-cta p', '.article-meta',
@@ -85,7 +86,11 @@
     });
   }
   function setSafe(el, value) {
-    if (value.indexOf('<') === -1) { el.textContent = value; return; }
+    // Plain text (no tags, no entities) is assigned directly. Anything with a
+    // tag (<) OR an entity reference (&amp; &nbsp; …) is routed through the
+    // DOMParser + allowlist sanitizer below, which decodes entities into text
+    // nodes — a bare textContent assignment would render "&amp;" literally.
+    if (value.indexOf('<') === -1 && value.indexOf('&') === -1) { el.textContent = value; return; }
     var doc = new DOMParser().parseFromString(value, 'text/html');
     sanitize(doc.body);
     el.textContent = '';
