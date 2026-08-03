@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,450..650&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 /* ==========================================================================
    MyVitality — Aurora Instrument
    A minimal, instrument-grade dark system on the AURORA palette. Cool-black
    void, electric-purple brand accent + cyan live-data accent, the signature
    purple→cyan gradient reserved for CTAs and headline highlights, hairline
-   structure instead of card chrome, monospace data labels as the texture.
-   Display: Space Grotesk · Body: Inter · Data: JetBrains Mono
+   structure instead of card chrome, tracked-caps labels as the texture.
+   Display: Fraunces (warm serif) · Body & labels: Manrope
    ========================================================================== */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -48,9 +48,9 @@
   --faint:  #5C636D;         /* decorative mono ticks only */
 
   /* ── Type ── */
-  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
-  --font-sans:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans:    "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-label:   "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* ── Spacing scale (4px base) ── */
   --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px; --s5: 20px;
@@ -76,7 +76,7 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  letter-spacing: -0.011em;
+  letter-spacing: 0;
 }
 img { max-width: 100%; display: block; }
 a { color: var(--accent); text-decoration: none; }
@@ -101,18 +101,18 @@ section { padding: clamp(72px, 9.5vw, 128px) 0; }
 .center .section-sub { margin-left: auto; margin-right: auto; }
 
 /* ── Typography ── */
-h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.03em; line-height: 1.08; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 560; letter-spacing: -0.012em; line-height: 1.12; }
 
 .eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--font-mono); font-size: .72rem; font-weight: 500;
+  font-family: var(--font-label); font-size: .72rem; font-weight: 500;
   text-transform: uppercase; letter-spacing: .22em;
   color: var(--accent); margin-bottom: 18px;
 }
 .eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--accent-line); }
 .center .eyebrow { justify-content: center; }
 
-.section-title { font-size: clamp(1.9rem, 1.1rem + 2.6vw, 3rem); font-weight: 600; letter-spacing: -0.035em; margin-bottom: 18px; }
+.section-title { font-size: clamp(1.9rem, 1.1rem + 2.6vw, 3rem); font-weight: 560; letter-spacing: -0.016em; margin-bottom: 18px; }
 .section-sub { font-size: 1.04rem; color: var(--muted); line-height: 1.65; max-width: 560px; }
 .grad, .grad.gradient {
   color: var(--accent);
@@ -122,7 +122,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing:
 
 /* Mono kicker / data label utility */
 .mono-label {
-  font-family: var(--font-mono); font-size: .72rem; font-weight: 500;
+  font-family: var(--font-label); font-size: .72rem; font-weight: 500;
   text-transform: uppercase; letter-spacing: .18em; color: var(--muted);
 }
 
@@ -237,11 +237,11 @@ html.menu-open { overflow: hidden; }
   width: 560px; height: 560px; border-radius: 50%;
   background: radial-gradient(circle, rgba(123,108,255,0.09) 0%, transparent 68%); pointer-events: none;
 }
-.page-hero h1 { font-size: clamp(2rem, 1.3rem + 3.2vw, 3.2rem); font-weight: 600; letter-spacing: -0.04em; margin: 14px 0 18px; max-width: 800px; }
+.page-hero h1 { font-size: clamp(2rem, 1.3rem + 3.2vw, 3.2rem); font-weight: 560; letter-spacing: -0.016em; margin: 14px 0 18px; max-width: 800px; }
 .page-hero p.lede { font-size: 1.12rem; color: var(--text-2); line-height: 1.65; max-width: 620px; }
 
 /* ── Breadcrumbs ── */
-.crumbs { font-family: var(--font-mono); font-size: .74rem; letter-spacing: .04em; color: var(--muted); margin-bottom: 6px; }
+.crumbs { font-family: var(--font-label); font-size: .74rem; letter-spacing: .04em; color: var(--muted); margin-bottom: 6px; }
 .crumbs a { color: var(--muted); }
 .crumbs a:hover { color: var(--text); }
 .crumbs span { color: var(--text-2); }
@@ -287,7 +287,7 @@ html.menu-open { overflow: hidden; }
 .feat-card:hover .feat-icon { color: var(--accent); border-color: var(--accent-line); background: var(--accent-soft); }
 .feat-title { font-size: 1.02rem; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 9px; }
 .feat-desc { font-size: .9rem; color: var(--muted); line-height: 1.6; }
-.feat-card .more { display: inline-block; margin-top: 14px; font-family: var(--font-mono); font-size: .76rem; font-weight: 500; letter-spacing: .02em; color: var(--accent); }
+.feat-card .more { display: inline-block; margin-top: 14px; font-family: var(--font-label); font-size: .76rem; font-weight: 500; letter-spacing: .02em; color: var(--accent); }
 
 /* ── Problem cards ── */
 .problem-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 24px; }
@@ -298,7 +298,7 @@ html.menu-open { overflow: hidden; }
 /* ── Comparison table ── */
 .compare { width: 100%; border-collapse: collapse; background: var(--card); border-radius: var(--r); overflow: hidden; border: 1px solid var(--border); }
 .compare th, .compare td { padding: 15px 18px; text-align: left; font-size: .9rem; border-bottom: 1px solid var(--border-soft); }
-.compare thead th { color: var(--muted); font-family: var(--font-mono); font-weight: 500; font-size: .76rem; text-transform: uppercase; letter-spacing: .08em; background: rgba(255,255,255,0.015); }
+.compare thead th { color: var(--muted); font-family: var(--font-label); font-weight: 500; font-size: .76rem; text-transform: uppercase; letter-spacing: .08em; background: rgba(255,255,255,0.015); }
 .compare th[scope="col"].us { color: var(--accent); }
 .compare td:first-child { color: var(--text-2); font-weight: 500; }
 .compare .yes { color: var(--accent); font-weight: 600; }
@@ -324,8 +324,8 @@ html.menu-open { overflow: hidden; }
 @media (max-width: 640px) { .price-grid { grid-template-columns: 1fr; } }
 .price-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px; }
 .price-card.featured { border-color: var(--accent-line); background: var(--card-2); }
-.price-name { font-family: var(--font-mono); font-size: .74rem; text-transform: uppercase; letter-spacing: .14em; color: var(--accent); font-weight: 500; margin-bottom: 16px; }
-.price-amount { font-family: var(--font-display); font-size: 2.7rem; font-weight: 600; letter-spacing: -0.04em; }
+.price-name { font-family: var(--font-label); font-size: .74rem; text-transform: uppercase; letter-spacing: .14em; color: var(--accent); font-weight: 500; margin-bottom: 16px; }
+.price-amount { font-family: var(--font-display); font-size: 2.7rem; font-weight: 560; letter-spacing: -0.018em; }
 .price-amount small { font-size: .9rem; font-weight: 500; color: var(--muted); font-family: var(--font-sans); }
 .price-card ul { list-style: none; margin: 24px 0 0; display: flex; flex-direction: column; gap: 12px; }
 .price-card li { display: flex; gap: 10px; font-size: .92rem; color: var(--text-2); }
@@ -335,13 +335,13 @@ html.menu-open { overflow: hidden; }
 .ticker { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 16px 0; background: var(--surface); }
 .ticker-inner { display: flex; gap: 40px; animation: ticker 34s linear infinite; white-space: nowrap; width: max-content; }
 @keyframes ticker { from { transform: translateX(0) } to { transform: translateX(-50%) } }
-.ticker-item { display: flex; align-items: center; gap: 11px; font-family: var(--font-mono); font-size: .78rem; font-weight: 500; letter-spacing: .04em; color: var(--muted); text-transform: uppercase; }
+.ticker-item { display: flex; align-items: center; gap: 11px; font-family: var(--font-label); font-size: .78rem; font-weight: 500; letter-spacing: .04em; color: var(--muted); text-transform: uppercase; }
 .ticker-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent-2); }
 @media (prefers-reduced-motion: reduce) { .ticker-inner { animation: none; } }
 
 /* ── Device strip ── */
 .devices-strip { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 26px 24px; text-align: center; }
-.devices-strip-label { font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin-bottom: 18px; }
+.devices-strip-label { font-family: var(--font-label); font-size: .72rem; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin-bottom: 18px; }
 .device-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .device-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.025); border: 1px solid var(--border); border-radius: var(--r-full); padding: 6px 15px; font-size: .8rem; color: var(--text-2); white-space: nowrap; transition: border-color .2s var(--ease); }
 .device-badge:hover { border-color: var(--border-strong); }
@@ -352,17 +352,20 @@ html.menu-open { overflow: hidden; }
 .phone-float { animation: floatY 6s ease-in-out infinite; }
 @keyframes floatY { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-14px) } }
 @media (prefers-reduced-motion: reduce) { .phone-float { animation: none; } }
+/* iPhone 17 Pro proportions — 402×874pt display (2.174 ratio), thin uniform
+   bezel, Dynamic Island floating OVER the screen (125×37pt → 74×22 here). */
 .big-phone, .feature-phone {
-  width: 248px; height: 538px; border-radius: 50px; background: #0a0b10;
-  border: 1.5px solid rgba(255,255,255,0.12);
-  box-shadow: 0 50px 120px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06);
+  width: 250px; height: 532px; border-radius: 44px; background: #0a0a10;
+  padding: 5px;
+  border: 1.5px solid rgba(255,255,255,0.16);
+  box-shadow: 0 50px 120px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08);
   overflow: hidden; position: relative; flex-shrink: 0;
 }
-.phone-top { height: 42px; background: #0a0b10; display: flex; align-items: center; justify-content: center; }
-.dynamic-island { width: 104px; height: 30px; background: #000; border-radius: 22px; }
-.phone-screen { height: 496px; overflow: hidden; background: #0b0b12; }
+.phone-top { position: absolute; top: 12px; left: 0; right: 0; z-index: 6; display: flex; justify-content: center; pointer-events: none; }
+.dynamic-island { width: 74px; height: 22px; background: #000; border-radius: 22px; box-shadow: 0 0 0 1px rgba(0,0,0,0.45); }
+.phone-screen { position: absolute; inset: 5px; border-radius: 39px; overflow: hidden; background: #0b0b12; }
 .phone-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.phone-carousel { position: relative; height: 496px; overflow: hidden; }
+.phone-carousel { position: absolute; inset: 5px; border-radius: 39px; overflow: hidden; }
 .phone-slide { position: absolute; inset: 0; opacity: 0; transition: opacity .7s var(--ease); }
 .phone-slide.active { opacity: 1; }
 .phone-slide img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
@@ -373,13 +376,13 @@ html.menu-open { overflow: hidden; }
 /* ── CTA band ── */
 .cta { text-align: center; position: relative; overflow: hidden; background: var(--surface); border-top: 1px solid var(--border); }
 .cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 620px; height: 380px; border-radius: 50%; background: radial-gradient(ellipse at 36% 50%, rgba(123,108,255,0.12) 0%, transparent 70%), radial-gradient(ellipse at 68% 50%, rgba(54,230,255,0.07) 0%, transparent 70%); pointer-events: none; }
-.cta h2 { font-size: clamp(1.9rem, 1.2rem + 2.6vw, 2.9rem); font-weight: 600; letter-spacing: -0.04em; margin-bottom: 16px; position: relative; }
+.cta h2 { font-size: clamp(1.9rem, 1.2rem + 2.6vw, 2.9rem); font-weight: 560; letter-spacing: -0.016em; margin-bottom: 16px; position: relative; }
 .cta p { color: var(--muted); margin-bottom: 30px; position: relative; max-width: 520px; margin-left: auto; margin-right: auto; }
 .cta .appstore-btn, .cta .btn-primary { position: relative; }
 
 /* ── Prose (blog articles) ── */
 .prose { max-width: 720px; margin: 0 auto; color: var(--text-2); font-size: 1.06rem; line-height: 1.8; }
-.prose h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; letter-spacing: -0.03em; color: var(--text); margin: 44px 0 16px; }
+.prose h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 560; letter-spacing: -0.012em; color: var(--text); margin: 44px 0 16px; }
 .prose h3 { font-family: var(--font-display); font-size: 1.22rem; font-weight: 600; color: var(--text); margin: 30px 0 10px; }
 .prose p { margin: 0 0 18px; }
 .prose ul, .prose ol { margin: 0 0 18px 22px; display: flex; flex-direction: column; gap: 9px; }
@@ -388,7 +391,7 @@ html.menu-open { overflow: hidden; }
 .prose strong { color: var(--text); font-weight: 600; }
 .prose blockquote { border-left: 2px solid var(--accent); padding: 4px 0 4px 22px; margin: 24px 0; color: var(--text); font-weight: 500; }
 .prose img { border-radius: var(--r); margin: 26px 0; }
-.article-meta { font-family: var(--font-mono); color: var(--muted); font-size: .8rem; letter-spacing: .03em; margin-bottom: 10px; }
+.article-meta { font-family: var(--font-label); color: var(--muted); font-size: .8rem; letter-spacing: .03em; margin-bottom: 10px; }
 .article-cta { max-width: 720px; margin: 52px auto 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 30px; text-align: center; }
 
 /* ── Blog index cards ── */
@@ -400,7 +403,7 @@ html.menu-open { overflow: hidden; }
   transition: border-color .25s var(--ease), transform .25s var(--ease), background .25s var(--ease);
 }
 .post-card:hover { border-color: var(--accent-line); transform: translateY(-3px); background: var(--card-2); }
-.post-card .tag { font-family: var(--font-mono); font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); font-weight: 500; }
+.post-card .tag { font-family: var(--font-label); font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); font-weight: 500; }
 .post-card h3 { font-size: 1.12rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text); margin: 12px 0 9px; }
 .post-card p { font-size: .9rem; color: var(--muted); line-height: 1.6; }
 
@@ -411,7 +414,7 @@ html.menu-open { overflow: hidden; }
 .step-num {
   width: 44px; height: 44px; min-width: 44px; border-radius: 12px;
   background: var(--accent-soft); border: 1px solid var(--accent-line); color: var(--accent);
-  font-family: var(--font-mono); font-weight: 700; font-size: 1.05rem;
+  font-family: var(--font-label); font-weight: 700; font-size: 1.05rem;
   display: flex; align-items: center; justify-content: center; margin-top: 2px;
 }
 .step-title { font-size: 1.08rem; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 7px; }
@@ -424,7 +427,7 @@ footer.site-footer { border-top: 1px solid var(--border); padding: clamp(48px, 6
 .footer-brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 600; color: var(--text); font-size: 1.04rem; margin-bottom: 14px; }
 .footer-brand img { width: 26px; height: 26px; border-radius: 7px; }
 .footer-about { color: var(--muted); font-size: .88rem; line-height: 1.65; max-width: 290px; }
-.footer-col h3 { font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 16px; font-weight: 500; }
+.footer-col h3 { font-family: var(--font-label); font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 16px; font-weight: 500; }
 .footer-col a { display: block; color: var(--text-2); font-size: .9rem; margin-bottom: 11px; transition: color .2s var(--ease); }
 .footer-col a:hover { color: var(--text); }
 .footer-bottom { max-width: var(--maxw); margin: 40px auto 0; padding: 22px clamp(20px,5vw,28px) 0; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--muted); font-size: .82rem; }
