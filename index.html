@@ -4,16 +4,20 @@
   <script>document.documentElement.className += ' js';</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyVitality — All-in-One Fitness, Recovery &amp; Workout App for iPhone</title>
-  <meta name="description" content="All-in-one iPhone fitness app: GPS workouts, Apple Watch recovery &amp; HRV, sleep, AI nutrition and a data-grounded AI coach. One app instead of Strava + Whoop + MyFitnessPal. Join the free iOS beta waitlist.">
+  <meta name="theme-color" content="#08080C">
+  <title>All-in-One Fitness &amp; Recovery App for iPhone — MyVitality</title>
+  <meta name="description" content="One iPhone app for GPS workouts, Apple Watch recovery &amp; HRV, sleep and AI nutrition — instead of Strava + Whoop + MyFitnessPal. Join the free iOS beta.">
   <link rel="canonical" href="https://myvitality.fit/">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://myvitality.fit/">
-  <meta property="og:title" content="MyVitality — All-in-One Fitness, Recovery &amp; Workout App for iPhone">
+  <meta property="og:title" content="All-in-One Fitness &amp; Recovery App for iPhone — MyVitality">
   <meta property="og:description" content="GPS workouts, Apple Watch recovery &amp; HRV, sleep, AI nutrition and a coach grounded in your data — in one iPhone app. Join the free iOS beta waitlist.">
   <meta property="og:image" content="https://myvitality.fit/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="MyVitality — fitness, recovery, sleep and nutrition in one iPhone app">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,8 +57,8 @@
   <style>
     /* ── Homepage hero ── */
     .home-hero { position: relative; overflow: hidden; padding: clamp(56px, 8vw, 104px) 0 clamp(48px, 7vw, 88px); }
-    .home-hero::before { content:''; position:absolute; top:-260px; right:-180px; width:760px; height:760px; border-radius:50%; background: radial-gradient(circle, rgba(91,157,255,0.13) 0%, transparent 66%); pointer-events:none; animation: drift1 22s ease-in-out infinite; }
-    .home-hero::after { content:''; position:absolute; bottom:-320px; left:-220px; width:680px; height:680px; border-radius:50%; background: radial-gradient(circle, rgba(58,107,181,0.14) 0%, transparent 68%); pointer-events:none; animation: drift2 28s ease-in-out infinite; }
+    .home-hero::before { content:''; position:absolute; top:-260px; right:-180px; width:760px; height:760px; border-radius:50%; background: radial-gradient(circle, rgba(123,108,255,0.14) 0%, transparent 66%); pointer-events:none; animation: drift1 22s ease-in-out infinite; }
+    .home-hero::after { content:''; position:absolute; bottom:-320px; left:-220px; width:680px; height:680px; border-radius:50%; background: radial-gradient(circle, rgba(54,230,255,0.09) 0%, transparent 68%); pointer-events:none; animation: drift2 28s ease-in-out infinite; }
     @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-44px,34px)} }
     @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(50px,-28px)} }
     .home-hero .grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(40px,5vw,72px); align-items: center; position: relative; }
@@ -64,12 +68,11 @@
     .hero-copy > *:nth-child(5){animation-delay:.33s} .hero-copy > *:nth-child(6){animation-delay:.40s}
     @keyframes heroIn { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
     .home-hero h1 { font-size: clamp(2.6rem, 1.4rem + 4.6vw, 4.4rem); font-weight: 600; line-height: 1.0; letter-spacing: -0.045em; margin-bottom: 22px; }
-    .home-hero h1 .grad { color: var(--accent); }
     .home-hero .lede { font-size: 1.1rem; color: var(--text-2); line-height: 1.62; max-width: 500px; margin-bottom: 30px; }
     .waitlist-form { display:flex; gap:10px; flex-wrap:wrap; max-width:470px; }
     .waitlist-form input[type=email]{ flex:1; min-width:210px; padding:14px 16px; border-radius:var(--r-full); border:1px solid var(--border); background:var(--card); color:var(--text); font-size:.96rem; font-family:inherit; transition:border-color .15s, box-shadow .15s; }
     .waitlist-form input[type=email]::placeholder{ color:var(--muted); }
-    .waitlist-form input[type=email]:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(91,157,255,.16); }
+    .waitlist-form input[type=email]:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(123,108,255,.18); }
     .waitlist-form .btn-primary{ white-space:nowrap; }
     .waitlist-msg{ flex-basis:100%; font-size:.84rem; margin:4px 0 0; min-height:1.1em; }
     .waitlist-msg.ok{ color:var(--success); font-weight:600; }
@@ -86,11 +89,11 @@
     /* ── Readiness ring (signature) ── */
     .ring-wrap { opacity:0; animation: heroIn .9s var(--ease) .3s forwards; }
     .ring { position: relative; width: min(380px, 80vw); aspect-ratio: 1; margin: 0 auto; }
-    .ring::before { content:''; position:absolute; inset:-6%; background: radial-gradient(circle, rgba(91,157,255,0.18) 0%, transparent 60%); pointer-events:none; }
+    .ring::before { content:''; position:absolute; inset:-6%; background: radial-gradient(circle, rgba(123,108,255,0.16) 0%, transparent 60%); pointer-events:none; }
     .ring-svg { width:100%; height:100%; transform: rotate(-90deg); position:relative; }
     .ring-track { fill:none; stroke: rgba(255,255,255,0.07); stroke-width: 8; }
     .ring-prog { fill:none; stroke: var(--accent); stroke-width: 8; stroke-linecap: round;
-      stroke-dasharray: 653.45; stroke-dashoffset: 653.45; filter: drop-shadow(0 0 9px rgba(91,157,255,.55));
+      stroke-dasharray: 653.45; stroke-dashoffset: 653.45; filter: drop-shadow(0 0 9px rgba(123,108,255,.55));
       animation: ringDraw 1.7s var(--ease) .35s forwards; }
     @keyframes ringDraw { to { stroke-dashoffset: 91.5; } }
     .ring-center { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
@@ -114,11 +117,6 @@
       .ring { width: min(300px, 72vw); }
     }
 
-    /* ── Feature line icons (homepage) ── */
-    .feat-icon svg { width:21px; height:21px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
-    .feat-card .feat-icon { color: var(--text-2); transition: color .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease); }
-    .feat-card:hover .feat-icon { color: var(--accent); border-color: var(--accent-line); background: var(--accent-soft); }
-
     /* ── App showcase split ── */
     .showcase { background: var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
     .showcase .cap { font-family:var(--font-mono); font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-top:22px; }
@@ -126,7 +124,7 @@
     /* ── AI coach chat mockup ── */
     .chat-screen { height:496px; background: linear-gradient(180deg,#0c0e13,#0b0b12); display:flex; flex-direction:column; }
     .chat-head { display:flex; align-items:center; gap:10px; padding:14px 16px; border-bottom:1px solid var(--border); }
-    .chat-ava { width:32px; height:32px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; color:var(--ink); }
+    .chat-ava { width:32px; height:32px; border-radius:50%; background:var(--grad); display:flex; align-items:center; justify-content:center; color:var(--ink); }
     .chat-ava svg { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.7; }
     .chat-name { font-size:.85rem; font-weight:600; color:var(--text); }
     .chat-status { font-family:var(--font-mono); font-size:.58rem; letter-spacing:.06em; color:var(--success); }
@@ -136,7 +134,7 @@
     .bubble.coach { align-self:flex-start; background:rgba(255,255,255,0.05); color:var(--text-2); border-bottom-left-radius:5px; border:1px solid var(--border-soft); }
     .bubble.coach b { color:var(--text); }
     .data-pills { display:flex; gap:6px; margin:9px 0 1px; flex-wrap:wrap; }
-    .data-pill { font-family:var(--font-mono); font-size:.58rem; font-weight:500; letter-spacing:.04em; padding:3px 8px; border-radius:6px; background:var(--accent-soft); color:var(--accent); border:1px solid var(--accent-line); }
+    .data-pill { font-family:var(--font-mono); font-size:.58rem; font-weight:500; letter-spacing:.04em; padding:3px 8px; border-radius:6px; background:var(--accent-2-soft); color:var(--accent-2); border:1px solid var(--accent-2-line); }
 
     /* ── Why band (statements) ── */
     .why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
@@ -154,7 +152,7 @@
     .hero-visual { position: relative; display:flex; justify-content:center; align-items:center; min-height: 540px;
       opacity:0; animation: heroIn .9s var(--ease) .28s forwards; }
     .hero-visual::before { content:''; position:absolute; inset:6% 12%; border-radius:50%;
-      background: radial-gradient(circle, rgba(91,157,255,0.16) 0%, transparent 62%); pointer-events:none; }
+      background: radial-gradient(circle, rgba(123,108,255,0.15) 0%, transparent 62%); pointer-events:none; }
     .hero-visual .big-phone { position:relative; z-index:2; }
     .float-card { position:absolute; z-index:3; display:flex; align-items:center; gap:12px;
       background: rgba(15,18,23,0.74); backdrop-filter: blur(16px) saturate(150%); -webkit-backdrop-filter: blur(16px) saturate(150%);
@@ -166,18 +164,18 @@
     .mini-ring { position:relative; width:54px; height:54px; flex-shrink:0; }
     .mini-ring svg { width:100%; height:100%; transform: rotate(-90deg); }
     .mini-ring .ring-track { fill:none; stroke: rgba(255,255,255,0.09); stroke-width: 14; }
-    .mini-ring .ring-prog { fill:none; stroke: var(--accent); stroke-width: 14; stroke-linecap: round;
-      stroke-dasharray: 653.45; stroke-dashoffset: 91.5; filter: drop-shadow(0 0 5px rgba(91,157,255,.55)); }
+    .mini-ring .ring-prog { fill:none; stroke: url(#auroraRing); stroke-width: 14; stroke-linecap: round;
+      stroke-dasharray: 653.45; stroke-dashoffset: 91.5; filter: drop-shadow(0 0 5px rgba(123,108,255,.55)); }
     .mini-ring-num { position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
       font-family: var(--font-display); font-size:1.12rem; font-weight:600; letter-spacing:-0.04em; }
     .fc-label { font-family:var(--font-mono); font-size:.58rem; letter-spacing:.16em; color:var(--muted); display:block; }
-    .fc-val { font-family:var(--font-display); font-size:1.06rem; font-weight:600; letter-spacing:-0.02em; color:var(--accent); }
+    .fc-val { font-family:var(--font-display); font-size:1.06rem; font-weight:600; letter-spacing:-0.02em; color:var(--accent-2); }
     .fc-row { display:flex; align-items:center; gap:9px; }
     .fc-dot { width:6px; height:6px; border-radius:50%; background:var(--muted); flex-shrink:0; }
-    .fc-dot.up { background:var(--accent); box-shadow:0 0 8px rgba(91,157,255,.6); }
+    .fc-dot.up { background:var(--accent-2); box-shadow:0 0 8px rgba(54,230,255,.6); }
     .fc-k { font-family:var(--font-mono); font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); min-width:42px; }
     .fc-v { font-family:var(--font-display); font-size:.92rem; font-weight:600; letter-spacing:-0.02em; margin-left:auto; }
-    .fc-v.up { color:var(--accent); }
+    .fc-v.up { color:var(--accent-2); }
     /* On phones the floating cards drop into a centred row under the device —
        absolute overlap is a desktop flourish that risks clipping when narrow. */
     @media (max-width: 900px) {
@@ -211,7 +209,7 @@
     .compare caption { caption-side:bottom; text-align:left; font-size:.74rem; color:var(--faint); line-height:1.55; padding:14px 18px 0; }
     .compare .partial { color:var(--text-2); font-weight:500; }
     .compare thead th.us { background:var(--accent-soft); }
-    .compare td.us, .compare tbody td.us { background:rgba(91,157,255,0.05); }
+    .compare td.us, .compare tbody td.us { background:rgba(123,108,255,0.06); }
     .compare .price-cell { font-family:var(--font-mono); font-size:.82rem; }
     .compare-links { text-align:center; margin-top:18px; font-size:.86rem; color:var(--muted); }
     .compare-links a { color:var(--accent); font-weight:600; }
@@ -266,6 +264,7 @@
         <div class="float-card float-readiness" role="img" aria-label="Recovery readiness 86 out of 100 — ready to train">
           <div class="mini-ring">
             <svg viewBox="0 0 240 240" aria-hidden="true">
+              <defs><linearGradient id="auroraRing" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#7B6CFF"/><stop offset="1" stop-color="#36E6FF"/></linearGradient></defs>
               <circle class="ring-track" cx="120" cy="120" r="104"></circle>
               <circle class="ring-prog" cx="120" cy="120" r="104"></circle>
             </svg>
@@ -623,7 +622,7 @@
         <p class="footer-about">Fitness, recovery and community in one app. Track workouts, understand your body and stay consistent — built for everyday athletes.</p>
       </div>
       <div class="footer-col">
-        <h4>Product</h4>
+        <h3>Product</h3>
         <a href="/features/">Features</a>
         <a href="/workout-tracker/">Workout tracker</a>
         <a href="/recovery-tracker/">Recovery tracker</a>
@@ -632,13 +631,13 @@
         <a href="/pricing/">Pricing</a>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h3>Company</h3>
         <a href="/about/">About</a>
         <a href="/blog/">Blog</a>
         <a href="mailto:egemizrak@icloud.com">Contact</a>
       </div>
       <div class="footer-col">
-        <h4>Legal</h4>
+        <h3>Legal</h3>
         <a href="/privacy-policy/">Privacy Policy</a>
         <a href="/terms/">Terms</a>
       </div>

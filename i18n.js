@@ -35,7 +35,7 @@
     '.article-cta h2', '.article-cta p', '.article-meta',
     '.prose p', '.prose h2', '.prose h3', '.prose li', '.prose blockquote',
     '.post-card h3', '.post-card p', '.post-card .tag',
-    '.footer-about', '.footer-col h4', '.footer-col a', '.footer-bottom span'
+    '.footer-about', '.footer-col h3', '.footer-col a', '.footer-bottom span'
   ].join(',');
 
   // Rough country → language map for the IP fallback (only supported langs).
