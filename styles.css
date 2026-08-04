@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,450..650&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,450..650;1,9..144,450..650&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 /* ==========================================================================
    MyVitality — Aurora Instrument
@@ -66,6 +66,18 @@
   --ease: cubic-bezier(.2,.7,.2,1);
 }
 
+/* ── Page transitions — cross-document view transitions (progressive) ──
+   Pages crossfade + drift on navigation; the sticky nav keeps its own
+   transition group so it stays visually anchored between pages. */
+@view-transition { navigation: auto; }
+nav.site-nav { view-transition-name: site-nav; }
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) { animation: pageOut .2s var(--ease) both; }
+  ::view-transition-new(root) { animation: pageIn .32s var(--ease) both; }
+}
+@keyframes pageOut { to { opacity: 0; transform: translateY(-8px); } }
+@keyframes pageIn { from { opacity: 0; transform: translateY(10px); } }
+
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   font-family: var(--font-sans);
@@ -118,6 +130,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 560; letter-spacing:
   color: var(--accent);
   background: var(--grad);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  font-style: italic; padding-right: .05em; /* italic serif accent; pad stops clip cutting the overhang */
 }
 
 /* Mono kicker / data label utility */
@@ -149,13 +162,20 @@ nav.site-nav {
 .nav-links { display: flex; align-items: center; gap: 30px; }
 .nav-links a { color: var(--muted); font-size: .9rem; font-weight: 500; white-space: nowrap; transition: color .2s var(--ease); }
 .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--text); }
+.nav-links a:not(.nav-cta) { position: relative; }
+.nav-links a:not(.nav-cta)::after {
+  content: ''; position: absolute; left: 0; bottom: -7px; width: 100%; height: 1.5px; border-radius: 2px;
+  background: var(--grad); transform: scaleX(0); transform-origin: left; transition: transform .28s var(--ease);
+}
+.nav-links a:not(.nav-cta):hover::after, .nav-links a:not(.nav-cta)[aria-current="page"]::after { transform: scaleX(1); }
 .nav-cta {
-  background: var(--grad); color: var(--ink) !important;
+  background: var(--grad); background-size: 165% 100%; background-position: 0% 50%;
+  color: var(--ink) !important;
   padding: 9px 18px; border-radius: var(--r-full); font-weight: 600; font-size: .85rem !important;
-  flex-shrink: 0; transition: transform .2s var(--ease), box-shadow .2s var(--ease), filter .2s var(--ease);
+  flex-shrink: 0; transition: transform .2s var(--ease), box-shadow .2s var(--ease), background-position .4s var(--ease);
   box-shadow: 0 6px 22px rgba(123,108,255,0.24);
 }
-.nav-cta:hover { transform: translateY(-1px); filter: brightness(1.08); box-shadow: 0 10px 30px rgba(123,108,255,0.34); }
+.nav-cta:hover { transform: translateY(-1px); background-position: 92% 50%; box-shadow: 0 10px 30px rgba(123,108,255,0.34); }
 
 /* Hamburger (injected by app.js) */
 .nav-toggle {
@@ -201,13 +221,14 @@ html.menu-open { overflow: hidden; }
 /* ── Buttons ── */
 .btn-primary {
   display: inline-flex; align-items: center; gap: 9px;
-  background: var(--grad); color: var(--ink);
+  background: var(--grad); background-size: 165% 100%; background-position: 0% 50%;
+  color: var(--ink);
   padding: 13px 24px; border-radius: var(--r-full); font-weight: 600; font-size: .95rem;
   letter-spacing: -0.01em; border: 0; cursor: pointer; font-family: inherit;
-  transition: transform .2s var(--ease), box-shadow .2s var(--ease), filter .2s var(--ease);
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease), background-position .4s var(--ease);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 8px 28px rgba(123,108,255,0.26);
 }
-.btn-primary:hover { transform: translateY(-2px); filter: brightness(1.09); box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 14px 40px rgba(123,108,255,0.36); }
+.btn-primary:hover { transform: translateY(-2px); background-position: 92% 50%; box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 14px 40px rgba(123,108,255,0.36); }
 .btn-secondary {
   display: inline-flex; align-items: center; gap: 8px;
   background: transparent; border: 1px solid var(--border);
@@ -287,7 +308,8 @@ html.menu-open { overflow: hidden; }
 .feat-card:hover .feat-icon { color: var(--accent); border-color: var(--accent-line); background: var(--accent-soft); }
 .feat-title { font-size: 1.02rem; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 9px; }
 .feat-desc { font-size: .9rem; color: var(--muted); line-height: 1.6; }
-.feat-card .more { display: inline-block; margin-top: 14px; font-family: var(--font-label); font-size: .76rem; font-weight: 500; letter-spacing: .02em; color: var(--accent); }
+.feat-card .more { display: inline-block; margin-top: 14px; font-family: var(--font-label); font-size: .76rem; font-weight: 500; letter-spacing: .02em; color: var(--accent); transition: transform .25s var(--ease), color .25s var(--ease); }
+.feat-card:hover .more { transform: translateX(3px); color: var(--accent-2); }
 
 /* ── Problem cards ── */
 .problem-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 24px; }
@@ -304,6 +326,8 @@ html.menu-open { overflow: hidden; }
 .compare .yes { color: var(--accent); font-weight: 600; }
 .compare .no { color: var(--faint); }
 .compare tr:last-child td { border-bottom: none; }
+.compare tbody tr { transition: background .18s var(--ease); }
+.compare tbody tr:hover { background: rgba(255,255,255,0.02); }
 .compare-wrap { overflow-x: auto; }
 
 /* ── FAQ (CSS-only accordion, hairline list) ── */
@@ -316,6 +340,15 @@ html.menu-open { overflow: hidden; }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after { content: '+'; color: var(--accent); font-size: 1.5rem; font-weight: 300; line-height: 1; transition: transform .25s var(--ease); }
 .faq details[open] summary::after { transform: rotate(45deg); }
+/* Smooth accordion expand where the browser can animate height:auto */
+@supports (interpolate-size: allow-keywords) {
+  :root { interpolate-size: allow-keywords; }
+  .faq details::details-content {
+    height: 0; overflow: clip;
+    transition: height .32s var(--ease), content-visibility .32s allow-discrete;
+  }
+  .faq details[open]::details-content { height: auto; }
+}
 .faq details p { color: var(--text-2); font-size: .95rem; line-height: 1.7; padding: 0 4px 22px; max-width: 660px; }
 .faq details p a { color: var(--accent); }
 
@@ -440,8 +473,28 @@ html.js [data-reveal] {
   transition: opacity .7s var(--ease), transform .7s var(--ease); will-change: opacity, transform;
 }
 html.js [data-reveal].in { opacity: 1; transform: none; }
+
+/* Grids cascade: the container stays put, its children stagger in one by one */
+html.js :is(.cards-3, .cards-2, .post-grid, .trust-grid, .why-grid, .steps, .price-grid, .faq)[data-reveal] {
+  opacity: 1; transform: none; transition: none;
+}
+html.js :is(.cards-3, .cards-2, .post-grid, .trust-grid, .why-grid, .steps, .price-grid, .faq)[data-reveal] > * {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity .55s var(--ease), transform .55s var(--ease);
+}
+html.js :is(.cards-3, .cards-2, .post-grid, .trust-grid, .why-grid, .steps, .price-grid, .faq)[data-reveal].in > * { opacity: 1; transform: none; }
+html.js [data-reveal].in > :nth-child(2) { transition-delay: .07s; }
+html.js [data-reveal].in > :nth-child(3) { transition-delay: .14s; }
+html.js [data-reveal].in > :nth-child(4) { transition-delay: .21s; }
+html.js [data-reveal].in > :nth-child(5) { transition-delay: .28s; }
+html.js [data-reveal].in > :nth-child(6) { transition-delay: .35s; }
+html.js [data-reveal].in > :nth-child(7) { transition-delay: .42s; }
+html.js [data-reveal].in > :nth-child(n+8) { transition-delay: .49s; }
+
 @media (prefers-reduced-motion: reduce) {
-  html.js [data-reveal] { opacity: 1 !important; transform: none !important; }
+  html.js [data-reveal], html.js [data-reveal] > * {
+    opacity: 1 !important; transform: none !important; transition: none !important;
+  }
   html { scroll-behavior: auto; }
 }
 
