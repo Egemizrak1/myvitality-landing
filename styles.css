@@ -110,6 +110,16 @@ a { color: var(--accent); text-decoration: none; }
 /* ── Layout ── */
 .container { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(20px, 5vw, 28px); }
 section { padding: clamp(72px, 9.5vw, 128px) 0; }
+
+/* ── Large-display scaling ──
+   The layout is designed at MacBook width (~1500px viewport). On wider
+   external monitors, magnify the whole page proportionally so the content
+   doesn't sit laptop-sized in a sea of margin. `zoom` re-layouts (text
+   stays sharp) and scales px and rem uniformly — type, cards, phone
+   mockups, spacing all keep their proportions. Below 1600px: unchanged. */
+@media (min-width: 1600px) { body { zoom: 1.1; } }
+@media (min-width: 1920px) { body { zoom: 1.25; } }
+@media (min-width: 2400px) { body { zoom: 1.5; } }
 .center { text-align: center; }
 .center .section-sub { margin-left: auto; margin-right: auto; }
 
