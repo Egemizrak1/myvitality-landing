@@ -82,6 +82,14 @@ nav.site-nav { view-transition-name: site-nav; }
 @keyframes pageOut { to { opacity: 0; transform: translateY(-8px); } }
 @keyframes pageIn { from { opacity: 0; transform: translateY(10px); } }
 
+/* JS fallback (app.js) where cross-document view transitions are
+   unsupported: .page-enter fades the new page in after an internal
+   navigation, .page-leave fades out just before leaving. */
+@media (prefers-reduced-motion: no-preference) {
+  html.page-enter body { animation: pageIn .32s var(--ease) both; }
+  html.page-leave body { animation: pageOut .18s var(--ease) both; }
+}
+
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   font-family: var(--font-sans);
@@ -519,6 +527,17 @@ html.js [data-reveal].in .eyebrow::before { width: 22px; }
   .phone-wrap .big-phone, .phone-wrap .feature-phone { transition: transform .6s var(--ease); }
   .phone-wrap:hover .big-phone, .phone-wrap:hover .feature-phone {
     transform: perspective(1100px) rotateY(-5deg) rotateX(1.5deg);
+  }
+}
+
+/* Scroll-linked depth — subpage hero + CTA glows drift as you scroll
+   (progressive; browsers without scroll-driven animations keep them static) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .page-hero::before { animation: glowRise linear both; animation-timeline: view(); }
+    .cta::before { animation: ctaRise linear both; animation-timeline: view(); }
+    @keyframes glowRise { from { transform: translateY(70px); } to { transform: translateY(-90px); } }
+    @keyframes ctaRise { from { transform: translate(-50%, -36%); } to { transform: translate(-50%, -64%); } }
   }
 }
 

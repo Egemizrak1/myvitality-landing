@@ -7,6 +7,38 @@
   root.classList.add('js');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ── Page transitions — JS fallback for browsers without cross-document
+   * view transitions (native @view-transition in styles.css covers the rest).
+   * Leaving: fade the page out, then navigate. Entering: fade in only when
+   * we arrived from an internal navigation (sessionStorage flag), so first
+   * visits and external arrivals never flash. ── */
+  if (!('PageRevealEvent' in window) && !reduce) {
+    try {
+      if (sessionStorage.getItem('mv-nav')) {
+        sessionStorage.removeItem('mv-nav');
+        root.classList.add('page-enter');
+      }
+    } catch (e) {}
+    d.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return;
+      if ((a.getAttribute('href') || '').charAt(0) === '#') return; /* pure anchor */
+      var url;
+      try { url = new URL(a.href, location.href); } catch (err) { return; }
+      if (url.origin !== location.origin) return;
+      if (url.pathname === location.pathname && url.hash) return; /* in-page anchor */
+      e.preventDefault();
+      try { sessionStorage.setItem('mv-nav', '1'); } catch (err) {}
+      root.classList.add('page-leave');
+      setTimeout(function () { location.href = url.href; }, 170);
+    });
+    /* bfcache restore (back/forward) — never come back faded out */
+    window.addEventListener('pageshow', function (e) {
+      if (e.persisted) root.classList.remove('page-leave');
+    });
+  }
+
   function ready(fn) {
     if (d.readyState !== 'loading') fn();
     else d.addEventListener('DOMContentLoaded', fn);
