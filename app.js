@@ -7,6 +7,67 @@
   root.classList.add('js');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ── Analytics — consent-gated GA4 + Meta Pixel ──
+   * IDs boşken TAMAMEN inert (banner dahil hiçbir şey render olmaz).
+   * Doldurunca: ilk ziyarette Accept/Decline barı; kabulde yüklenir.
+   * mvTrack('waitlist_join', {method, source}) dönüşüm eventi app'ten çağrılır. */
+  var GA4_ID = '';        // ör. 'G-XXXXXXXXXX'
+  var META_PIXEL_ID = ''; // ör. '1234567890'
+  var consent = null;
+  try { consent = localStorage.getItem('mv-consent'); } catch (e) {}
+  function loadAnalytics() {
+    if (GA4_ID) {
+      var gs = d.createElement('script'); gs.async = true;
+      gs.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
+      d.head.appendChild(gs);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date()); window.gtag('config', GA4_ID);
+    }
+    if (META_PIXEL_ID) {
+      var fs = d.createElement('script'); fs.async = true;
+      fs.src = 'https://connect.facebook.net/en_US/fbevents.js';
+      d.head.appendChild(fs);
+      window.fbq = window.fbq || function () {
+        (window.fbq.q = window.fbq.q || []).push(arguments);
+      };
+      window.fbq.queue = window.fbq.q = window.fbq.q || [];
+      window.fbq.loaded = true; window.fbq.version = '2.0';
+      window.fbq('init', META_PIXEL_ID); window.fbq('track', 'PageView');
+    }
+  }
+  window.mvTrack = function (name, params) {
+    if (consent !== 'yes') return;
+    if (window.gtag) window.gtag('event', name, params || {});
+    if (window.fbq && name === 'waitlist_join') window.fbq('track', 'Lead', params || {});
+  };
+  function consentBar() {
+    var bar = d.createElement('div');
+    bar.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:250;background:#141210;border-top:1px solid rgba(255,255,255,.1);padding:14px 20px;display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;font-size:.85rem;color:#B5AEA4';
+    var label = d.createElement('span');
+    label.textContent = 'We use cookies to measure our marketing.';
+    var yes = d.createElement('button');
+    yes.textContent = 'Accept';
+    yes.style.cssText = 'background:#FF6B47;color:#160B07;border:0;border-radius:999px;padding:8px 18px;font-weight:600;cursor:pointer;font-family:inherit';
+    var no = d.createElement('button');
+    no.textContent = 'Decline';
+    no.style.cssText = 'background:transparent;color:#B5AEA4;border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:8px 18px;cursor:pointer;font-family:inherit';
+    var pick = function (c) {
+      consent = c;
+      try { localStorage.setItem('mv-consent', c); } catch (err) {}
+      bar.remove();
+      if (c === 'yes') loadAnalytics();
+    };
+    yes.addEventListener('click', function () { pick('yes'); });
+    no.addEventListener('click', function () { pick('no'); });
+    bar.appendChild(label); bar.appendChild(yes); bar.appendChild(no);
+    d.body.appendChild(bar);
+  }
+  if (GA4_ID || META_PIXEL_ID) {
+    if (consent === 'yes') loadAnalytics();
+    else if (consent === null) ready(consentBar);
+  }
+
   /* ── Page transitions — JS fallback for browsers without cross-document
    * view transitions (native @view-transition in styles.css covers the rest).
    * Leaving: fade the page out, then navigate. Entering: fade in only when
@@ -239,6 +300,7 @@
             }).then(function (r) {
               if (r.ok && r.data && r.data.success) {
                 var em = r.data.data && r.data.data.email;
+                window.mvTrack('waitlist_join', { method: 'google', source: gSource });
                 showGoogleMsg(true, "✓ You're on the list" + (em ? ' as ' + em : '') + " — we'll email you at launch.");
               } else {
                 showGoogleMsg(false, (r.data && r.data.message) || 'Something went wrong — please try again.');
@@ -287,6 +349,7 @@
           return res.json().catch(function () { return {}; }).then(function (data) { return { ok: res.ok, data: data }; });
         }).then(function (r) {
           if (r.ok && r.data && r.data.success) {
+            window.mvTrack('waitlist_join', { method: 'email', source: form.getAttribute('data-source') || 'home' });
             if (msg) { msg.className = 'waitlist-msg ok'; msg.textContent = "✓ You're on the list — we'll email you at launch."; }
             input.disabled = true; input.value = ''; btn.style.display = 'none';
           } else {
