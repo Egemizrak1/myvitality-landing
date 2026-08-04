@@ -227,7 +227,7 @@
       var initGoogle = function () {
         if (!(window.google && google.accounts && google.accounts.id)) return false;
         google.accounts.id.initialize({
-          client_id: '604077645761-0uc1t50rlumqse1lr3mq4vgaf0t4b0tn.apps.googleusercontent.com',
+          client_id: '67250723601-shanruaigepf6cho3bf70tnh4kk8130j.apps.googleusercontent.com',
           callback: function (resp) {
             if (!resp || !resp.credential) return;
             fetch('https://fitsync-api-phi.vercel.app/api/waitlist/google', {
