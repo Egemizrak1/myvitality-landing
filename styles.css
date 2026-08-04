@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,450..650;1,9..144,450..650&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Fraunces:ital,opsz,wght@1,9..144,450..650&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 /* ==========================================================================
    MyVitality — Ember & Bone
@@ -7,7 +7,9 @@
    signature ember→gold "sunrise" gradient reserved for CTAs and headline
    highlights, hairline structure instead of card chrome. Matches the warm
    MV app icon. (In-phone mockup surfaces stay cool — that's the app's UI.)
-   Display: Fraunces (warm serif, italic accents) · Body & labels: Manrope
+   Display: Bricolage Grotesque (punchy, characterful) · Accent words:
+   Fraunces italic (the serif flourish inside grotesque headlines) ·
+   Body & labels: Manrope
    ========================================================================== */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -49,7 +51,8 @@
   --faint:  #5E594F;         /* decorative mono ticks only */
 
   /* ── Type ── */
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-display: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-accent:  "Fraunces", Georgia, "Times New Roman", serif;
   --font-sans:    "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-label:   "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
@@ -124,7 +127,7 @@ section { padding: clamp(72px, 9.5vw, 128px) 0; }
 .center .section-sub { margin-left: auto; margin-right: auto; }
 
 /* ── Typography ── */
-h1, h2, h3 { font-family: var(--font-display); font-weight: 560; letter-spacing: -0.012em; line-height: 1.12; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.015em; line-height: 1.1; }
 
 .eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
@@ -135,12 +138,13 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 560; letter-spacing:
 .eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--accent-line); }
 .center .eyebrow { justify-content: center; }
 
-.section-title { font-size: clamp(1.9rem, 1.1rem + 2.6vw, 3rem); font-weight: 560; letter-spacing: -0.016em; margin-bottom: 18px; }
+.section-title { font-size: clamp(1.9rem, 1.1rem + 2.6vw, 3rem); font-weight: 740; letter-spacing: -0.02em; margin-bottom: 18px; }
 .section-sub { font-size: 1.04rem; color: var(--muted); line-height: 1.65; max-width: 560px; }
 .grad, .grad.gradient {
   color: var(--accent);
   background: var(--grad);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  font-family: var(--font-accent); font-weight: 580;
   font-style: italic; padding-right: .05em; /* italic serif accent; pad stops clip cutting the overhang */
 }
 
@@ -168,7 +172,7 @@ nav.site-nav {
 .site-nav.scrolled .nav-inner { padding-top: 10px; padding-bottom: 10px; }
 .nav-logo {
   display: flex; align-items: center; gap: 10px; flex-shrink: 0;
-  font-family: var(--font-display); font-size: 1.04rem; font-weight: 600;
+  font-family: var(--font-display); font-size: 1.04rem; font-weight: 700;
   letter-spacing: -0.02em; color: var(--text);
 }
 .nav-logo img { width: 26px; height: 26px; border-radius: 7px; }
@@ -216,7 +220,7 @@ nav.site-nav {
   display: flex; flex-direction: column; gap: 2px;
 }
 .mobile-menu-inner a {
-  font-family: var(--font-display); font-size: 1.5rem; font-weight: 500;
+  font-family: var(--font-display); font-size: 1.5rem; font-weight: 650;
   color: var(--text-2); padding: 16px 0; border-bottom: 1px solid var(--border-soft);
   transition: color .2s var(--ease);
 }
@@ -273,7 +277,7 @@ html.menu-open { overflow: hidden; }
   width: 560px; height: 560px; border-radius: 50%;
   background: radial-gradient(circle, rgba(255,107,71,0.09) 0%, transparent 68%); pointer-events: none;
 }
-.page-hero h1 { font-size: clamp(2rem, 1.3rem + 3.2vw, 3.2rem); font-weight: 560; letter-spacing: -0.016em; margin: 14px 0 18px; max-width: 800px; }
+.page-hero h1 { font-size: clamp(2rem, 1.3rem + 3.2vw, 3.2rem); font-weight: 740; letter-spacing: -0.02em; margin: 14px 0 18px; max-width: 800px; }
 .page-hero p.lede { font-size: 1.12rem; color: var(--text-2); line-height: 1.65; max-width: 620px; }
 
 /* ── Breadcrumbs ── */
@@ -373,7 +377,7 @@ html.menu-open { overflow: hidden; }
 .price-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px; }
 .price-card.featured { border-color: var(--accent-line); background: var(--card-2); }
 .price-name { font-family: var(--font-label); font-size: .74rem; text-transform: uppercase; letter-spacing: .14em; color: var(--accent); font-weight: 500; margin-bottom: 16px; }
-.price-amount { font-family: var(--font-display); font-size: 2.7rem; font-weight: 560; letter-spacing: -0.018em; }
+.price-amount { font-family: var(--font-display); font-size: 2.7rem; font-weight: 720; letter-spacing: -0.02em; }
 .price-amount small { font-size: .9rem; font-weight: 500; color: var(--muted); font-family: var(--font-sans); }
 .price-card ul { list-style: none; margin: 24px 0 0; display: flex; flex-direction: column; gap: 12px; }
 .price-card li { display: flex; gap: 10px; font-size: .92rem; color: var(--text-2); }
@@ -424,13 +428,13 @@ html.menu-open { overflow: hidden; }
 /* ── CTA band ── */
 .cta { text-align: center; position: relative; overflow: hidden; background: var(--surface); border-top: 1px solid var(--border); }
 .cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 620px; height: 380px; border-radius: 50%; background: radial-gradient(ellipse at 36% 50%, rgba(255,107,71,0.12) 0%, transparent 70%), radial-gradient(ellipse at 68% 50%, rgba(230,180,80,0.07) 0%, transparent 70%); pointer-events: none; }
-.cta h2 { font-size: clamp(1.9rem, 1.2rem + 2.6vw, 2.9rem); font-weight: 560; letter-spacing: -0.016em; margin-bottom: 16px; position: relative; }
+.cta h2 { font-size: clamp(1.9rem, 1.2rem + 2.6vw, 2.9rem); font-weight: 740; letter-spacing: -0.02em; margin-bottom: 16px; position: relative; }
 .cta p { color: var(--muted); margin-bottom: 30px; position: relative; max-width: 520px; margin-left: auto; margin-right: auto; }
 .cta .appstore-btn, .cta .btn-primary { position: relative; }
 
 /* ── Prose (blog articles) ── */
 .prose { max-width: 720px; margin: 0 auto; color: var(--text-2); font-size: 1.06rem; line-height: 1.8; }
-.prose h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 560; letter-spacing: -0.012em; color: var(--text); margin: 44px 0 16px; }
+.prose h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; letter-spacing: -0.015em; color: var(--text); margin: 44px 0 16px; }
 .prose h3 { font-family: var(--font-display); font-size: 1.22rem; font-weight: 600; color: var(--text); margin: 30px 0 10px; }
 .prose p { margin: 0 0 18px; }
 .prose ul, .prose ol { margin: 0 0 18px 22px; display: flex; flex-direction: column; gap: 9px; }
@@ -472,7 +476,7 @@ html.menu-open { overflow: hidden; }
 footer.site-footer { border-top: 1px solid var(--border); padding: clamp(48px, 6vw, 64px) 0 36px; }
 .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 32px; }
 @media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; } }
-.footer-brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 600; color: var(--text); font-size: 1.04rem; margin-bottom: 14px; }
+.footer-brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; color: var(--text); font-size: 1.04rem; margin-bottom: 14px; }
 .footer-brand img { width: 26px; height: 26px; border-radius: 7px; }
 .footer-about { color: var(--muted); font-size: .88rem; line-height: 1.65; max-width: 290px; }
 .footer-col h3 { font-family: var(--font-label); font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 16px; font-weight: 500; }
