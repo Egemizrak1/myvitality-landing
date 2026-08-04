@@ -211,6 +211,61 @@
         .catch(localeFallback);
     }
 
+    /* ── "Sign up with Google" (waitlist) ──
+     * GIS renders official buttons into .g-signin containers; the signed
+     * ID token goes to /waitlist/google where the backend extracts the
+     * verified email — no typos, no fake addresses. If GIS never loads
+     * (blocked / unsupported), containers stay :empty and CSS hides them. */
+    var gContainers = d.querySelectorAll('.g-signin');
+    if (gContainers.length) {
+      var gSource = 'landing';
+      var showGoogleMsg = function (ok, text) {
+        var form = d.querySelector('.waitlist-form[data-source="' + gSource + '"]') || d.querySelector('.waitlist-form');
+        var msg = form && form.querySelector('.waitlist-msg');
+        if (msg) { msg.className = 'waitlist-msg ' + (ok ? 'ok' : 'err'); msg.textContent = text; }
+      };
+      var initGoogle = function () {
+        if (!(window.google && google.accounts && google.accounts.id)) return false;
+        google.accounts.id.initialize({
+          client_id: '604077645761-0uc1t50rlumqse1lr3mq4vgaf0t4b0tn.apps.googleusercontent.com',
+          callback: function (resp) {
+            if (!resp || !resp.credential) return;
+            fetch('https://fitsync-api-phi.vercel.app/api/waitlist/google', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ credential: resp.credential, source: gSource })
+            }).then(function (res) {
+              return res.json().catch(function () { return {}; }).then(function (data) { return { ok: res.ok, data: data }; });
+            }).then(function (r) {
+              if (r.ok && r.data && r.data.success) {
+                var em = r.data.data && r.data.data.email;
+                showGoogleMsg(true, "✓ You're on the list" + (em ? ' as ' + em : '') + " — we'll email you at launch.");
+              } else {
+                showGoogleMsg(false, (r.data && r.data.message) || 'Something went wrong — please try again.');
+              }
+            }).catch(function () {
+              showGoogleMsg(false, 'Network error — please try again.');
+            });
+          }
+        });
+        gContainers.forEach(function (el) {
+          google.accounts.id.renderButton(el, {
+            type: 'standard', theme: 'filled_black', size: 'large', shape: 'pill',
+            text: 'signup_with', logo_alignment: 'left', width: 280,
+            click_listener: function () { gSource = el.getAttribute('data-source') || 'landing'; }
+          });
+        });
+        return true;
+      };
+      /* gsi/client is async — retry briefly until it lands */
+      if (!initGoogle()) {
+        var gTries = 0;
+        var gTimer = setInterval(function () {
+          if (initGoogle() || ++gTries > 40) clearInterval(gTimer);
+        }, 250);
+      }
+    }
+
     /* ── Waitlist capture ── */
     var API = 'https://fitsync-api-phi.vercel.app/api/waitlist';
     d.querySelectorAll('.waitlist-form').forEach(function (form) {
