@@ -4,7 +4,7 @@
   <script>document.documentElement.className += ' js';</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#08080C">
+  <meta name="theme-color" content="#0A0908">
   <title>All-in-One Fitness &amp; Recovery App for iPhone — MyVitality</title>
   <meta name="description" content="One iPhone app for GPS workouts, Apple Watch recovery &amp; HRV, sleep and AI nutrition — instead of Strava + Whoop + MyFitnessPal. Join the free iOS beta.">
   <link rel="canonical" href="https://myvitality.fit/">
@@ -57,8 +57,8 @@
   <style>
     /* ── Homepage hero ── */
     .home-hero { position: relative; overflow: hidden; padding: clamp(56px, 8vw, 104px) 0 clamp(48px, 7vw, 88px); }
-    .home-hero::before { content:''; position:absolute; top:-260px; right:-180px; width:760px; height:760px; border-radius:50%; background: radial-gradient(circle, rgba(123,108,255,0.14) 0%, transparent 66%); pointer-events:none; animation: drift1 22s ease-in-out infinite; }
-    .home-hero::after { content:''; position:absolute; bottom:-320px; left:-220px; width:680px; height:680px; border-radius:50%; background: radial-gradient(circle, rgba(54,230,255,0.09) 0%, transparent 68%); pointer-events:none; animation: drift2 28s ease-in-out infinite; }
+    .home-hero::before { content:''; position:absolute; top:-260px; right:-180px; width:760px; height:760px; border-radius:50%; background: radial-gradient(circle, rgba(255,107,71,0.14) 0%, transparent 66%); pointer-events:none; animation: drift1 22s ease-in-out infinite; }
+    .home-hero::after { content:''; position:absolute; bottom:-320px; left:-220px; width:680px; height:680px; border-radius:50%; background: radial-gradient(circle, rgba(230,180,80,0.09) 0%, transparent 68%); pointer-events:none; animation: drift2 28s ease-in-out infinite; }
     @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-44px,34px)} }
     @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(50px,-28px)} }
     .home-hero .grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(40px,5vw,72px); align-items: center; position: relative; }
@@ -72,7 +72,7 @@
     .waitlist-form { display:flex; gap:10px; flex-wrap:wrap; max-width:470px; }
     .waitlist-form input[type=email]{ flex:1; min-width:210px; padding:14px 16px; border-radius:var(--r-full); border:1px solid var(--border); background:var(--card); color:var(--text); font-size:.96rem; font-family:inherit; transition:border-color .15s, box-shadow .15s; }
     .waitlist-form input[type=email]::placeholder{ color:var(--muted); }
-    .waitlist-form input[type=email]:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(123,108,255,.18); }
+    .waitlist-form input[type=email]:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(255,107,71,.18); }
     .waitlist-form .btn-primary{ white-space:nowrap; }
     .waitlist-msg{ flex-basis:100%; font-size:.84rem; margin:4px 0 0; min-height:1.1em; }
     .waitlist-msg.ok{ color:var(--success); font-weight:600; }
@@ -89,11 +89,11 @@
     /* ── Readiness ring (signature) ── */
     .ring-wrap { opacity:0; animation: heroIn .9s var(--ease) .3s forwards; }
     .ring { position: relative; width: min(380px, 80vw); aspect-ratio: 1; margin: 0 auto; }
-    .ring::before { content:''; position:absolute; inset:-6%; background: radial-gradient(circle, rgba(123,108,255,0.16) 0%, transparent 60%); pointer-events:none; }
+    .ring::before { content:''; position:absolute; inset:-6%; background: radial-gradient(circle, rgba(255,107,71,0.16) 0%, transparent 60%); pointer-events:none; }
     .ring-svg { width:100%; height:100%; transform: rotate(-90deg); position:relative; }
     .ring-track { fill:none; stroke: rgba(255,255,255,0.07); stroke-width: 8; }
     .ring-prog { fill:none; stroke: var(--accent); stroke-width: 8; stroke-linecap: round;
-      stroke-dasharray: 653.45; stroke-dashoffset: 653.45; filter: drop-shadow(0 0 9px rgba(123,108,255,.55));
+      stroke-dasharray: 653.45; stroke-dashoffset: 653.45; filter: drop-shadow(0 0 9px rgba(255,107,71,.55));
       animation: ringDraw 1.7s var(--ease) .35s forwards; }
     @keyframes ringDraw { to { stroke-dashoffset: 91.5; } }
     .ring-center { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
@@ -152,7 +152,7 @@
     .hero-visual { position: relative; display:flex; justify-content:center; align-items:center; min-height: 540px;
       opacity:0; animation: heroIn .9s var(--ease) .28s forwards; }
     .hero-visual::before { content:''; position:absolute; inset:6% 12%; border-radius:50%;
-      background: radial-gradient(circle, rgba(123,108,255,0.15) 0%, transparent 62%); pointer-events:none; }
+      background: radial-gradient(circle, rgba(255,107,71,0.15) 0%, transparent 62%); pointer-events:none; }
     .hero-visual .big-phone { position:relative; z-index:2; }
     .float-card { position:absolute; z-index:3; display:flex; align-items:center; gap:12px;
       background: rgba(15,18,23,0.74); backdrop-filter: blur(16px) saturate(150%); -webkit-backdrop-filter: blur(16px) saturate(150%);
@@ -165,14 +165,14 @@
     .mini-ring svg { width:100%; height:100%; transform: rotate(-90deg); }
     .mini-ring .ring-track { fill:none; stroke: rgba(255,255,255,0.09); stroke-width: 14; }
     .mini-ring .ring-prog { fill:none; stroke: url(#auroraRing); stroke-width: 14; stroke-linecap: round;
-      stroke-dasharray: 653.45; stroke-dashoffset: 91.5; filter: drop-shadow(0 0 5px rgba(123,108,255,.55)); }
+      stroke-dasharray: 653.45; stroke-dashoffset: 91.5; filter: drop-shadow(0 0 5px rgba(255,107,71,.55)); }
     .mini-ring-num { position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
       font-family: var(--font-display); font-size:1.12rem; font-weight:600; letter-spacing:-0.015em; }
     .fc-label { font-family:var(--font-label); font-size:.58rem; letter-spacing:.16em; color:var(--muted); display:block; }
     .fc-val { font-family:var(--font-display); font-size:1.06rem; font-weight:600; letter-spacing:-0.02em; color:var(--accent-2); }
     .fc-row { display:flex; align-items:center; gap:9px; }
     .fc-dot { width:6px; height:6px; border-radius:50%; background:var(--muted); flex-shrink:0; }
-    .fc-dot.up { background:var(--accent-2); box-shadow:0 0 8px rgba(54,230,255,.6); }
+    .fc-dot.up { background:var(--accent-2); box-shadow:0 0 8px rgba(230,180,80,.6); }
     .fc-k { font-family:var(--font-label); font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); min-width:42px; }
     .fc-v { font-family:var(--font-display); font-size:.92rem; font-weight:600; letter-spacing:-0.02em; margin-left:auto; }
     .fc-v.up { color:var(--accent-2); }
@@ -209,7 +209,7 @@
     .compare caption { caption-side:bottom; text-align:left; font-size:.74rem; color:var(--faint); line-height:1.55; padding:14px 18px 0; }
     .compare .partial { color:var(--text-2); font-weight:500; }
     .compare thead th.us { background:var(--accent-soft); }
-    .compare td.us, .compare tbody td.us { background:rgba(123,108,255,0.06); }
+    .compare td.us, .compare tbody td.us { background:rgba(255,107,71,0.06); }
     .compare .price-cell { font-family:var(--font-label); font-size:.82rem; }
     .compare-links { text-align:center; margin-top:18px; font-size:.86rem; color:var(--muted); }
     .compare-links a { color:var(--accent); font-weight:600; }
@@ -264,7 +264,7 @@
         <div class="float-card float-readiness" role="img" aria-label="Recovery readiness 86 out of 100 — ready to train">
           <div class="mini-ring">
             <svg viewBox="0 0 240 240" aria-hidden="true">
-              <defs><linearGradient id="auroraRing" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#7B6CFF"/><stop offset="1" stop-color="#36E6FF"/></linearGradient></defs>
+              <defs><linearGradient id="auroraRing" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FF6B47"/><stop offset="1" stop-color="#E6B450"/></linearGradient></defs>
               <circle class="ring-track" cx="120" cy="120" r="104"></circle>
               <circle class="ring-prog" cx="120" cy="120" r="104"></circle>
             </svg>
