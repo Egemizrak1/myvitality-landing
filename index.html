@@ -131,15 +131,18 @@
       .home-hero .waitlist-form, .home-hero .hero-meta { justify-content: center; margin-left:auto; margin-right:auto; }
       .home-hero .waitlist-or { margin-left:auto; margin-right:auto; }
       .home-hero .g-signin { display:flex; justify-content:center; }
-      .hero-visual { order:-1; min-height:0; margin:0 auto 8px; flex-direction:column; gap:12px; }
+      /* Mobil hiyerarşi: başlık → metin → CTA → görsel (görsel EN SONDA). */
+      .hero-visual { min-height:0; margin:20px auto 0; flex-direction:column; gap:12px; }
       .float-card { position:static; animation:none; width:max-content; max-width:92%; }
       .float-readiness, .float-hrv { animation:none; }
       .float-hrv { min-width:200px; }
     }
-    @media (max-width: 460px) {
-      .float-card { padding:9px 11px; gap:9px; border-radius:13px; }
-      .mini-ring { width:46px; height:46px; }
-      .fc-val { font-size:.95rem; }
+    @media (max-width: 700px) {
+      /* Telefonda ilk ekran sade: yüzen metrik kartları ve stat satırı yok. */
+      .float-card, .hero-meta { display:none; }
+      .home-hero { padding: 40px 0 56px; }
+      .home-hero h1 { font-size: clamp(2rem, 8.6vw, 2.6rem); }
+      .home-hero .lede { font-size: 1.02rem; }
     }
 
     /* ── Feature splits (screenshot phone + copy) ── */
@@ -279,7 +282,7 @@
         <ul class="feature-list">
           <li><strong>Personalized recovery score</strong> built from your own baselines, not population averages</li>
           <li><strong>HRV, resting heart rate &amp; sleep</strong> — with trends against your recent normal</li>
-          <li><strong>Daily strain target</strong> that matches training to how recovered you are</li>
+          <li class="m-hide"><strong>Daily strain target</strong> that matches training to how recovered you are</li>
           <li><strong>Early-warning alerts</strong> when your training load climbs faster than your body adapts</li>
         </ul>
         <a class="more" href="/recovery-tracker/" style="display:inline-block;margin-top:20px;color:var(--accent);font-weight:600;font-size:.9rem">Explore recovery →</a>
@@ -307,14 +310,14 @@
         <ul class="feature-list">
           <li><strong>Sleep score</strong> from duration, efficiency, timing and restfulness — honest about limited data</li>
           <li><strong>REM, Deep, Light &amp; Awake</strong> on an interactive stage timeline</li>
-          <li><strong>Sleep timing</strong> — in bed, asleep, wake and sleep latency, detected from your night</li>
+          <li class="m-hide"><strong>Sleep timing</strong> — in bed, asleep, wake and sleep latency, detected from your night</li>
           <li><strong>Personal sleep need &amp; sleep debt</strong> that adapt to you and decay as you catch up</li>
-          <li><strong>Consistency tracking</strong> — how steady your bed and wake times really are</li>
+          <li class="m-hide"><strong>Consistency tracking</strong> — how steady your bed and wake times really are</li>
         </ul>
         <div class="metric-chips">
           <div class="metric-chip">8h 02m <span>slept</span></div>
-          <div class="metric-chip">1h 46m <span>deep</span></div>
-          <div class="metric-chip">1h 04m <span>REM</span></div>
+          <div class="metric-chip m-hide">1h 46m <span>deep</span></div>
+          <div class="metric-chip m-hide">1h 04m <span>REM</span></div>
           <div class="metric-chip">86 <span>score</span></div>
         </div>
       </div>
@@ -342,8 +345,8 @@
           <li><strong>Personal heart-rate zones</strong> computed from your resting and max heart rate — editable if you know better</li>
           <li><strong>Activity Strain</strong> with a full heart-rate timeline and time-in-zone breakdown</li>
           <li><strong>Automatic workout detection</strong> — forgot to record? MyVitality spots runs, walks and rides from your wearable data and asks to save them</li>
-          <li><strong>Live zones while you train</strong> — real-time zone and strain in the GPS tracker</li>
-          <li><strong>Honest insights</strong> — pace vs your recent average, how this session compares to your typical</li>
+          <li class="m-hide"><strong>Live zones while you train</strong> — real-time zone and strain in the GPS tracker</li>
+          <li class="m-hide"><strong>Honest insights</strong> — pace vs your recent average, how this session compares to your typical</li>
         </ul>
         <a class="more" href="/workout-tracker/" style="display:inline-block;margin-top:20px;color:var(--accent);font-weight:600;font-size:.9rem">Explore workout tracking →</a>
       </div>
@@ -371,8 +374,8 @@
           <li><strong>For You, Popular &amp; Nearby</strong> route feeds for running, walking and cycling</li>
           <li><strong>Route generation</strong> — pick a style and distance, get a route built from real paths, parks and waterfronts</li>
           <li><strong>Search this area</strong> — pan anywhere in the world and discover routes there</li>
-          <li><strong>Inspired by legendary routes</strong> — designs echo famous runs and climbs from around the world</li>
-          <li><strong>Your heatmap</strong> — every workout you've done, layered on one map</li>
+          <li class="m-hide"><strong>Inspired by legendary routes</strong> — designs echo famous runs and climbs from around the world</li>
+          <li class="m-hide"><strong>Your heatmap</strong> — every workout you've done, layered on one map</li>
         </ul>
       </div>
       <div class="phone-wrap" data-reveal>
@@ -399,8 +402,8 @@
           <li><strong>Scan a meal</strong> — AI recognizes the foods and portions, nutrition comes from a verified food database</li>
           <li><strong>Scan a barcode</strong> — packaged foods pull real product nutrition data</li>
           <li><strong>Calories, protein, carbs &amp; fat</strong> against your own goals, plus water and micronutrients</li>
-          <li><strong>Net calories</strong> — what you eat minus what you burn, in one number</li>
-          <li><strong>Everything editable</strong> — estimates are a starting point, you stay in control</li>
+          <li class="m-hide"><strong>Net calories</strong> — what you eat minus what you burn, in one number</li>
+          <li class="m-hide"><strong>Everything editable</strong> — estimates are a starting point, you stay in control</li>
         </ul>
       </div>
       <div class="phone-wrap" data-reveal>
@@ -425,8 +428,8 @@
         <p class="section-sub">Ask anything. Before it answers, the coach looks at your actual recovery, sleep, training load, nutrition and goals — then explains what they mean in plain language.</p>
         <ul class="feature-list">
           <li><strong>"Should I train hard today?"</strong> — answered with your recovery and sleep, not generic tips</li>
-          <li><strong>"How did yesterday's run affect me?"</strong> — connects strain, resting heart rate and readiness</li>
-          <li><strong>Race predictions &amp; taper guidance</strong> for your next event, from your real training</li>
+          <li class="m-hide"><strong>"How did yesterday's run affect me?"</strong> — connects strain, resting heart rate and readiness</li>
+          <li class="m-hide"><strong>Race predictions &amp; taper guidance</strong> for your next event, from your real training</li>
           <li><strong>One intelligence layer</strong> across sleep, recovery, training and nutrition</li>
         </ul>
       </div>
@@ -444,8 +447,8 @@
                 You slept <b>8h 02m</b> of your 8h 11m need and your HRV is steady at <b>62 ms</b>. Recovery is <b>78</b> — a quality tempo session fits well today; save all-out intervals for a greener day.
                 <div class="data-pills"><span class="data-pill">Recovery 78</span><span class="data-pill">Sleep 8h 02m</span><span class="data-pill">HRV 62 ms</span></div>
               </div>
-              <div class="bubble user">How did yesterday's run affect me?</div>
-              <div class="bubble coach">Your 8.4K added <b>10.7 strain</b> — above your recent typical. Resting HR held at <b>44 bpm</b> overnight, so you absorbed it well.</div>
+              <div class="bubble user m-hide">How did yesterday's run affect me?</div>
+              <div class="bubble coach m-hide">Your 8.4K added <b>10.7 strain</b> — above your recent typical. Resting HR held at <b>44 bpm</b> overnight, so you absorbed it well.</div>
             </div>
           </div>
         </div>
@@ -464,9 +467,9 @@
         <p class="section-sub">Share workouts and routes, cheer your friends on, and keep each other consistent — in a community that's actively moderated to stay about fitness.</p>
         <ul class="feature-list">
           <li><strong>Activity posts</strong> with your route, stats and photos — kudos and comments included</li>
-          <li><strong>Save &amp; run friends' routes</strong> straight from the feed</li>
+          <li class="m-hide"><strong>Save &amp; run friends' routes</strong> straight from the feed</li>
           <li><strong>Challenges &amp; groups</strong> to compete and stay accountable</li>
-          <li><strong>Private by choice</strong> — private accounts with follow requests, and per-post visibility</li>
+          <li class="m-hide"><strong>Private by choice</strong> — private accounts with follow requests, and per-post visibility</li>
           <li><strong>A moderated space</strong> — every public post is checked against our <a href="/guidelines/" style="color:var(--accent)">community guidelines</a> before it goes live</li>
         </ul>
         <a class="more" href="/community/" style="display:inline-block;margin-top:20px;color:var(--accent);font-weight:600;font-size:.9rem">Explore community →</a>

@@ -560,6 +560,41 @@ html.js [data-reveal].in .eyebrow::before { width: 22px; }
   html { scroll-behavior: auto; }
 }
 
+/* ── Mobile recomposition (≤700px) — desktop untouched ──
+   Phones get their own composition: one idea per viewport, fewer bullets
+   (.m-hide), single-column grids, hairline rows instead of card stacks,
+   calmer type, no float/tint animations. */
+@media (max-width: 700px) {
+  .m-hide { display: none !important; }
+  section { padding: 56px 0; }
+  .section-title { font-size: 1.7rem; }
+  .section-sub { font-size: .98rem; }
+  .split { gap: 30px; }
+  .feature-list { gap: 11px; margin-top: 20px; }
+  /* Flex-satır maddeler (etiket | açıklama ayrı öğeler) darda taşar ve yoğun
+     görünür → mobilde doğal akan tek paragraf + soldaki işaret. */
+  .feature-list li { display: block; position: relative; padding-left: 32px; font-size: .92rem; }
+  .feature-list li::before { position: absolute; left: 0; top: 1px; }
+  .cards-3, .post-grid { grid-template-columns: 1fr; }
+  .trust-grid { grid-template-columns: 1fr; gap: 0; }
+  /* Kart yığını yerine hairline satırlar (card overuse azaltma) */
+  .trust-cell { background: none; border: 0; border-top: 1px solid var(--border);
+    border-radius: 0; padding: 18px 2px; }
+  .trust-grid > .trust-cell:last-child { border-bottom: 1px solid var(--border); }
+  .trust-ico { width: 30px; height: 30px; border-radius: 8px; margin-bottom: 10px; }
+  .trust-ico svg { width: 15px; height: 15px; }
+  .phone-float { animation: none; }
+  .page-hero::before, .cta::before { display: none; }
+  .page-hero h1 { font-size: clamp(1.8rem, 7.5vw, 2.4rem); }
+  .footer-grid > div:first-child { grid-column: 1 / -1; }
+  .compare th, .compare td { padding: 12px 12px; font-size: .84rem; }
+  .price-amount { font-size: 2.3rem; }
+}
+@media (max-width: 360px) {
+  .big-phone, .feature-phone { width: 232px; height: 494px; border-radius: 41px; }
+  .phone-screen, .phone-carousel, .chat-screen { border-radius: 36px; }
+}
+
 /* ── Language switcher (injected by i18n.js) ── */
 .lang-select {
   flex-shrink: 0; cursor: pointer;
