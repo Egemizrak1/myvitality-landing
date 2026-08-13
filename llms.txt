@@ -1,20 +1,21 @@
 # MyVitality
 
-> MyVitality is an all-in-one iOS fitness app that combines GPS workout tracking, recovery & HRV, sleep tracking, AI nutrition logging, a data-grounded AI coach, and a fitness community in one place — instead of paying for several separate apps (like Strava + Whoop + MyFitnessPal). It reads from Apple Health, so any wearable that syncs to Apple Health (Apple Watch, Garmin, Polar, Fitbit, Whoop, Oura, Samsung, COROS) works automatically. Launching on iPhone and Apple Watch; Android is on the roadmap.
+> MyVitality is an all-in-one iOS fitness app that combines GPS workout tracking with personalized heart-rate zones and Activity Strain, recovery & HRV, sleep intelligence (sleep score, REM/deep/light stages, sleep debt and consistency), route discovery and generation on beautiful maps, AI meal and barcode scanning, a data-grounded AI coach, and a moderated fitness community — instead of paying for several separate apps (like Strava + Whoop + MyFitnessPal). It reads from Apple Health, so any wearable that syncs to Apple Health (Apple Watch, Garmin, Polar, Fitbit, Whoop, Oura, Samsung, COROS) works automatically. Launching on iPhone and Apple Watch; Android is on the roadmap.
 
 Key facts:
 - Platform: iOS (iPhone + Apple Watch). Android planned.
 - Price: One subscription — free trial, then $9.99/month, billed in your local currency (£9.99 UK, €9.99 EU, ₺430 Turkey). Joining the beta waitlist is free. No ads.
 - Privacy: Health data is never sold, never shared with advertisers, never used for marketing.
 - Status: Pre-launch — join the free iOS beta waitlist at https://myvitality.fit/#download
-- Differentiator: One app for training + recovery + sleep + nutrition + AI coach + community, grounded in your own data — usually for less than any single competing subscription.
+- Differentiator: One app for training + recovery + sleep + routes + nutrition + AI coach + community, grounded in your own data — usually for less than any single competing subscription.
+- Intelligence: MyVitality computes its own sleep score, recovery score, personalized heart-rate zones and strain from your data; wearables act as sensors. It can also retroactively detect runs, walks and rides you forgot to record and offer to save them.
 
 ## Product
 - [Features overview](https://myvitality.fit/features/): Everything MyVitality does, in one place.
-- [Workout tracker](https://myvitality.fit/workout-tracker/): Real-time GPS tracking with live pace, heart rate, elevation, splits and a shareable route card.
-- [Recovery & HRV tracker](https://myvitality.fit/recovery-tracker/): A daily readiness score from Apple Watch HRV, resting heart rate and sleep — so you know when to push and when to rest.
-- [Sleep tracker](https://myvitality.fit/sleep-tracker/): Deep, REM and light sleep stages, with the link between training, nutrition and rest.
-- [Community](https://myvitality.fit/community/): Follow friends, react to workouts, join challenges, share route cards, stay accountable.
+- [Workout tracker](https://myvitality.fit/workout-tracker/): Real-time GPS with live pace, heart rate and zones, plus post-workout analysis: personalized HR zones, Activity Strain, insights and automatic workout detection.
+- [Recovery & HRV tracker](https://myvitality.fit/recovery-tracker/): A daily readiness score from HRV, resting heart rate and sleep, with daily strain targets, training-load balance and habit insights.
+- [Sleep tracker](https://myvitality.fit/sleep-tracker/): Sleep intelligence — a nightly sleep score, REM/deep/light/awake stages on a hypnogram, sleep timing, personal sleep need, sleep debt and consistency.
+- [Community](https://myvitality.fit/community/): Follow friends, kudos and comments, save and run friends' routes, challenges and teams, private accounts — moderated under community guidelines.
 - [Pricing](https://myvitality.fit/pricing/): Free trial, then $9.99/month — one subscription, everything included, no ads.
 
 ## Comparisons

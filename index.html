@@ -4,16 +4,16 @@
   <script>document.documentElement.className += ' js';</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0A0908">
+  <meta name="theme-color" content="#0B0D0E">
   <title>All-in-One Fitness &amp; Recovery App for iPhone — MyVitality</title>
-  <meta name="description" content="One iPhone app for GPS workouts, Apple Watch recovery &amp; HRV, sleep and AI nutrition — instead of Strava + Whoop + MyFitnessPal. Join the free iOS beta.">
+  <meta name="description" content="Recovery, sleep intelligence, training strain, route discovery, nutrition and an AI coach — one iPhone app instead of Strava + Whoop + MyFitnessPal. Join the free iOS beta.">
   <link rel="canonical" href="https://myvitality.fit/">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://myvitality.fit/">
   <meta property="og:title" content="All-in-One Fitness &amp; Recovery App for iPhone — MyVitality">
-  <meta property="og:description" content="GPS workouts, Apple Watch recovery &amp; HRV, sleep, AI nutrition and a coach grounded in your data — in one iPhone app. Join the free iOS beta waitlist.">
+  <meta property="og:description" content="Recovery, sleep intelligence, training strain, route discovery, nutrition and an AI coach grounded in your data — in one iPhone app. Join the free iOS beta waitlist.">
   <meta property="og:image" content="https://myvitality.fit/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -30,7 +30,7 @@
     "name": "MyVitality",
     "operatingSystem": "iOS 14.0 or later",
     "applicationCategory": "HealthApplication",
-    "description": "MyVitality is a fitness tracking app for iPhone and Apple Watch. Track workouts with GPS, monitor recovery and HRV, log sleep and nutrition, get a data-grounded AI coach and stay connected with your fitness community.",
+    "description": "MyVitality is a fitness and health app for iPhone and Apple Watch. Get a daily recovery score, sleep stages and sleep intelligence, personalized heart-rate zones and training strain, GPS workouts with route discovery, meal and barcode scanning, an AI coach grounded in your data, and a fitness community.",
     "url": "https://myvitality.fit/",
     "image": "https://myvitality.fit/assets/og-image.png",
     "screenshot": "https://myvitality.fit/assets/fitness-tracking-app-dashboard.webp",
@@ -57,32 +57,32 @@
   <style>
     /* ── Homepage hero ── */
     .home-hero { position: relative; overflow: hidden; padding: clamp(56px, 8vw, 104px) 0 clamp(48px, 7vw, 88px); }
-    .home-hero::before { content:''; position:absolute; top:-260px; right:-180px; width:760px; height:760px; border-radius:50%; background: radial-gradient(circle, rgba(255,107,71,0.14) 0%, transparent 66%); pointer-events:none; animation: drift1 22s ease-in-out infinite; }
-    .home-hero::after { content:''; position:absolute; bottom:-320px; left:-220px; width:680px; height:680px; border-radius:50%; background: radial-gradient(circle, rgba(230,180,80,0.09) 0%, transparent 68%); pointer-events:none; animation: drift2 28s ease-in-out infinite; }
-    @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-44px,34px)} }
-    @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(50px,-28px)} }
     .home-hero .grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(40px,5vw,72px); align-items: center; position: relative; }
+    /* Grid blowout koruması: iframe'li çocuklar (GIS butonu) track'i viewport'tan
+       geniş zorlamasın. */
+    .home-hero .grid > * { min-width: 0; }
+    .g-signin iframe { max-width: 100%; }
+    @media (max-width: 560px) { .waitlist-form input[type=email] { min-width: 0; } }
     .hero-copy > * { opacity: 0; animation: heroIn .7s var(--ease) forwards; }
     .hero-copy > *:nth-child(1){animation-delay:.05s} .hero-copy > *:nth-child(2){animation-delay:.12s}
     .hero-copy > *:nth-child(3){animation-delay:.19s} .hero-copy > *:nth-child(4){animation-delay:.26s}
     .hero-copy > *:nth-child(5){animation-delay:.33s} .hero-copy > *:nth-child(6){animation-delay:.40s}
     @keyframes heroIn { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
-    .home-hero h1 { font-size: clamp(2.4rem, 1.3rem + 4vw, 3.9rem); font-weight: 750; line-height: 1.06; letter-spacing: -0.025em; margin-bottom: 22px; }
+    .home-hero h1 { font-size: clamp(2.4rem, 1.3rem + 4vw, 3.9rem); font-weight: 650; line-height: 1.06; letter-spacing: -0.03em; margin-bottom: 22px; }
     .home-hero .lede { font-size: 1.1rem; color: var(--text-2); line-height: 1.62; max-width: 500px; margin-bottom: 30px; }
     .waitlist-form { display:flex; gap:10px; flex-wrap:wrap; max-width:470px; }
-    .waitlist-form input[type=email]{ flex:1; min-width:210px; padding:14px 16px; border-radius:var(--r-full); border:1px solid var(--border); background:var(--card); color:var(--text); font-size:.96rem; font-family:inherit; transition:border-color .15s, box-shadow .15s; }
+    .waitlist-form input[type=email]{ flex:1; min-width:210px; padding:14px 16px; border-radius:12px; border:1px solid var(--border); background:var(--card); color:var(--text); font-size:.96rem; font-family:inherit; transition:border-color .15s, box-shadow .15s; }
     .waitlist-form input[type=email]::placeholder{ color:var(--muted); }
-    .waitlist-form input[type=email]:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(255,107,71,.18); }
+    .waitlist-form input[type=email]:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(157,221,224,.14); }
     .waitlist-form .btn-primary{ white-space:nowrap; }
     .waitlist-msg{ flex-basis:100%; font-size:.84rem; margin:4px 0 0; min-height:1.1em; }
     .waitlist-msg.ok{ color:var(--success); font-weight:600; }
-    .waitlist-msg.err{ color:#ff6b6b; }
+    .waitlist-msg.err{ color:var(--error); }
     .waitlist-note{ font-size:.8rem; color:var(--muted); margin-top:16px; }
     .waitlist-note a{ color:var(--accent); font-weight:600; }
     /* "or" divider + Google button (GIS renders an iframe into .g-signin) */
     .waitlist-or { display:flex; align-items:center; gap:12px; max-width:470px; margin:16px 0 12px;
-      font-family:var(--font-label); font-size:.68rem; font-weight:500; letter-spacing:.2em;
-      text-transform:uppercase; color:var(--faint); }
+      font-family:var(--font-label); font-size:.74rem; font-weight:500; letter-spacing:0; color:var(--faint); }
     .waitlist-or::before, .waitlist-or::after { content:''; height:1px; flex:1; background:var(--border); }
     .g-signin { min-height:44px; }
     .g-signin:empty { display:none; }
@@ -90,110 +90,48 @@
     .waitlist-or:has(+ .g-signin:empty) { display:none; }
     .waitlist-or-center { margin-left:auto; margin-right:auto; }
     .g-signin-center { display:flex; justify-content:center; }
-    /* hero meta row — mono, hairline-separated */
+    /* hero meta row — hairline-separated */
     .hero-meta { display:flex; gap:26px; margin-top:34px; flex-wrap:wrap; }
     .hero-meta > div { display:flex; flex-direction:column; gap:5px; padding-left:18px; border-left:1px solid var(--border); }
     .hero-meta > div:first-child { padding-left:0; border-left:0; }
-    .hero-meta b { font-family:var(--font-display); font-size:1.55rem; font-weight:700; letter-spacing:-0.015em; line-height:1; font-variant-numeric:tabular-nums; }
-    .hero-meta span { font-family:var(--font-label); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
-
-    /* ── Readiness ring (signature) ── */
-    .ring-wrap { opacity:0; animation: heroIn .9s var(--ease) .3s forwards; }
-    .ring { position: relative; width: min(380px, 80vw); aspect-ratio: 1; margin: 0 auto; }
-    .ring::before { content:''; position:absolute; inset:-6%; background: radial-gradient(circle, rgba(255,107,71,0.16) 0%, transparent 60%); pointer-events:none; }
-    .ring-svg { width:100%; height:100%; transform: rotate(-90deg); position:relative; }
-    .ring-track { fill:none; stroke: rgba(255,255,255,0.07); stroke-width: 8; }
-    .ring-prog { fill:none; stroke: var(--accent); stroke-width: 8; stroke-linecap: round;
-      stroke-dasharray: 653.45; stroke-dashoffset: 653.45; filter: drop-shadow(0 0 9px rgba(255,107,71,.55));
-      animation: ringDraw 1.7s var(--ease) .35s forwards; }
-    @keyframes ringDraw { to { stroke-dashoffset: 91.5; } }
-    .ring-center { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-    .ring-num { font-family: var(--font-display); font-size: clamp(3.2rem, 13vw, 4.8rem); font-weight: 720; letter-spacing:-0.025em; line-height:1; }
-    .ring-cap { font-family: var(--font-label); font-size:.7rem; letter-spacing:.34em; color: var(--accent); margin-top:12px; }
-    .ring-cap-sub { font-family: var(--font-label); font-size:.62rem; letter-spacing:.16em; color: var(--muted); margin-top:6px; }
-    .ring-ticks { display:flex; justify-content:center; gap:9px; margin-top:30px; flex-wrap:wrap; }
-    .ring-tick { display:inline-flex; gap:7px; align-items:center; font-family:var(--font-label); font-size:.72rem; letter-spacing:.03em; color:var(--muted); padding:8px 13px; border:1px solid var(--border); border-radius:var(--r-full); background:var(--card); }
-    .ring-tick b { color:var(--text); font-weight:600; }
-    .ring-tick .up { color:var(--accent); }
-    @media (prefers-reduced-motion: reduce) {
-      .home-hero::before, .home-hero::after { animation:none; }
-      .hero-copy > *, .ring-wrap { opacity:1; animation:none; }
-      .ring-prog { animation:none; stroke-dashoffset:91.5; }
-    }
-    @media (max-width: 900px) {
-      .home-hero .grid { grid-template-columns: 1fr; text-align: center; }
-      .home-hero .lede { margin-left:auto; margin-right:auto; }
-      .home-hero .waitlist-form, .home-hero .hero-meta { justify-content: center; margin-left:auto; margin-right:auto; }
-      .home-hero .waitlist-or { margin-left:auto; margin-right:auto; }
-      .home-hero .g-signin { display:flex; justify-content:center; }
-      .ring-wrap { margin-top: 8px; order: -1; }
-      .ring { width: min(300px, 72vw); }
-    }
-
-    /* ── App showcase split ── */
-    .showcase { background: var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-    .showcase .cap { font-family:var(--font-label); font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-top:22px; }
-
-    /* ── AI coach chat mockup ── */
-    .chat-screen { position:absolute; inset:5px; border-radius:39px; overflow:hidden; padding-top:34px; background: linear-gradient(180deg,#0c0e13,#0b0b12); display:flex; flex-direction:column; }
-    .chat-head { display:flex; align-items:center; gap:10px; padding:14px 16px; border-bottom:1px solid var(--border); }
-    .chat-ava { width:32px; height:32px; border-radius:50%; background:var(--grad); display:flex; align-items:center; justify-content:center; color:var(--ink); }
-    .chat-ava svg { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.7; }
-    .chat-name { font-size:.85rem; font-weight:600; color:var(--text); }
-    .chat-status { font-family:var(--font-label); font-size:.58rem; letter-spacing:.06em; color:var(--success); }
-    .chat-body { flex:1; padding:16px 14px; display:flex; flex-direction:column; gap:10px; overflow:hidden; }
-    .bubble { max-width:84%; padding:10px 13px; font-size:.78rem; line-height:1.45; border-radius:15px; }
-    .bubble.user { align-self:flex-end; background:var(--accent); color:var(--ink); border-bottom-right-radius:5px; font-weight:500; }
-    .bubble.coach { align-self:flex-start; background:rgba(255,255,255,0.05); color:var(--text-2); border-bottom-left-radius:5px; border:1px solid var(--border-soft); }
-    .bubble.coach b { color:var(--text); }
-    .data-pills { display:flex; gap:6px; margin:9px 0 1px; flex-wrap:wrap; }
-    .data-pill { font-family:var(--font-label); font-size:.58rem; font-weight:500; letter-spacing:.04em; padding:3px 8px; border-radius:6px; background:var(--accent-2-soft); color:var(--accent-2); border:1px solid var(--accent-2-line); }
-
-    /* ── Why band (statements) ── */
-    .why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
-    @media (max-width:760px){ .why-grid{ grid-template-columns:1fr; } }
-    .why-cell { padding:30px 28px; border-right:1px solid var(--border); }
-    .why-cell:last-child { border-right:0; }
-    @media (max-width:760px){ .why-cell{ border-right:0; border-bottom:1px solid var(--border); } .why-cell:last-child{border-bottom:0;} }
-    .why-cell .n { font-family:var(--font-label); font-size:.74rem; letter-spacing:.1em; color:var(--accent); margin-bottom:14px; }
-    .why-cell h3 { font-size:1.08rem; font-weight:600; letter-spacing:-0.02em; margin-bottom:9px; }
-    .why-cell p { font-size:.92rem; color:var(--muted); line-height:1.62; }
-    .beta-note { text-align:center; color:var(--muted); font-size:.84rem; margin-top:28px; }
-    .beta-note a { color:var(--accent); font-weight:600; }
+    .hero-meta b { font-family:var(--font-display); font-size:1.55rem; font-weight:650; letter-spacing:-0.02em; line-height:1; font-variant-numeric:tabular-nums; }
+    .hero-meta span { font-family:var(--font-label); font-size:.74rem; letter-spacing:0; color:var(--muted); }
 
     /* ── Hero device mockup + floating data cards (above the fold) ── */
     .hero-visual { position: relative; display:flex; justify-content:center; align-items:center; min-height: 540px;
       opacity:0; animation: heroIn .9s var(--ease) .28s forwards; }
-    .hero-visual::before { content:''; position:absolute; inset:6% 12%; border-radius:50%;
-      background: radial-gradient(circle, rgba(255,107,71,0.15) 0%, transparent 62%); pointer-events:none; }
     .hero-visual .big-phone { position:relative; z-index:2; }
     .float-card { position:absolute; z-index:3; display:flex; align-items:center; gap:12px;
-      background: rgba(15,18,23,0.74); backdrop-filter: blur(16px) saturate(150%); -webkit-backdrop-filter: blur(16px) saturate(150%);
-      border:1px solid var(--border-strong); border-radius:16px; padding:13px 15px;
-      box-shadow: 0 26px 64px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05); }
+      background: rgba(19,22,23,0.82); backdrop-filter: blur(16px) saturate(150%); -webkit-backdrop-filter: blur(16px) saturate(150%);
+      border:1px solid var(--border-strong); border-radius:14px; padding:13px 15px;
+      box-shadow: 0 26px 64px rgba(0,0,0,0.55); }
     .float-readiness { top: 7%; right: -4%; animation: floatY 6.5s ease-in-out infinite; }
     .float-hrv { bottom: 9%; left: -6%; flex-direction:column; align-items:stretch; gap:9px; animation: floatY 7.5s ease-in-out .4s infinite; }
     @media (prefers-reduced-motion: reduce) { .float-card { animation:none !important; } }
     .mini-ring { position:relative; width:54px; height:54px; flex-shrink:0; }
     .mini-ring svg { width:100%; height:100%; transform: rotate(-90deg); }
     .mini-ring .ring-track { fill:none; stroke: rgba(255,255,255,0.09); stroke-width: 14; }
-    .mini-ring .ring-prog { fill:none; stroke: url(#auroraRing); stroke-width: 14; stroke-linecap: round;
-      stroke-dasharray: 653.45; stroke-dashoffset: 91.5; filter: drop-shadow(0 0 5px rgba(255,107,71,.55)); }
+    .mini-ring .ring-prog { fill:none; stroke: var(--accent); stroke-width: 14; stroke-linecap: round;
+      stroke-dasharray: 653.45; stroke-dashoffset: 143.7; }
     .mini-ring-num { position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-      font-family: var(--font-display); font-size:1.12rem; font-weight:600; letter-spacing:-0.015em; }
-    .fc-label { font-family:var(--font-label); font-size:.58rem; letter-spacing:.16em; color:var(--muted); display:block; }
-    .fc-val { font-family:var(--font-display); font-size:1.06rem; font-weight:600; letter-spacing:-0.02em; color:var(--accent-2); }
+      font-family: var(--font-display); font-size:1.12rem; font-weight:650; letter-spacing:-0.015em; font-variant-numeric:tabular-nums; }
+    .fc-label { font-family:var(--font-label); font-size:.66rem; letter-spacing:.01em; color:var(--muted); display:block; font-weight:600; }
+    .fc-val { font-family:var(--font-display); font-size:1.06rem; font-weight:600; letter-spacing:-0.02em; color:var(--accent); }
     .fc-row { display:flex; align-items:center; gap:9px; }
     .fc-dot { width:6px; height:6px; border-radius:50%; background:var(--muted); flex-shrink:0; }
-    .fc-dot.up { background:var(--accent-2); box-shadow:0 0 8px rgba(230,180,80,.6); }
-    .fc-k { font-family:var(--font-label); font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); min-width:42px; }
-    .fc-v { font-family:var(--font-display); font-size:.92rem; font-weight:600; letter-spacing:-0.02em; margin-left:auto; }
-    .fc-v.up { color:var(--accent-2); }
+    .fc-dot.up { background:var(--accent); }
+    .fc-k { font-family:var(--font-label); font-size:.7rem; letter-spacing:0; color:var(--muted); min-width:42px; font-weight:600; }
+    .fc-v { font-family:var(--font-display); font-size:.92rem; font-weight:600; letter-spacing:-0.02em; margin-left:auto; font-variant-numeric:tabular-nums; }
+    .fc-v.up { color:var(--accent); }
     /* On phones the floating cards drop into a centred row under the device —
        absolute overlap is a desktop flourish that risks clipping when narrow. */
     @media (max-width: 900px) {
+      .home-hero .grid { grid-template-columns: 1fr; text-align: center; }
+      .home-hero .lede { margin-left:auto; margin-right:auto; }
+      .home-hero .waitlist-form, .home-hero .hero-meta { justify-content: center; margin-left:auto; margin-right:auto; }
+      .home-hero .waitlist-or { margin-left:auto; margin-right:auto; }
+      .home-hero .g-signin { display:flex; justify-content:center; }
       .hero-visual { order:-1; min-height:0; margin:0 auto 8px; flex-direction:column; gap:12px; }
-      .hero-visual::before { inset:2% 8%; }
       .float-card { position:static; animation:none; width:max-content; max-width:92%; }
       .float-readiness, .float-hrv { animation:none; }
       .float-hrv { min-width:200px; }
@@ -203,6 +141,41 @@
       .mini-ring { width:46px; height:46px; }
       .fc-val { font-size:.95rem; }
     }
+
+    /* ── Feature splits (screenshot phone + copy) ── */
+    .feature-band { border-top:1px solid var(--border); }
+    .feature-band.alt { background:var(--surface); }
+    .metric-chips { display:flex; gap:8px; flex-wrap:wrap; margin-top:22px; }
+    .metric-chip { display:inline-flex; align-items:center; gap:7px; padding:7px 13px; border-radius:var(--r-full);
+      background:var(--accent-soft); border:1px solid var(--accent-line); color:var(--text);
+      font-family:var(--font-label); font-size:.78rem; font-weight:600; font-variant-numeric:tabular-nums; }
+    .metric-chip span { color:var(--muted); font-weight:500; }
+
+    /* ── AI coach chat mockup ── */
+    .chat-screen { position:absolute; inset:5px; border-radius:39px; overflow:hidden; padding-top:34px; background: var(--bg); display:flex; flex-direction:column; }
+    .chat-head { display:flex; align-items:center; gap:10px; padding:14px 16px; border-bottom:1px solid var(--border); }
+    .chat-ava { width:32px; height:32px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; color:var(--ink); }
+    .chat-ava svg { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.7; }
+    .chat-name { font-size:.85rem; font-weight:600; color:var(--text); }
+    .chat-status { font-family:var(--font-label); font-size:.62rem; letter-spacing:0; color:var(--success); font-weight:600; }
+    .chat-body { flex:1; padding:16px 14px; display:flex; flex-direction:column; gap:10px; overflow:hidden; }
+    .bubble { max-width:84%; padding:10px 13px; font-size:.78rem; line-height:1.45; border-radius:14px; }
+    .bubble.user { align-self:flex-end; background:var(--accent); color:var(--ink); border-bottom-right-radius:5px; font-weight:500; }
+    .bubble.coach { align-self:flex-start; background:var(--card); color:var(--text-2); border-bottom-left-radius:5px; border:1px solid var(--border-soft); }
+    .bubble.coach b { color:var(--text); }
+    .data-pills { display:flex; gap:6px; margin:9px 0 1px; flex-wrap:wrap; }
+    .data-pill { font-family:var(--font-label); font-size:.62rem; font-weight:600; letter-spacing:0; padding:3px 8px; border-radius:6px; background:var(--accent-soft); color:var(--accent); border:1px solid var(--accent-line); font-variant-numeric:tabular-nums; }
+
+    /* ── Membership band ── */
+    .membership-card { max-width:640px; margin:44px auto 0; background:var(--card); border:1px solid var(--border);
+      border-radius:var(--r-lg); padding:36px 32px; text-align:center; }
+    .membership-price { font-family:var(--font-display); font-size:2.9rem; font-weight:650; letter-spacing:-0.03em; font-variant-numeric:tabular-nums; margin:10px 0 2px; }
+    .membership-price small { font-size:1rem; font-weight:500; color:var(--muted); }
+    .membership-sub { color:var(--muted); font-size:.9rem; }
+    .membership-list { list-style:none; margin:24px auto 28px; display:grid; grid-template-columns:1fr 1fr; gap:10px 22px; max-width:460px; text-align:left; }
+    @media (max-width:560px){ .membership-list { grid-template-columns:1fr; } }
+    .membership-list li { display:flex; gap:9px; font-size:.9rem; color:var(--text-2); }
+    .membership-list li::before { content:'✓'; color:var(--accent); font-weight:700; }
 
     /* ── Trust band ── */
     .trust-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
@@ -222,8 +195,8 @@
     .compare caption { caption-side:bottom; text-align:left; font-size:.74rem; color:var(--faint); line-height:1.55; padding:14px 18px 0; }
     .compare .partial { color:var(--text-2); font-weight:500; }
     .compare thead th.us { background:var(--accent-soft); }
-    .compare td.us, .compare tbody td.us { background:rgba(255,107,71,0.06); }
-    .compare .price-cell { font-family:var(--font-label); font-size:.82rem; }
+    .compare td.us, .compare tbody td.us { background:rgba(157,221,224,0.06); }
+    .compare .price-cell { font-family:var(--font-label); font-size:.82rem; font-variant-numeric:tabular-nums; }
     .compare-links { text-align:center; margin-top:18px; font-size:.86rem; color:var(--muted); }
     .compare-links a { color:var(--accent); font-weight:600; }
     .compare-links .sep { color:var(--faint); margin:0 10px; }
@@ -253,8 +226,8 @@
     <div class="grid">
       <div class="hero-copy">
         <span class="eyebrow">Now in private beta · iOS first</span>
-        <h1>Train with clarity, <span class="grad">not guesswork.</span></h1>
-        <p class="lede">MyVitality reads your Apple Watch recovery, GPS workouts, sleep and nutrition — then tells you, in plain language, whether today is a day to push or a day to rest.</p>
+        <h1>Understand your body. <span class="grad">Train smarter.</span></h1>
+        <p class="lede">MyVitality turns your sleep, heart data, workouts and meals into one clear picture — a daily recovery score, sleep intelligence and training strain that tell you what your body is ready for today.</p>
         <form class="waitlist-form" data-source="home_hero">
           <input type="email" name="email" required placeholder="Enter your email" aria-label="Email address" autocomplete="email">
           <button type="submit" class="btn-primary">Join the iOS beta waitlist →</button>
@@ -273,144 +246,49 @@
         <div class="big-phone phone-float">
           <div class="phone-top"><div class="dynamic-island"></div></div>
           <div class="phone-screen">
-            <img src="/assets/fitness-tracking-app-dashboard.webp" alt="MyVitality iPhone app dashboard showing recovery, training load and nutrition" width="240" height="522">
+            <img src="/assets/fitness-tracking-app-dashboard.webp" alt="MyVitality iPhone dashboard showing recovery, strain, sleep and daily activity" width="240" height="522">
           </div>
         </div>
-        <div class="float-card float-readiness" role="img" aria-label="Recovery readiness 86 out of 100 — ready to train">
+        <div class="float-card float-readiness" role="img" aria-label="Recovery 78 out of 100 — ready to train">
           <div class="mini-ring">
             <svg viewBox="0 0 240 240" aria-hidden="true">
-              <defs><linearGradient id="auroraRing" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FF6B47"/><stop offset="1" stop-color="#E6B450"/></linearGradient></defs>
               <circle class="ring-track" cx="120" cy="120" r="104"></circle>
               <circle class="ring-prog" cx="120" cy="120" r="104"></circle>
             </svg>
-            <div class="mini-ring-num">86</div>
+            <div class="mini-ring-num">78</div>
           </div>
-          <div><span class="fc-label">RECOVERY</span><b class="fc-val">Ready to train</b></div>
+          <div><span class="fc-label">Recovery</span><b class="fc-val">Ready to train</b></div>
         </div>
         <div class="float-card float-hrv" aria-hidden="true">
-          <div class="fc-row"><span class="fc-dot up"></span><span class="fc-k">HRV</span><b class="fc-v up">↑8%</b></div>
-          <div class="fc-row"><span class="fc-dot"></span><span class="fc-k">Sleep</span><b class="fc-v">7h 42m</b></div>
+          <div class="fc-row"><span class="fc-dot up"></span><span class="fc-k">Sleep</span><b class="fc-v up">8h 02m</b></div>
+          <div class="fc-row"><span class="fc-dot"></span><span class="fc-k">HRV</span><b class="fc-v">62 ms</b></div>
         </div>
       </div>
     </div>
   </div>
 </header>
 
-<!-- DEVICE COMPATIBILITY -->
-<div class="devices-strip">
-  <div class="devices-strip-label">At launch, MyVitality syncs through Apple Health</div>
-  <div class="device-badges">
-    <span class="device-badge">Apple Watch</span>
-    <span class="device-badge">Garmin</span>
-    <span class="device-badge">Polar</span>
-    <span class="device-badge">Fitbit</span>
-    <span class="device-badge">Whoop</span>
-    <span class="device-badge">Oura Ring</span>
-    <span class="device-badge">Samsung Galaxy Watch</span>
-    <span class="device-badge">COROS</span>
-  </div>
-  <p class="device-badge-note">Garmin, Fitbit, Whoop, Oura and others work at launch <strong>as long as they're set to sync to Apple Health</strong> — MyVitality reads the data from there. Direct integrations are on the roadmap.</p>
-</div>
-
-<!-- 01 · PROBLEM -->
-<section>
-  <div class="container center" data-reveal>
-    <span class="eyebrow">01 — The problem</span>
-    <h2 class="section-title">Tracking your fitness shouldn't be this hard</h2>
-    <p class="section-sub">Most people quit tracking because the tools get in the way. Notes get messy, spreadsheets get abandoned, and five separate apps never talk to each other.</p>
-  </div>
-  <div class="container" style="margin-top:48px">
-    <div class="cards-3" data-reveal>
-      <div class="problem-card">
-        <div class="x">Scattered data</div>
-        <p>Runs in one app, sleep in another, food in a third. You never see how training, recovery and nutrition actually connect.</p>
-      </div>
-      <div class="problem-card">
-        <div class="x">No idea when to rest</div>
-        <p>You push hard every day and wonder why you're tired or injured. Without recovery and HRV data, you're guessing.</p>
-      </div>
-      <div class="problem-card">
-        <div class="x">Consistency fades</div>
-        <p>Motivation dips, you miss a few days, and the habit quietly disappears. Nothing keeps you accountable.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 02 · FEATURES -->
-<section id="features" style="background:var(--surface);border-top:1px solid var(--border)">
-  <div class="container center" data-reveal>
-    <span class="eyebrow">02 — Everything you need</span>
-    <h2 class="section-title">Six tools. One app.</h2>
-    <p class="section-sub">Each is useful on its own — and far more powerful when they all share the same data.</p>
-  </div>
-  <div class="container" style="margin-top:52px">
-    <div class="cards-3" data-reveal>
-      <div class="feat-card">
-        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M9 20l-5 2V6l5-2 6 2 5-2v16l-5 2-6-2z"/><path d="M9 4v16M15 6v16"/></svg></div>
-        <div class="feat-title"><a class="feat-title-link" href="/workout-tracker/">Workout Tracker</a></div>
-        <div class="feat-desc">Real-time GPS on a clean, distraction-free map with live pace, heart rate, elevation and splits. Finish with a shareable route card.</div>
-        <a class="more" href="/workout-tracker/">Explore →</a>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-9.2-8.4C1.1 8.3 2.8 5 6 5c2 0 3.2 1.2 4 2 .8-.8 2-2 4-2 3.2 0 4.9 3.3 3.2 6.6C19 15.4 12 20 12 20z"/></svg></div>
-        <div class="feat-title"><a class="feat-title-link" href="/recovery-tracker/">Recovery &amp; HRV</a></div>
-        <div class="feat-desc">A daily readiness score from your Apple Watch HRV, resting heart rate and sleep — so you know when to push and when to rest.</div>
-        <a class="more" href="/recovery-tracker/">Explore →</a>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.6 6.6 0 0 0 21 12.8z"/></svg></div>
-        <div class="feat-title"><a class="feat-title-link" href="/sleep-tracker/">Sleep Tracking</a></div>
-        <div class="feat-desc">Deep, REM and light stages every morning. See how training and nutrition affect the quality of your rest.</div>
-        <a class="more" href="/sleep-tracker/">Explore →</a>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M5 21C4 12 9 4 20 4c0 11-8 16-15 14z"/><path d="M5 21c2-6 6-9 10-10"/></svg></div>
-        <div class="feat-title">AI Nutrition</div>
-        <div class="feat-desc">Snap a photo of your plate for a fast, editable estimate of calories, protein, carbs and fat. Tweak anything, scan barcodes and set your own macro goals.</div>
-        <a class="more" href="/features/">See all →</a>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 3l1.7 5L19 9.7l-5.3 1.6L12 17l-1.7-5.7L5 9.7 10.3 8z"/><path d="M19 14.5l.6 1.9 1.9.6-1.9.6-.6 1.9-.6-1.9-1.9-.6 1.9-.6z"/></svg></div>
-        <div class="feat-title">AI Coach</div>
-        <div class="feat-desc">Ask anything. Your coach reads your real recovery, training load and goals, then answers with your numbers — not generic tips.</div>
-        <a class="more" href="#coach">Meet the coach →</a>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 6.2a3 3 0 0 1 0 5.6M20.5 20a5.5 5.5 0 0 0-4-5.3"/></svg></div>
-        <div class="feat-title"><a class="feat-title-link" href="/community/">Community</a></div>
-        <div class="feat-desc">Follow friends, react to their workouts, join challenges and share your route card in one tap. Stay accountable together.</div>
-        <a class="more" href="/community/">Explore →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 03 · APP SHOWCASE -->
-<section class="showcase">
+<!-- 01 · RECOVERY & HEALTH -->
+<section id="recovery" class="feature-band">
   <div class="container">
     <div class="split">
       <div data-reveal>
-        <span class="eyebrow">03 — The app</span>
-        <h2 class="section-title">Designed to be glanced at</h2>
-        <p class="section-sub">Open it, get your answer, get on with your day. Every screen leads with the one number that matters — readiness, pace, calories left, tonight's sleep — and hides the rest until you ask.</p>
+        <span class="eyebrow">01 — Recovery &amp; health</span>
+        <h2 class="section-title">Know when to push, and when to rest</h2>
+        <p class="section-sub">Every morning MyVitality reads your HRV, resting heart rate and sleep, and turns them into one recovery score with a plain-language recommendation for the day. Your health trends live right underneath it.</p>
         <ul class="feature-list">
-          <li><strong>One dashboard</strong> for training, recovery and nutrition</li>
-          <li><strong>Distraction-free GPS</strong> with live pace and clean route maps</li>
-          <li><strong>Recovery first</strong> — your readiness score, front and centre</li>
+          <li><strong>Personalized recovery score</strong> built from your own baselines, not population averages</li>
+          <li><strong>HRV, resting heart rate &amp; sleep</strong> — with trends against your recent normal</li>
+          <li><strong>Daily strain target</strong> that matches training to how recovered you are</li>
+          <li><strong>Early-warning alerts</strong> when your training load climbs faster than your body adapts</li>
         </ul>
+        <a class="more" href="/recovery-tracker/" style="display:inline-block;margin-top:20px;color:var(--accent);font-weight:600;font-size:.9rem">Explore recovery →</a>
       </div>
-      <div class="phone-wrap phone-float" data-reveal>
-        <div class="big-phone">
+      <div class="phone-wrap" data-reveal>
+        <div class="feature-phone">
           <div class="phone-top"><div class="dynamic-island"></div></div>
-          <div class="phone-carousel" id="heroCarousel">
-            <div class="phone-slide active"><img src="/assets/fitness-tracking-app-dashboard.webp" alt="MyVitality fitness tracking app dashboard showing daily activity, recovery and nutrition" width="240" height="522"></div>
-            <div class="phone-slide"><img src="/assets/workout-tracker-gps-route-map.webp" alt="Workout tracker app showing a GPS route on a map" loading="lazy" width="240" height="522"></div>
-            <div class="phone-slide"><img src="/assets/recovery-sleep-hrv-tracker-screen.webp" alt="Recovery and HRV tracker screen with readiness score" loading="lazy" width="240" height="522"></div>
-            <div class="phone-slide"><img src="/assets/ai-nutrition-calorie-tracker-screen.webp" alt="AI nutrition and calorie tracker screen" loading="lazy" width="240" height="522"></div>
-            <div class="carousel-dots" id="carouselDots">
-              <div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div>
-            </div>
+          <div class="phone-screen">
+            <img src="/assets/recovery-sleep-hrv-tracker-screen.webp" alt="MyVitality Health screen with recovery score 78, HRV, resting heart rate, sleep and activity strain" loading="lazy" width="240" height="522">
           </div>
         </div>
       </div>
@@ -418,42 +296,138 @@
   </div>
 </section>
 
-<!-- 04 · HOW IT WORKS -->
-<section id="how">
-  <div class="container center" data-reveal>
-    <span class="eyebrow">04 — How it works</span>
-    <h2 class="section-title">Track → Understand → Improve</h2>
-    <p class="section-sub">Up and running in minutes. Start with a free trial. Works with any smartwatch that syncs to Apple Health.</p>
-  </div>
-  <div class="steps" data-reveal>
-    <div class="step">
-      <div class="step-num">1</div>
-      <div><div class="step-title">Track</div><div class="step-desc">Record GPS workouts in real time, or let MyVitality pull your runs, rides, sleep and heart rate automatically from Apple Health.</div></div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div><div class="step-title">Understand</div><div class="step-desc">Wake up to a recovery score from your HRV and sleep. See your training load, trends and what's actually moving the needle.</div></div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div><div class="step-title">Improve</div><div class="step-desc">Ask your AI coach what to do today, log your meals, hit your streak and stay consistent with friends cheering you on.</div></div>
+<!-- 02 · SLEEP INTELLIGENCE -->
+<section id="sleep" class="feature-band alt">
+  <div class="container">
+    <div class="split reverse">
+      <div data-reveal>
+        <span class="eyebrow">02 — Sleep intelligence</span>
+        <h2 class="section-title">See how you really slept</h2>
+        <p class="section-sub">MyVitality builds a full picture of every night: a confidence-weighted sleep score, your stages through the night, and how tonight compares to what your body actually needs.</p>
+        <ul class="feature-list">
+          <li><strong>Sleep score</strong> from duration, efficiency, timing and restfulness — honest about limited data</li>
+          <li><strong>REM, Deep, Light &amp; Awake</strong> on an interactive stage timeline</li>
+          <li><strong>Sleep timing</strong> — in bed, asleep, wake and sleep latency, detected from your night</li>
+          <li><strong>Personal sleep need &amp; sleep debt</strong> that adapt to you and decay as you catch up</li>
+          <li><strong>Consistency tracking</strong> — how steady your bed and wake times really are</li>
+        </ul>
+        <div class="metric-chips">
+          <div class="metric-chip">8h 02m <span>slept</span></div>
+          <div class="metric-chip">1h 46m <span>deep</span></div>
+          <div class="metric-chip">1h 04m <span>REM</span></div>
+          <div class="metric-chip">86 <span>score</span></div>
+        </div>
+      </div>
+      <div class="phone-wrap" data-reveal>
+        <div class="feature-phone">
+          <div class="phone-top"><div class="dynamic-island"></div></div>
+          <div class="phone-screen">
+            <img src="/assets/sleep-stages-hypnogram-screen.webp" alt="MyVitality Sleep Details screen with sleep score 86, hypnogram of REM, light and deep stages, and timing breakdown" loading="lazy" width="240" height="522">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 05 · AI COACH -->
-<section id="coach" style="background:var(--surface);border-top:1px solid var(--border)">
+<!-- 03 · ACTIVITY & STRAIN -->
+<section id="activity" class="feature-band">
   <div class="container">
     <div class="split">
       <div data-reveal>
-        <span class="eyebrow">05 — AI coach</span>
-        <h2 class="section-title">A coach that knows your data</h2>
-        <p class="section-sub">Ask anything. MyVitality's coach reads your real recovery, training load, recent runs and goals — then answers with your numbers, not canned advice.</p>
+        <span class="eyebrow">03 — Activity &amp; strain</span>
+        <h2 class="section-title">Every workout, properly analyzed</h2>
+        <p class="section-sub">Track with GPS or sync from your watch — either way, MyVitality analyzes each session with heart-rate zones personalized to you and a strain score on the same scale as your day, so training and recovery finally speak the same language.</p>
         <ul class="feature-list">
-          <li><strong>Knows your HRV, sleep, training load &amp; goals</strong></li>
-          <li><strong>Race-time predictions and taper guidance</strong> for your next event</li>
-          <li><strong>Grounded in your data</strong> — never generic, copy-paste tips</li>
-          <li><strong>Just ask in plain language,</strong> any time of day</li>
+          <li><strong>Personal heart-rate zones</strong> computed from your resting and max heart rate — editable if you know better</li>
+          <li><strong>Activity Strain</strong> with a full heart-rate timeline and time-in-zone breakdown</li>
+          <li><strong>Automatic workout detection</strong> — forgot to record? MyVitality spots runs, walks and rides from your wearable data and asks to save them</li>
+          <li><strong>Live zones while you train</strong> — real-time zone and strain in the GPS tracker</li>
+          <li><strong>Honest insights</strong> — pace vs your recent average, how this session compares to your typical</li>
+        </ul>
+        <a class="more" href="/workout-tracker/" style="display:inline-block;margin-top:20px;color:var(--accent);font-weight:600;font-size:.9rem">Explore workout tracking →</a>
+      </div>
+      <div class="phone-wrap" data-reveal>
+        <div class="feature-phone">
+          <div class="phone-top"><div class="dynamic-island"></div></div>
+          <div class="phone-screen">
+            <img src="/assets/workout-hr-zones-strain-analysis.webp" alt="MyVitality workout analysis with activity strain 10.7, heart-rate timeline and personalized zone breakdown" loading="lazy" width="240" height="522">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 · MAPS & ROUTES -->
+<section id="maps" class="feature-band alt">
+  <div class="container">
+    <div class="split reverse">
+      <div data-reveal>
+        <span class="eyebrow">04 — Maps &amp; routes</span>
+        <h2 class="section-title">Discover routes around you</h2>
+        <p class="section-sub">Open the map and MyVitality surfaces real runnable and rideable routes wherever you are — ranked for you, drawn on beautiful maps, ready to follow.</p>
+        <ul class="feature-list">
+          <li><strong>For You, Popular &amp; Nearby</strong> route feeds for running, walking and cycling</li>
+          <li><strong>Route generation</strong> — pick a style and distance, get a route built from real paths, parks and waterfronts</li>
+          <li><strong>Search this area</strong> — pan anywhere in the world and discover routes there</li>
+          <li><strong>Inspired by legendary routes</strong> — designs echo famous runs and climbs from around the world</li>
+          <li><strong>Your heatmap</strong> — every workout you've done, layered on one map</li>
+        </ul>
+      </div>
+      <div class="phone-wrap" data-reveal>
+        <div class="feature-phone">
+          <div class="phone-top"><div class="dynamic-island"></div></div>
+          <div class="phone-screen">
+            <img src="/assets/route-discovery-map-screen.webp" alt="MyVitality Maps screen discovering running routes in Istanbul with Discover, Plan and Heatmap modes" loading="lazy" width="240" height="522">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 · NUTRITION -->
+<section id="nutrition" class="feature-band">
+  <div class="container">
+    <div class="split">
+      <div data-reveal>
+        <span class="eyebrow">05 — Nutrition</span>
+        <h2 class="section-title">Track meals in seconds</h2>
+        <p class="section-sub">Photograph your plate or scan a barcode. MyVitality recognizes the food, sizes the portions and does the math from verified nutrition data — you just confirm and go.</p>
+        <ul class="feature-list">
+          <li><strong>Scan a meal</strong> — AI recognizes the foods and portions, nutrition comes from a verified food database</li>
+          <li><strong>Scan a barcode</strong> — packaged foods pull real product nutrition data</li>
+          <li><strong>Calories, protein, carbs &amp; fat</strong> against your own goals, plus water and micronutrients</li>
+          <li><strong>Net calories</strong> — what you eat minus what you burn, in one number</li>
+          <li><strong>Everything editable</strong> — estimates are a starting point, you stay in control</li>
+        </ul>
+      </div>
+      <div class="phone-wrap" data-reveal>
+        <div class="feature-phone">
+          <div class="phone-top"><div class="dynamic-island"></div></div>
+          <div class="phone-screen">
+            <img src="/assets/ai-nutrition-calorie-tracker-screen.webp" alt="MyVitality nutrition screen with calories left ring, protein, carbs, fat and water tracking" loading="lazy" width="240" height="522">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 · AI COACH -->
+<section id="coach" class="feature-band alt">
+  <div class="container">
+    <div class="split">
+      <div data-reveal>
+        <span class="eyebrow">06 — AI coach</span>
+        <h2 class="section-title">A coach that reads your data first</h2>
+        <p class="section-sub">Ask anything. Before it answers, the coach looks at your actual recovery, sleep, training load, nutrition and goals — then explains what they mean in plain language.</p>
+        <ul class="feature-list">
+          <li><strong>"Should I train hard today?"</strong> — answered with your recovery and sleep, not generic tips</li>
+          <li><strong>"How did yesterday's run affect me?"</strong> — connects strain, resting heart rate and readiness</li>
+          <li><strong>Race predictions &amp; taper guidance</strong> for your next event, from your real training</li>
+          <li><strong>One intelligence layer</strong> across sleep, recovery, training and nutrition</li>
         </ul>
       </div>
       <div class="phone-wrap" data-reveal>
@@ -462,16 +436,16 @@
           <div class="chat-screen">
             <div class="chat-head">
               <div class="chat-ava"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 5L19 9.7l-5.3 1.6L12 17l-1.7-5.7L5 9.7 10.3 8z"/></svg></div>
-              <div><div class="chat-name">AI Coach</div><div class="chat-status">● ONLINE</div></div>
+              <div><div class="chat-name">AI Coach</div><div class="chat-status">● Online</div></div>
             </div>
             <div class="chat-body">
-              <div class="bubble user">Am I good for a hard run today?</div>
+              <div class="bubble user">Should I train hard today?</div>
               <div class="bubble coach">
-                Your HRV is <b>8% above</b> your 14-day baseline and you slept <b>7h 42m</b>. Recovery is green — a tempo session is well within range today.
-                <div class="data-pills"><span class="data-pill">HRV ↑8%</span><span class="data-pill">SLEEP 7H42</span><span class="data-pill">RECOVERY 86</span></div>
+                You slept <b>8h 02m</b> of your 8h 11m need and your HRV is steady at <b>62 ms</b>. Recovery is <b>78</b> — a quality tempo session fits well today; save all-out intervals for a greener day.
+                <div class="data-pills"><span class="data-pill">Recovery 78</span><span class="data-pill">Sleep 8h 02m</span><span class="data-pill">HRV 62 ms</span></div>
               </div>
-              <div class="bubble user">What pace should I target?</div>
-              <div class="bubble coach">Based on your recent 5K (<b>22:40</b>), aim for <b>4:55–5:05 /km</b> on the tempo blocks and keep your heart rate under 168.</div>
+              <div class="bubble user">How did yesterday's run affect me?</div>
+              <div class="bubble coach">Your 8.4K added <b>10.7 strain</b> — above your recent typical. Resting HR held at <b>44 bpm</b> overnight, so you absorbed it well.</div>
             </div>
           </div>
         </div>
@@ -480,36 +454,85 @@
   </div>
 </section>
 
-<!-- 06 · WHY / COMPARISON -->
-<section>
-  <div class="container center" data-reveal>
-    <span class="eyebrow">06 — Why MyVitality</span>
-    <h2 class="section-title">Made to be used every day</h2>
-    <p class="section-sub">Not another dashboard you check once and forget. Three ideas keep you coming back.</p>
-  </div>
-  <div class="container" style="margin-top:46px;max-width:980px">
-    <div class="why-grid" data-reveal>
-      <div class="why-cell">
-        <div class="n">01</div>
-        <h3>One app, not five</h3>
-        <p>Training, recovery, sleep and nutrition finally live in one place — so the connections between them are obvious.</p>
+<!-- 07 · COMMUNITY -->
+<section id="community" class="feature-band">
+  <div class="container">
+    <div class="split reverse">
+      <div data-reveal>
+        <span class="eyebrow">07 — Community</span>
+        <h2 class="section-title">Train with people, not alone</h2>
+        <p class="section-sub">Share workouts and routes, cheer your friends on, and keep each other consistent — in a community that's actively moderated to stay about fitness.</p>
+        <ul class="feature-list">
+          <li><strong>Activity posts</strong> with your route, stats and photos — kudos and comments included</li>
+          <li><strong>Save &amp; run friends' routes</strong> straight from the feed</li>
+          <li><strong>Challenges &amp; groups</strong> to compete and stay accountable</li>
+          <li><strong>Private by choice</strong> — private accounts with follow requests, and per-post visibility</li>
+          <li><strong>A moderated space</strong> — every public post is checked against our <a href="/guidelines/" style="color:var(--accent)">community guidelines</a> before it goes live</li>
+        </ul>
+        <a class="more" href="/community/" style="display:inline-block;margin-top:20px;color:var(--accent);font-weight:600;font-size:.9rem">Explore community →</a>
       </div>
-      <div class="why-cell">
-        <div class="n">02</div>
-        <h3>Decisions, not data</h3>
-        <p>A recovery score and an AI coach read your numbers and turn them into a clear answer: push today, or recover.</p>
-      </div>
-      <div class="why-cell">
-        <div class="n">03</div>
-        <h3>Accountability that sticks</h3>
-        <p>Streaks, challenges and friends cheering you on keep you consistent long after motivation fades.</p>
+      <div class="phone-wrap" data-reveal>
+        <div class="feature-phone">
+          <div class="phone-top"><div class="dynamic-island"></div></div>
+          <div class="phone-screen">
+            <img src="/assets/fitness-community-activity-feed.webp" alt="MyVitality social feed with friends' run and ride posts, kudos and route cards" loading="lazy" width="240" height="522">
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="container center" style="margin-top:64px" data-reveal>
-    <span class="eyebrow">How it compares</span>
-    <h2 class="section-title">One app instead of three subscriptions</h2>
-    <p class="section-sub">Strava tracks workouts. Whoop tracks recovery. MyFitnessPal tracks food. MyVitality brings all three together — for less than any one of them.</p>
+</section>
+
+<!-- 08 · WEARABLES -->
+<section id="devices" class="feature-band alt">
+  <div class="container center" data-reveal>
+    <span class="eyebrow">08 — Works with your watch</span>
+    <h2 class="section-title">Bring your health data together</h2>
+    <p class="section-sub">MyVitality syncs through Apple Health, so any wearable that writes there — Apple Watch, Garmin, Whoop, Oura, Polar, Fitbit and more — feeds your recovery, sleep and training analysis automatically.</p>
+  </div>
+  <div class="container" style="margin-top:40px">
+    <div class="device-badges" data-reveal>
+      <span class="device-badge">Apple Watch</span>
+      <span class="device-badge">Garmin</span>
+      <span class="device-badge">Polar</span>
+      <span class="device-badge">Fitbit</span>
+      <span class="device-badge">Whoop</span>
+      <span class="device-badge">Oura Ring</span>
+      <span class="device-badge">Samsung Galaxy Watch</span>
+      <span class="device-badge">COROS</span>
+    </div>
+    <p class="device-badge-note" style="text-align:center">Garmin, Fitbit, Whoop, Oura and others work <strong>as long as they sync to Apple Health</strong> — MyVitality reads the data from there. Direct device integrations are on the roadmap.</p>
+  </div>
+</section>
+
+<!-- 09 · MEMBERSHIP -->
+<section id="membership" class="feature-band">
+  <div class="container center" data-reveal>
+    <span class="eyebrow">09 — Membership</span>
+    <h2 class="section-title">One membership. Everything included.</h2>
+    <p class="section-sub">No feature tiers, no locked screens, no ads. Recovery, sleep intelligence, strain, routes, nutrition, the AI coach and community — all in one plan.</p>
+  </div>
+  <div class="container" data-reveal>
+    <div class="membership-card">
+      <div class="mono-label">MyVitality Membership</div>
+      <div class="membership-price"><span data-price="amount">$9.99</span><small>/month</small></div>
+      <p class="membership-sub">Planned launch price, shown in your local currency · starts with a free trial</p>
+      <ul class="membership-list">
+        <li>Daily recovery score</li>
+        <li>Sleep intelligence</li>
+        <li>Workout analysis &amp; strain</li>
+        <li>Route discovery &amp; generation</li>
+        <li>Meal &amp; barcode scanning</li>
+        <li>AI coach</li>
+        <li>Challenges &amp; community</li>
+        <li>No ads, ever</li>
+      </ul>
+      <a href="/pricing/" class="btn-primary">See pricing details →</a>
+    </div>
+  </div>
+  <div class="container center" style="margin-top:72px" data-reveal>
+    <h2 class="section-title" style="font-size:clamp(1.5rem,1rem+1.8vw,2.2rem)">One app instead of three subscriptions</h2>
+    <p class="section-sub" style="margin-left:auto;margin-right:auto">Strava tracks workouts. Whoop tracks recovery. MyFitnessPal tracks food. MyVitality brings all three together — for less than any one of them.</p>
   </div>
   <div class="container" style="margin-top:40px;max-width:900px">
     <div class="compare-wrap" data-reveal>
@@ -521,8 +544,9 @@
         <tbody>
           <tr><td>GPS workouts &amp; route maps</td><td class="yes">Yes</td><td class="no">—</td><td class="no">—</td><td class="yes us">Yes</td></tr>
           <tr><td>Recovery, HRV &amp; readiness</td><td class="no">—</td><td class="yes">Yes</td><td class="no">—</td><td class="yes us">Yes</td></tr>
-          <tr><td>Sleep tracking</td><td class="no">—</td><td class="yes">Yes</td><td class="no">—</td><td class="yes us">Yes</td></tr>
+          <tr><td>Sleep stages &amp; sleep debt</td><td class="no">—</td><td class="yes">Yes</td><td class="no">—</td><td class="yes us">Yes</td></tr>
           <tr><td>Nutrition &amp; calorie tracking</td><td class="no">—</td><td class="no">—</td><td class="yes">Yes</td><td class="yes us">Yes</td></tr>
+          <tr><td>Route discovery &amp; generation</td><td class="partial">Routes</td><td class="no">—</td><td class="no">—</td><td class="yes us">Yes</td></tr>
           <tr><td>AI coach grounded in your data</td><td class="no">—</td><td class="partial">Coach</td><td class="no">—</td><td class="yes us">Yes</td></tr>
           <tr><td>Works without buying hardware</td><td class="yes">Yes</td><td class="partial">Band needed</td><td class="yes">Yes</td><td class="yes us">Yes</td></tr>
           <tr><td>Training, recovery &amp; food in one app</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes us">Yes</td></tr>
@@ -534,10 +558,10 @@
   </div>
 </section>
 
-<!-- 07 · TRUST -->
-<section id="privacy" style="background:var(--surface);border-top:1px solid var(--border)">
+<!-- 10 · TRUST -->
+<section id="privacy" class="feature-band alt">
   <div class="container center" data-reveal>
-    <span class="eyebrow">07 — Built on trust</span>
+    <span class="eyebrow">10 — Built on trust</span>
     <h2 class="section-title">Your health data stays yours</h2>
     <p class="section-sub">A fitness app sees your most personal data. We treat it that way — no ads, no data brokers, no fine print.</p>
   </div>
@@ -567,10 +591,10 @@
   </div>
 </section>
 
-<!-- 08 · FROM THE BLOG -->
+<!-- 11 · FROM THE BLOG -->
 <section id="learn">
   <div class="container center" data-reveal>
-    <span class="eyebrow">08 — From the blog</span>
+    <span class="eyebrow">11 — From the blog</span>
     <h2 class="section-title">Learn the metrics that matter</h2>
     <p class="section-sub">Plain-English guides to recovery, HRV and training — so the numbers in the app actually mean something.</p>
   </div>
@@ -592,12 +616,12 @@
         <p>Skip the vanity numbers. These are the few metrics worth checking every week to actually improve.</p>
       </a>
     </div>
-    <p class="beta-note"><a href="/blog/">Read all guides on the blog →</a></p>
+    <p class="beta-note" style="text-align:center;color:var(--muted);font-size:.84rem;margin-top:28px"><a href="/blog/" style="color:var(--accent);font-weight:600">Read all guides on the blog →</a></p>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq" style="background:var(--surface);border-top:1px solid var(--border)">
+<section id="faq" class="feature-band alt">
   <div class="container center" data-reveal>
     <span class="eyebrow">FAQ</span>
     <h2 class="section-title">Frequently asked questions</h2>
@@ -657,6 +681,7 @@
         <h3>Legal</h3>
         <a href="/privacy-policy/">Privacy Policy</a>
         <a href="/terms/">Terms</a>
+        <a href="/guidelines/">Community Guidelines</a>
       </div>
     </div>
   </div>

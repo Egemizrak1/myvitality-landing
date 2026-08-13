@@ -6,64 +6,57 @@
 <head>
 <meta charset="UTF-8">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Fraunces:ital,opsz,wght@1,9..144,450..650&family=Manrope:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1200px; height: 630px; overflow: hidden; }
   body {
-    background: #0A0908; color: #F5F1EA; position: relative;
-    font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased;
+    background: #0B0D0E; color: #F2F3F3; position: relative;
+    font-family: "Inter", sans-serif; -webkit-font-smoothing: antialiased;
   }
-  .glow-p { position: absolute; top: -340px; right: -180px; width: 820px; height: 820px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,107,71,0.20) 0%, transparent 64%); }
-  .glow-c { position: absolute; bottom: -400px; left: -240px; width: 780px; height: 780px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(230,180,80,0.13) 0%, transparent 66%); }
-  .hairline { position: absolute; left: 72px; right: 72px; top: 118px; height: 1px; background: rgba(255,255,255,0.08); }
+  .tint { position: absolute; top: -340px; right: -180px; width: 820px; height: 820px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(157,221,224,0.07) 0%, transparent 64%); }
+  .hairline { position: absolute; left: 72px; right: 72px; top: 118px; height: 1px; background: #25292A; }
   .wrap { position: absolute; inset: 0; padding: 64px 72px; display: flex; flex-direction: column; }
-  .brand { display: flex; align-items: center; gap: 14px; font-family: "Bricolage Grotesque"; font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+  .brand { display: flex; align-items: center; gap: 14px; font-size: 26px; font-weight: 650; letter-spacing: -0.02em; }
   .brand img { width: 40px; height: 40px; border-radius: 10px; }
   .main { flex: 1; display: flex; align-items: center; gap: 60px; }
   .copy { flex: 1; }
-  h1 { font-family: "Bricolage Grotesque"; font-size: 72px; font-weight: 750; line-height: 1.04; letter-spacing: -0.025em; }
-  h1 .grad { background: linear-gradient(120deg, #FF6B47, #E6B450); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: "Fraunces"; font-weight: 580; font-style: italic; padding-right: .05em; }
-  .sub { margin-top: 30px; font-family: "Manrope", sans-serif; font-size: 17px; font-weight: 500;
-    letter-spacing: 0.16em; color: #8A847A; text-transform: uppercase; }
-  .sub b { color: #E6B450; font-weight: 500; }
+  h1 { font-size: 72px; font-weight: 650; line-height: 1.05; letter-spacing: -0.03em; }
+  h1 .grad { color: #9DDDE0; }
+  .sub { margin-top: 30px; font-size: 19px; font-weight: 500; letter-spacing: 0;
+    color: #92999A; }
+  .sub b { color: #9DDDE0; font-weight: 500; }
   .ring-box { position: relative; width: 300px; height: 300px; flex-shrink: 0; }
-  .ring-box::before { content:''; position: absolute; inset: -14%;
-    background: radial-gradient(circle, rgba(255,107,71,0.22) 0%, transparent 62%); }
   .ring-box svg { width: 100%; height: 100%; transform: rotate(-90deg); position: relative; }
   .ring-track { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 16; }
-  .ring-prog { fill: none; stroke: url(#g); stroke-width: 16; stroke-linecap: round;
-    stroke-dasharray: 653.45; stroke-dashoffset: 91.5; }
+  .ring-prog { fill: none; stroke: #9DDDE0; stroke-width: 16; stroke-linecap: round;
+    stroke-dasharray: 653.45; stroke-dashoffset: 143.7; }
   .ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-  .ring-num { font-family: "Bricolage Grotesque"; font-size: 92px; font-weight: 720; letter-spacing: -0.025em; line-height: 1; }
-  .ring-cap { font-family: "Manrope", sans-serif; font-size: 14px; letter-spacing: 0.34em; color: #FF6B47; margin-top: 12px; }
+  .ring-num { font-size: 92px; font-weight: 650; letter-spacing: -0.03em; line-height: 1;
+    font-variant-numeric: tabular-nums; }
+  .ring-cap { font-size: 15px; letter-spacing: 0.02em; color: #9DDDE0; margin-top: 12px; font-weight: 600; }
   .foot { display: flex; align-items: center; justify-content: space-between;
-    font-family: "Manrope", sans-serif; font-size: 16px; letter-spacing: 0.06em; color: #8A847A; }
-  .foot .cta { display: inline-flex; align-items: center; padding: 12px 26px; border-radius: 999px;
-    background: linear-gradient(120deg, #FF6B47, #E6B450); color: #160B07;
-    font-family: "Manrope"; font-weight: 600; font-size: 17px; letter-spacing: 0; }
+    font-size: 16px; letter-spacing: 0; color: #92999A; }
+  .foot .cta { display: inline-flex; align-items: center; padding: 12px 26px; border-radius: 12px;
+    background: #9DDDE0; color: #0B1416;
+    font-weight: 600; font-size: 17px; letter-spacing: 0; }
 </style>
 </head>
 <body>
-  <div class="glow-p"></div>
-  <div class="glow-c"></div>
+  <div class="tint"></div>
   <div class="wrap">
     <div class="brand"><img src="../icon-192.png" alt=""> MyVitality</div>
     <div class="main">
       <div class="copy">
-        <h1>Train with clarity,<br><span class="grad">not guesswork.</span></h1>
-        <div class="sub">Workouts <b>·</b> Recovery <b>·</b> Sleep <b>·</b> Nutrition <b>·</b> AI Coach</div>
+        <h1>Understand your body.<br><span class="grad">Train smarter.</span></h1>
+        <div class="sub">Recovery <b>·</b> Sleep <b>·</b> Strain <b>·</b> Routes <b>·</b> Nutrition <b>·</b> AI Coach</div>
       </div>
       <div class="ring-box">
         <svg viewBox="0 0 240 240">
-          <defs><linearGradient id="g" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0" stop-color="#FF6B47"/><stop offset="1" stop-color="#E6B450"/>
-          </linearGradient></defs>
           <circle class="ring-track" cx="120" cy="120" r="104"></circle>
           <circle class="ring-prog" cx="120" cy="120" r="104"></circle>
         </svg>
-        <div class="ring-center"><div class="ring-num">86</div><div class="ring-cap">RECOVERY</div></div>
+        <div class="ring-center"><div class="ring-num">78</div><div class="ring-cap">Recovery</div></div>
       </div>
     </div>
     <div class="foot">
