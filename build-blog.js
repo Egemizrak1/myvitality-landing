@@ -25,7 +25,7 @@ function nav(active) {
     `<a href="${href}"${active === href ? ' aria-current="page"' : ''}>${label}</a>`;
   return `<nav class="site-nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo"><img src="/icon-180.png" alt="MyVitality logo"> MyVitality</a>
+    <a href="/" class="nav-logo"><img src="/logo.svg" alt="MyVitality logo"> MyVitality</a>
     <div class="nav-links">
       ${item('/features/', 'Features')}
       ${item('/workout-tracker/', 'Workout')}
@@ -43,7 +43,7 @@ const FOOTER = `<footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div>
-        <a href="/" class="footer-brand"><img src="/icon-180.png" alt="MyVitality logo"> MyVitality</a>
+        <a href="/" class="footer-brand"><img src="/logo.svg" alt="MyVitality logo"> MyVitality</a>
         <p class="footer-about">Fitness, recovery and community in one app. Track workouts, understand your body and stay consistent — built for everyday athletes.</p>
       </div>
       <div class="footer-col"><h4>Product</h4>
@@ -65,8 +65,8 @@ function head({ title, description, url, schema = '' }) {
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(description)}">
   <link rel="canonical" href="${url}">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png">
+  <link rel="icon" type="image/svg+xml" href="/logo.svg"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png?v=3">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${url}">
   <meta property="og:title" content="${esc(title)}">
