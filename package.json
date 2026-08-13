@@ -5,11 +5,13 @@
   "description": "MyVitality marketing site + Markdown blog generator",
   "scripts": {
     "build": "node build-blog.js",
-    "i18n": "node i18n-build.js",
+    "i18n": "node i18n-build.js && node i18n-auto.js",
+    "i18n:check": "node i18n-auto.js --dry",
     "serve": "python3 -m http.server 8799"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
-    "marked": "^12.0.2"
+    "marked": "^12.0.2",
+    "node-html-parser": "^7.1.0"
   }
 }

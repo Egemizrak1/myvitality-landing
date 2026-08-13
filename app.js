@@ -230,10 +230,10 @@
       var EURO = ['AT','BE','HR','CY','EE','FI','FR','DE','GR','IE','IT','LV',
                   'LT','LU','MT','NL','PT','SK','SI','ES'];
       var PRICE = {
-        USD: { sym: '$', amt: '6.99' },
-        GBP: { sym: '£', amt: '6.99' },
-        EUR: { sym: '€', amt: '6.99' },
-        TRY: { sym: '₺', amt: '300' }
+        USD: { sym: '$', amt: '9.99' },
+        GBP: { sym: '£', amt: '9.99' },
+        EUR: { sym: '€', amt: '9.99' },
+        TRY: { sym: '₺', amt: '430' }
       };
       var toCurrency = function (cc) {
         cc = (cc || '').toUpperCase();

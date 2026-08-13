@@ -4,7 +4,7 @@
 
 Key facts:
 - Platform: iOS (iPhone + Apple Watch). Android planned.
-- Price: One subscription — free trial, then $6.99/month, billed in your local currency (£6.99 UK, €6.99 EU, ₺300 Turkey). Joining the beta waitlist is free. No ads.
+- Price: One subscription — free trial, then $9.99/month, billed in your local currency (£9.99 UK, €9.99 EU, ₺430 Turkey). Joining the beta waitlist is free. No ads.
 - Privacy: Health data is never sold, never shared with advertisers, never used for marketing.
 - Status: Pre-launch — join the free iOS beta waitlist at https://myvitality.fit/#download
 - Differentiator: One app for training + recovery + sleep + nutrition + AI coach + community, grounded in your own data — usually for less than any single competing subscription.
@@ -15,7 +15,7 @@ Key facts:
 - [Recovery & HRV tracker](https://myvitality.fit/recovery-tracker/): A daily readiness score from Apple Watch HRV, resting heart rate and sleep — so you know when to push and when to rest.
 - [Sleep tracker](https://myvitality.fit/sleep-tracker/): Deep, REM and light sleep stages, with the link between training, nutrition and rest.
 - [Community](https://myvitality.fit/community/): Follow friends, react to workouts, join challenges, share route cards, stay accountable.
-- [Pricing](https://myvitality.fit/pricing/): Free trial, then $6.99/month — one subscription, everything included, no ads.
+- [Pricing](https://myvitality.fit/pricing/): Free trial, then $9.99/month — one subscription, everything included, no ads.
 
 ## Comparisons
 - [The all-in-one Strava alternative](https://myvitality.fit/blog/strava-alternative-all-in-one/): What Strava does well, where it stops, and what an all-in-one app adds.
