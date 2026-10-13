@@ -121,6 +121,8 @@
     });
     docEl.lang = lang;
     docEl.dir = RTL[lang] ? 'rtl' : 'ltr';
+    // app.js redraws the Google button in the new language
+    d.dispatchEvent(new CustomEvent('mv:lang', { detail: lang }));
   }
 
   function setLang(lang, persist) {

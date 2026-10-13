@@ -321,21 +321,34 @@
           }
         });
         gContainers.forEach(function (el) {
+          el.innerHTML = '';
           google.accounts.id.renderButton(el, {
             type: 'standard', theme: 'filled_black', size: 'large', shape: 'pill',
-            text: 'signup_with', logo_alignment: 'left', width: 280,
+            text: 'signup_with', logo_alignment: 'left', width: 280, locale: gHl,
             click_listener: function () { gSource = el.getAttribute('data-source') || 'landing'; }
           });
         });
         return true;
       };
-      /* gsi/client is async — retry briefly until it lands */
-      if (!initGoogle()) {
-        var gTries = 0;
-        var gTimer = setInterval(function () {
-          if (initGoogle() || ++gTries > 40) clearInterval(gTimer);
-        }, 250);
-      }
+      /* GIS words the button in the language of the script's ?hl=, else the
+       * browser's or the Google account's (a Turkish account got "Google ile
+       * kaydolun" on an English page; the button's own locale option alone
+       * does not change it). So gsi/client is loaded here, with the page's
+       * language once i18n.js has set it, and again if the visitor switches. */
+      var gHl = null;
+      var loadGoogle = function (lang) {
+        var hl = lang === 'zh' ? 'zh-CN' : (lang || 'en');
+        if (hl === gHl) return;
+        gHl = hl;
+        var s = d.createElement('script');
+        s.src = 'https://accounts.google.com/gsi/client?hl=' + encodeURIComponent(hl);
+        s.async = true;
+        s.onload = function () { if (gHl === hl) initGoogle(); };
+        d.head.appendChild(s);
+      };
+      d.addEventListener('mv:lang', function (e) { loadGoogle(e.detail); });
+      /* i18n.js may wait on an IP lookup; don't hold the button for long */
+      setTimeout(function () { if (!gHl) loadGoogle(root.lang); }, 2500);
     }
 
     /* ── Waitlist capture ── */
