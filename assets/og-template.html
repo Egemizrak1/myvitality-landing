@@ -6,57 +6,60 @@
 <head>
 <meta charset="UTF-8">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=Barlow+Semi+Condensed:wght@600&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1200px; height: 630px; overflow: hidden; }
   body {
-    background: #0B0D0E; color: #F2F3F3; position: relative;
-    font-family: "Inter", sans-serif; -webkit-font-smoothing: antialiased;
+    background: #FFFFFF; color: #111111; position: relative;
+    font-family: "Barlow", sans-serif; -webkit-font-smoothing: antialiased;
   }
-  .tint { position: absolute; top: -340px; right: -180px; width: 820px; height: 820px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(157,221,224,0.07) 0%, transparent 64%); }
-  .hairline { position: absolute; left: 72px; right: 72px; top: 118px; height: 1px; background: #25292A; }
+  .hairline { position: absolute; left: 72px; right: 72px; top: 118px; height: 1px; background: #E5E5E5; }
   .wrap { position: absolute; inset: 0; padding: 64px 72px; display: flex; flex-direction: column; }
-  .brand { display: flex; align-items: center; gap: 14px; font-size: 26px; font-weight: 650; letter-spacing: -0.02em; }
-  .brand img { width: 40px; height: 40px; border-radius: 10px; }
+  .brand { display: flex; align-items: center; gap: 12px; font-size: 31px; font-weight: 700; letter-spacing: -0.01em; line-height: 1; }
+  .brand img { width: 40px; height: 40px; }
   .main { flex: 1; display: flex; align-items: center; gap: 60px; }
   .copy { flex: 1; }
-  h1 { font-size: 72px; font-weight: 650; line-height: 1.05; letter-spacing: -0.03em; }
-  h1 .grad { color: #9DDDE0; }
-  .sub { margin-top: 30px; font-size: 19px; font-weight: 500; letter-spacing: 0;
-    color: #92999A; }
-  .sub b { color: #9DDDE0; font-weight: 500; }
-  .ring-box { position: relative; width: 300px; height: 300px; flex-shrink: 0; }
+  h1 { font-size: 84px; font-weight: 700; line-height: 1.0; letter-spacing: -0.03em; }
+  h1 .grad { color: #6B6B6B; }
+  .sub { margin-top: 30px; font-family: "Barlow Semi Condensed", "Barlow", sans-serif; font-size: 18px; font-weight: 600;
+    letter-spacing: .09em; text-transform: uppercase; color: #6B6B6B; }
+  .sub b { color: #A3A3A3; font-weight: 600; }
+  /* The app's one dark card, with the recovery ring */
+  .ring-card { width: 340px; height: 340px; flex-shrink: 0; border-radius: 28px; background: #111111;
+    display: flex; align-items: center; justify-content: center; }
+  .ring-box { position: relative; width: 260px; height: 260px; }
   .ring-box svg { width: 100%; height: 100%; transform: rotate(-90deg); position: relative; }
-  .ring-track { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 16; }
-  .ring-prog { fill: none; stroke: #9DDDE0; stroke-width: 16; stroke-linecap: round;
+  .ring-track { fill: none; stroke: #2C2C2E; stroke-width: 16; }
+  .ring-prog { fill: none; stroke: #FFFFFF; stroke-width: 16; stroke-linecap: round;
     stroke-dasharray: 653.45; stroke-dashoffset: 143.7; }
-  .ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-  .ring-num { font-size: 92px; font-weight: 650; letter-spacing: -0.03em; line-height: 1;
+  .ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #FFFFFF; }
+  .ring-num { font-size: 92px; font-weight: 700; letter-spacing: -0.03em; line-height: 1;
     font-variant-numeric: tabular-nums; }
-  .ring-cap { font-size: 15px; letter-spacing: 0.02em; color: #9DDDE0; margin-top: 12px; font-weight: 600; }
+  .ring-cap { font-family: "Barlow Semi Condensed", "Barlow", sans-serif; font-size: 15px; letter-spacing: .09em;
+    text-transform: uppercase; color: #9C9C9C; margin-top: 10px; font-weight: 600; }
   .foot { display: flex; align-items: center; justify-content: space-between;
-    font-size: 16px; letter-spacing: 0; color: #92999A; }
-  .foot .cta { display: inline-flex; align-items: center; padding: 12px 26px; border-radius: 12px;
-    background: #9DDDE0; color: #0B1416;
-    font-weight: 600; font-size: 17px; letter-spacing: 0; }
+    font-size: 19px; font-weight: 500; color: #6B6B6B; }
+  .foot .cta { display: inline-flex; align-items: center; height: 56px; padding: 0 30px; border-radius: 999px;
+    background: #111111; color: #FFFFFF; font-weight: 600; font-size: 19px; letter-spacing: -0.01em; }
 </style>
 </head>
 <body>
-  <div class="tint"></div>
+  <div class="hairline"></div>
   <div class="wrap">
-    <div class="brand"><img src="../icon-192.png" alt=""> MyVitality</div>
+    <div class="brand"><img src="../logo.svg" alt=""> MyVitality</div>
     <div class="main">
       <div class="copy">
         <h1>Understand your body.<br><span class="grad">Train smarter.</span></h1>
         <div class="sub">Recovery <b>·</b> Sleep <b>·</b> Strain <b>·</b> Routes <b>·</b> Nutrition <b>·</b> AI Coach</div>
       </div>
-      <div class="ring-box">
-        <svg viewBox="0 0 240 240">
-          <circle class="ring-track" cx="120" cy="120" r="104"></circle>
-          <circle class="ring-prog" cx="120" cy="120" r="104"></circle>
-        </svg>
-        <div class="ring-center"><div class="ring-num">78</div><div class="ring-cap">Recovery</div></div>
+      <div class="ring-card">
+        <div class="ring-box">
+          <svg viewBox="0 0 240 240">
+            <circle class="ring-track" cx="120" cy="120" r="104"></circle>
+            <circle class="ring-prog" cx="120" cy="120" r="104"></circle>
+          </svg>
+          <div class="ring-center"><div class="ring-num">78</div><div class="ring-cap">Recovery</div></div>
+        </div>
       </div>
     </div>
     <div class="foot">

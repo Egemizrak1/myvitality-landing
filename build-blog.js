@@ -62,11 +62,12 @@ function head({ title, description, url, schema = '' }) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FFFFFF">
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(description)}">
   <link rel="canonical" href="${url}">
-  <link rel="icon" type="image/svg+xml" href="/logo.svg"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
-  <link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png?v=3">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png?v=4">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${url}">
   <meta property="og:title" content="${esc(title)}">
@@ -75,7 +76,6 @@ function head({ title, description, url, schema = '' }) {
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
 ${schema}
 </head>

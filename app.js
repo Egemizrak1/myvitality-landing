@@ -43,15 +43,15 @@
   };
   function consentBar() {
     var bar = d.createElement('div');
-    bar.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:250;background:#131617;border-top:1px solid rgba(255,255,255,.1);padding:14px 20px;display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;font-size:.85rem;color:#AEB4B5';
+    bar.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:250;background:#FFFFFF;border-top:1px solid #E5E5E5;padding:14px 20px;display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;font-size:.95rem;color:#6B6B6B';
     var label = d.createElement('span');
     label.textContent = 'We use cookies to measure our marketing.';
     var yes = d.createElement('button');
     yes.textContent = 'Accept';
-    yes.style.cssText = 'background:#9DDDE0;color:#0B1416;border:0;border-radius:10px;padding:8px 18px;font-weight:600;cursor:pointer;font-family:inherit';
+    yes.style.cssText = 'background:#111111;color:#FFFFFF;border:0;border-radius:999px;min-height:44px;padding:0 22px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:inherit';
     var no = d.createElement('button');
     no.textContent = 'Decline';
-    no.style.cssText = 'background:transparent;color:#AEB4B5;border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:8px 18px;cursor:pointer;font-family:inherit';
+    no.style.cssText = 'background:#F4F4F5;color:#111111;border:0;border-radius:999px;min-height:44px;padding:0 22px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:inherit';
     var pick = function (c) {
       consent = c;
       try { localStorage.setItem('mv-consent', c); } catch (err) {}
