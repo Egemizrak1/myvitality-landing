@@ -76,6 +76,7 @@ function head({ title, description, url, schema = '' }) {
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script>/* Boot screen: the app's loader on the first page of a visit (styles.css, .booting) */(function(){var r=document.documentElement,t0,ok,done;try{if(sessionStorage.getItem('mv-boot'))return;sessionStorage.setItem('mv-boot','1')}catch(e){return}r.classList.add('booting');function end(){if(done)return;done=1;r.classList.add('booted');document.dispatchEvent(new Event('mv:booted'));setTimeout(function(){r.classList.remove('booting','booted')},300)}function check(){if(t0&&ok)setTimeout(end,Math.max(0,1116-(performance.now()-t0)))}requestAnimationFrame(function(){t0=performance.now();check()});document.addEventListener('DOMContentLoaded',function(){(document.fonts?document.fonts.ready:Promise.resolve()).then(function(){ok=1;check()})});setTimeout(end,4000)})();</script>
   <link rel="stylesheet" href="/styles.css">
 ${schema}
 </head>

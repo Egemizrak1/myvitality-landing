@@ -103,6 +103,33 @@ nav.site-nav { view-transition-name: site-nav; }
   html.page-leave body { animation: pageOut .18s var(--ease) both; }
 }
 
+/* ── Boot screen — the app's loader (MyVitalityLoader.large) ──
+   First page of a visit only: a white screen with the 56px mark, the M
+   resting in grey while the V draws through it in ink on the app's 1.8 s
+   loop. The inline script before this stylesheet in every page adds
+   .booting, then .booted (fade) once the page and fonts are ready and the
+   V has drawn once. Reduced motion: the whole mark pulses, as in the app. */
+html.booting::before, html.booting::after { content: ''; position: fixed; z-index: 2147483647; }
+html.booting::before { inset: 0; background: var(--bg); }
+html.booting::after {
+  top: 50%; left: 50%; width: 56px; height: 56px; margin: -28px 0 0 -28px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cstyle%3E.v{animation:f 1.8s linear infinite}.a,.b{stroke-dasharray:100 100}.a{animation:a 1.8s linear infinite}.b{animation:b 1.8s linear infinite}@keyframes f{0%25{opacity:1}74%25{opacity:1;animation-timing-function:cubic-bezier(.42,0,.58,1)}96%25,to{opacity:0}}@keyframes a{0%25{stroke-dashoffset:100;animation-timing-function:cubic-bezier(.4327,0,.6439,.7431)}49.772%25,to{stroke-dashoffset:30.5891}}@keyframes b{0%25,49.77%25{stroke-dashoffset:101}49.772%25{stroke-dashoffset:100;animation-timing-function:cubic-bezier(.303,.6232,.6318,1)}62%25,to{stroke-dashoffset:94.0182}}%3C/style%3E%3Cpath stroke='%236B6B6B' d='M2.50 42 L7.11 23.55 M10.86 8.58 L12 4 L24 29.50 L36 4 L45.50 42'/%3E%3Cg class='v' stroke='%23111111'%3E%3Cpath class='a' d='M2.50 4 L24 44 L35.36 22.86'/%3E%3Cpath class='b' d='M42.67 9.27 L45.50 4'/%3E%3C/g%3E%3C/svg%3E") center / 56px 56px no-repeat;
+}
+html.booted::before, html.booted::after { opacity: 0; transition: opacity .28s var(--ease); pointer-events: none; }
+/* The page's own entrance animations wait for the loader to go */
+html.booting:not(.booted) body * { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) {
+  html.booting::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='%236B6B6B' d='M2.50 42 L7.11 23.55 M10.86 8.58 L12 4 L24 29.50 L36 4 L45.50 42'/%3E%3Cpath stroke='%23111111' d='M2.50 4 L24 44 L35.36 22.86'/%3E%3Cpath stroke='%23111111' d='M42.67 9.27 L45.50 4'/%3E%3C/svg%3E");
+    animation: bootPulse 1.8s infinite;
+  }
+  html.booted::before, html.booted::after { transition: none; }
+}
+@keyframes bootPulse {
+  0%, 100% { opacity: 1; animation-timing-function: cubic-bezier(.37,0,.63,1); }
+  50% { opacity: .55; animation-timing-function: cubic-bezier(.37,0,.63,1); }
+}
+
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--bg); color-scheme: light; }
 body {
   font-family: var(--font-sans);

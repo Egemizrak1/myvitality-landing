@@ -105,6 +105,14 @@
     else d.addEventListener('DOMContentLoaded', fn);
   }
 
+  /* While the boot screen (inline script in <head>) is up, hold work that
+   * should be seen: it runs as the loader starts to fade. */
+  function afterBoot(fn) {
+    if (root.classList.contains('booting') && !root.classList.contains('booted')) {
+      d.addEventListener('mv:booted', fn, { once: true });
+    } else fn();
+  }
+
   ready(function () {
     var nav = d.querySelector('.site-nav');
     var inner = nav && nav.querySelector('.nav-inner');
@@ -189,14 +197,16 @@
           io.unobserve(en.target);
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-      revealEls.forEach(function (el) { io.observe(el); });
 
       var cio = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
           if (!en.isIntersecting) return; countUp(en.target); cio.unobserve(en.target);
         });
       }, { threshold: 0.5 });
-      counters.forEach(function (el) { cio.observe(el); });
+      afterBoot(function () {
+        revealEls.forEach(function (el) { io.observe(el); });
+        counters.forEach(function (el) { cio.observe(el); });
+      });
     } else {
       revealEls.forEach(function (el) { el.classList.add('in'); });
       counters.forEach(countUp);
