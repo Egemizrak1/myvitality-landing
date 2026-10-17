@@ -135,6 +135,21 @@ nav.site-nav { view-transition-name: site-header; }
 }
 ::view-transition-group(*.shot) { animation-duration: .9s; animation-timing-function: var(--ease-page); }
 
+/* ── Scroll motion (motion.js) ──
+   A waiting heading is split into lines, each a mask its text rises out
+   of. The mask is a clip-path reaching a little past the line box, so
+   ascenders and descenders keep their room without changing the
+   heading's height (padding or margins would). */
+.mv-line { display: block; clip-path: inset(-.14em -.1em -.22em -.1em); }
+.mv-line-in { display: block; }
+/* Lenis, desktop smooth scroll: its base rules. It sets the scroll
+   position itself, so the native smooth scrolling steps aside. */
+html.lenis, html.lenis body { height: auto; }
+html.lenis { scroll-behavior: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
 /* ── Boot screen — the app's loader (MyVitalityLoader.large) ──
    First page of a visit only: a white screen with the 56px mark, the M
    resting in grey while the V draws through it in ink on the app's 1.8 s
@@ -251,12 +266,13 @@ nav.site-nav {
   transition: border-color .3s var(--ease);
 }
 .site-nav.scrolled { border-bottom-color: var(--border); }
+/* One height whether scrolled or not: the bar is sticky, in the flow, so
+   shrinking it moved the whole page 10px (a layout shift on every scroll
+   past the top) */
 .site-nav .nav-inner {
   max-width: var(--maxw); margin: 0 auto; padding: 15px clamp(20px, 5vw, 28px);
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  transition: padding .3s var(--ease);
 }
-.site-nav.scrolled .nav-inner { padding-top: 10px; padding-bottom: 10px; }
 /* Lockup as in MyVitalityLogo: mark, 0.3× gap, Barlow 700 wordmark at 0.78× */
 .nav-logo {
   display: flex; align-items: center; gap: 7px; flex-shrink: 0;

@@ -105,6 +105,37 @@
     } else fn();
   }
 
+  /* ── Scroll motion (motion.js): GSAP + ScrollTrigger, plus Lenis on
+   * hover + fine pointer devices, self-hosted in /assets/vendor. Fetched
+   * only once the page has settled (load, boot screen, first translation
+   * pass, then an idle moment), so it never delays the first paint, and
+   * not at all under reduced motion. ── */
+  if (!reduce) {
+    var settling = 3;
+    var settled = function () {
+      if (--settling) return;
+      var idle = window.requestIdleCallback || function (cb) { setTimeout(cb, 200); };
+      idle(function () {
+        var srcs = ['/assets/vendor/gsap.min.js', '/assets/vendor/ScrollTrigger.min.js'];
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) srcs.push('/assets/vendor/lenis.min.js');
+        srcs.push('/motion.js');
+        srcs.forEach(function (src) {
+          var s = d.createElement('script');
+          s.src = src; s.async = false; /* run in this order */
+          d.head.appendChild(s);
+        });
+      }, { timeout: 2000 });
+    };
+    if (d.readyState === 'complete') settled();
+    else window.addEventListener('load', settled, { once: true });
+    afterBoot(settled);
+    /* i18n.js may wait on an IP lookup before its first pass */
+    var langPass = false;
+    var onLangPass = function () { if (!langPass) { langPass = true; settled(); } };
+    d.addEventListener('mv:lang', onLangPass, { once: true });
+    setTimeout(onLangPass, 3000);
+  }
+
   ready(function () {
     var nav = d.querySelector('.site-nav');
     var inner = nav && nav.querySelector('.nav-inner');
@@ -158,6 +189,7 @@
         toggle.classList.toggle('is-open', open);
         toggle.setAttribute('aria-expanded', String(open));
         toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        if (window.mvLenis) window.mvLenis[open ? 'stop' : 'start']();
       };
       toggle.addEventListener('click', function () { setOpen(!overlay.classList.contains('open')); });
       overlay.addEventListener('click', function (e) {
