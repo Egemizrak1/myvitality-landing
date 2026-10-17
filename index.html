@@ -21,6 +21,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script>/* No cross-document View Transitions in this browser: styles.css fades <main> in instead */if(!('PageRevealEvent' in window))document.documentElement.classList.add('no-vt');</script>
   <script>/* Boot screen: the app's loader on the first page of a visit (styles.css, .booting) */(function(){var r=document.documentElement,t0,ok,done;try{if(sessionStorage.getItem('mv-boot'))return;sessionStorage.setItem('mv-boot','1')}catch(e){return}r.classList.add('booting');function end(){if(done)return;done=1;r.classList.add('booted');document.dispatchEvent(new Event('mv:booted'));setTimeout(function(){r.classList.remove('booting','booted')},300)}function check(){if(t0&&ok)setTimeout(end,Math.max(0,1116-(performance.now()-t0)))}requestAnimationFrame(function(){t0=performance.now();check()});document.addEventListener('DOMContentLoaded',function(){(document.fonts?document.fonts.ready:Promise.resolve()).then(function(){ok=1;check()})});setTimeout(end,4000)})();</script>
   <link rel="stylesheet" href="/styles.css">
 
@@ -229,8 +230,12 @@
       <a href="/blog/">Blog</a>
       <a href="/#download" class="nav-cta">Join the beta</a>
     </div>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <select id="langSelect" class="lang-select" aria-label="Choose language"><option value="en">English</option><option value="tr">Türkçe</option><option value="de">Deutsch</option><option value="es">Español</option><option value="fr">Français</option><option value="it">Italiano</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="pt">Português</option><option value="ru">Русский</option><option value="zh">中文</option><option value="ar">العربية</option></select>
   </div>
 </nav>
+
+<main id="main">
 
 <!-- HERO -->
 <header class="home-hero">
@@ -297,7 +302,7 @@
         <a class="more" href="/recovery-tracker/" style="display:inline-block;margin-top:20px;color:var(--accent);font-weight:600;font-size:.9rem">Explore recovery →</a>
       </div>
       <div class="phone-wrap" data-reveal>
-        <div class="feature-phone">
+        <div class="feature-phone" data-shot="recovery">
           <div class="phone-top"><div class="dynamic-island"></div></div>
           <div class="phone-screen">
             <img src="/assets/recovery-sleep-hrv-tracker-screen.webp" alt="MyVitality Health screen with recovery score 78, HRV, resting heart rate, sleep and activity strain" loading="lazy" width="240" height="522">
@@ -484,7 +489,7 @@
         <a class="more" href="/community/" style="display:inline-block;margin-top:20px;color:var(--accent);font-weight:600;font-size:.9rem">Explore community →</a>
       </div>
       <div class="phone-wrap" data-reveal>
-        <div class="feature-phone">
+        <div class="feature-phone" data-shot="community">
           <div class="phone-top"><div class="dynamic-island"></div></div>
           <div class="phone-screen">
             <img src="/assets/fitness-community-activity-feed.webp" alt="MyVitality social feed with friends' run and ride posts, kudos and route cards" loading="lazy" width="240" height="522">
@@ -665,6 +670,8 @@
     <p class="waitlist-note" style="text-align:center">Free to join · No spam · One email when the beta opens.</p>
   </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer class="site-footer">

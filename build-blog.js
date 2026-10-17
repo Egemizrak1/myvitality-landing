@@ -35,6 +35,8 @@ function nav(active) {
       ${item('/blog/', 'Blog')}
       <a href="/#download" class="nav-cta">Get the app</a>
     </div>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <select id="langSelect" class="lang-select" aria-label="Choose language"><option value="en">English</option><option value="tr">Türkçe</option><option value="de">Deutsch</option><option value="es">Español</option><option value="fr">Français</option><option value="it">Italiano</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="pt">Português</option><option value="ru">Русский</option><option value="zh">中文</option><option value="ar">العربية</option></select>
   </div>
 </nav>`;
 }
@@ -76,6 +78,7 @@ function head({ title, description, url, schema = '' }) {
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script>/* No cross-document View Transitions in this browser: styles.css fades <main> in instead */if(!('PageRevealEvent' in window))document.documentElement.classList.add('no-vt');</script>
   <script>/* Boot screen: the app's loader on the first page of a visit (styles.css, .booting) */(function(){var r=document.documentElement,t0,ok,done;try{if(sessionStorage.getItem('mv-boot'))return;sessionStorage.setItem('mv-boot','1')}catch(e){return}r.classList.add('booting');function end(){if(done)return;done=1;r.classList.add('booted');document.dispatchEvent(new Event('mv:booted'));setTimeout(function(){r.classList.remove('booting','booted')},300)}function check(){if(t0&&ok)setTimeout(end,Math.max(0,1116-(performance.now()-t0)))}requestAnimationFrame(function(){t0=performance.now();check()});document.addEventListener('DOMContentLoaded',function(){(document.fonts?document.fonts.ready:Promise.resolve()).then(function(){ok=1;check()})});setTimeout(end,4000)})();</script>
   <link rel="stylesheet" href="/styles.css">
 ${schema}
@@ -113,6 +116,8 @@ function renderArticle(p) {
 
 ${nav('/blog/')}
 
+<main id="main">
+
 <header class="page-hero">
   <div class="container" style="max-width:760px">
     <div class="crumbs"><a href="/">Home</a> / <a href="/blog/">Blog</a> / <span>${esc(p.crumb || p.tag)}</span></div>
@@ -127,6 +132,8 @@ ${p.html}
   </article>
   ${cta}
 </section>
+
+</main>
 
 ${FOOTER}
 
@@ -156,6 +163,8 @@ function renderIndex(posts) {
 
 ${nav('/blog/')}
 
+<main id="main">
+
 <header class="page-hero">
   <div class="container">
     <div class="crumbs"><a href="/">Home</a> / <span>Blog</span></div>
@@ -180,6 +189,8 @@ ${cards}
     <p style="position:relative"><a href="/#download" class="btn-primary" style="display:inline-flex">Get notified at launch →</a></p>
   </div>
 </section>
+
+</main>
 
 ${FOOTER}
 

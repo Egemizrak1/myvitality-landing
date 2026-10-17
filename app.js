@@ -68,37 +68,29 @@
     else if (consent === null) ready(consentBar);
   }
 
-  /* ── Page transitions — JS fallback for browsers without cross-document
-   * view transitions (native @view-transition in styles.css covers the rest).
-   * Leaving: fade the page out, then navigate. Entering: fade in only when
-   * we arrived from an internal navigation (sessionStorage flag), so first
-   * visits and external arrivals never flash. ── */
-  if (!('PageRevealEvent' in window) && !reduce) {
-    try {
-      if (sessionStorage.getItem('mv-nav')) {
-        sessionStorage.removeItem('mv-nav');
-        root.classList.add('page-enter');
-      }
-    } catch (e) {}
-    d.addEventListener('click', function (e) {
-      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
-      if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return;
-      if ((a.getAttribute('href') || '').charAt(0) === '#') return; /* pure anchor */
-      var url;
-      try { url = new URL(a.href, location.href); } catch (err) { return; }
-      if (url.origin !== location.origin) return;
-      if (url.pathname === location.pathname && url.hash) return; /* in-page anchor */
-      e.preventDefault();
-      try { sessionStorage.setItem('mv-nav', '1'); } catch (err) {}
-      root.classList.add('page-leave');
-      setTimeout(function () { location.href = url.href; }, 170);
-    });
-    /* bfcache restore (back/forward) — never come back faded out */
-    window.addEventListener('pageshow', function (e) {
-      if (e.persisted) root.classList.remove('page-leave');
-    });
-  }
+  /* ── Page transitions: shared phone ──
+   * Navigation itself is untouched (cross-document View Transitions in
+   * styles.css). A home section's phone that is also on the page it links
+   * to ([data-shot] → [data-shot-dest]) morphs into it. It is named only on
+   * the way out and only while on screen, so a phone scrolled out of view
+   * never flies in from off-screen. */
+  var SHOT_DEST = { '/recovery-tracker/': 'recovery', '/community/': 'community' };
+  var clearShots = function () {
+    d.querySelectorAll('[data-shot]').forEach(function (el) { el.style.viewTransitionName = ''; });
+  };
+  window.addEventListener('pageswap', function (e) {
+    clearShots();
+    if (!e.viewTransition || !e.activation || !e.activation.entry) return;
+    var key;
+    try { key = SHOT_DEST[new URL(e.activation.entry.url).pathname]; } catch (err) { return; }
+    var el = key && d.querySelector('[data-shot="' + key + '"]');
+    /* two-column layouts only, as [data-shot-dest] in styles.css */
+    if (!el || !window.matchMedia('(min-width: 901px)').matches) return;
+    var r = el.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < window.innerHeight) el.style.viewTransitionName = 'shot-' + key;
+  });
+  /* back/forward cache: never come back with a phone still named */
+  window.addEventListener('pageshow', function (e) { if (e.persisted) clearShots(); });
 
   function ready(fn) {
     if (d.readyState !== 'loading') fn();
@@ -134,14 +126,20 @@
       onScroll();
     }
 
-    /* ── Mobile menu — built from existing .nav-links ── */
+    /* ── Mobile menu — built from existing .nav-links ──
+     * The pages carry the button (so the header never shifts when it
+     * arrives); it shows once wired up here. */
     if (nav && inner && links) {
-      var toggle = d.createElement('button');
-      toggle.className = 'nav-toggle';
-      toggle.setAttribute('aria-label', 'Open menu');
-      toggle.setAttribute('aria-expanded', 'false');
-      for (var s = 0; s < 3; s++) toggle.appendChild(d.createElement('span'));
-      inner.appendChild(toggle);
+      var toggle = inner.querySelector('.nav-toggle');
+      if (!toggle) {
+        toggle = d.createElement('button');
+        toggle.className = 'nav-toggle';
+        toggle.setAttribute('aria-label', 'Open menu');
+        toggle.setAttribute('aria-expanded', 'false');
+        for (var s = 0; s < 3; s++) toggle.appendChild(d.createElement('span'));
+        inner.appendChild(toggle);
+      }
+      toggle.classList.add('ready');
 
       var overlay = d.createElement('div');
       overlay.className = 'mobile-menu';
@@ -163,8 +161,16 @@
       };
       toggle.addEventListener('click', function () { setOpen(!overlay.classList.contains('open')); });
       overlay.addEventListener('click', function (e) {
-        if (e.target === overlay || e.target.tagName === 'A') setOpen(false);
+        if (e.target === overlay) { setOpen(false); return; }
+        var a = e.target.closest ? e.target.closest('a') : null;
+        if (!a) return;
+        /* Leaving for another page: stay open, so the page transition
+         * carries the menu away whole instead of catching it half faded. */
+        if (a.pathname !== location.pathname && !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) return;
+        setOpen(false);
       });
+      /* ...and never come back to it open (back/forward cache) */
+      window.addEventListener('pageshow', function (e) { if (e.persisted) setOpen(false); });
       d.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
       window.addEventListener('resize', function () { if (window.innerWidth > 820) setOpen(false); });
     }

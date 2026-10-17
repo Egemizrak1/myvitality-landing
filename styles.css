@@ -81,27 +81,59 @@
 
   --maxw: 1140px;
   --ease: cubic-bezier(.2,.7,.2,1);
+  --ease-page: cubic-bezier(.76,0,.24,1);
 }
 
-/* ── Page transitions — cross-document view transitions (progressive) ──
-   Pages crossfade + drift on navigation; the sticky nav keeps its own
-   transition group so it stays visually anchored between pages. */
-@view-transition { navigation: auto; }
-nav.site-nav { view-transition-name: site-nav; }
+/* ── Page transitions — cross-document View Transitions ──
+   An iOS-style sheet, as in the app: the page being left sinks back into
+   a black stage (scales down, dims, corners round) while the new page
+   slides up over it from the bottom. The header holds still: its own
+   group, swapped without a fade. A home section's phone that is also on
+   the page it links to morphs into it: app.js names the one being left
+   (only when on screen), [data-shot-dest] names the one arriving; a phone
+   without a partner leaves and arrives with its page. Browsers without
+   cross-document transitions get .no-vt (inline script in <head>) and a
+   short fade-in of <main>; with no JS, nothing is ever hidden. Reduced
+   motion: none of it. */
 @media (prefers-reduced-motion: no-preference) {
-  ::view-transition-old(root) { animation: pageOut .2s var(--ease) both; }
-  ::view-transition-new(root) { animation: pageIn .32s var(--ease) both; }
+  @view-transition { navigation: auto; }
+  html.no-vt main { animation: mainIn .3s ease-out both; }
 }
-@keyframes pageOut { to { opacity: 0; transform: translateY(-8px); } }
-@keyframes pageIn { from { opacity: 0; transform: translateY(10px); } }
+nav.site-nav { view-transition-name: site-header; }
+::view-transition-group(site-header) { animation: none; }
+::view-transition-old(site-header) { display: none; }
+::view-transition-new(site-header) { animation: none; }
 
-/* JS fallback (app.js) where cross-document view transitions are
-   unsupported: .page-enter fades the new page in after an internal
-   navigation, .page-leave fades out just before leaving. */
-@media (prefers-reduced-motion: no-preference) {
-  html.page-enter body { animation: pageIn .32s var(--ease) both; }
-  html.page-leave body { animation: pageOut .18s var(--ease) both; }
+::view-transition { background: var(--card-dark); }
+::view-transition-old(root), ::view-transition-new(root) { mix-blend-mode: normal; }
+::view-transition-old(root) { animation: pageBack .9s var(--ease-page) both; }
+::view-transition-new(root) { animation: pageUp .9s var(--ease-page) both; }
+/* Separate rules: a selector the browser lacks must not drop the root's.
+   A lone phone arriving rides up with its page (100vh = the page's 100%);
+   one leaving fades before the new page covers it (groups paint on top). */
+::view-transition-old(*.shot):only-child { animation: shotOut .35s ease-out both; }
+::view-transition-new(*.shot):only-child { animation: shotUp .9s var(--ease-page) both; }
+@keyframes pageBack {
+  from { clip-path: inset(0 round 0); }
+  to { transform: scale(.88); opacity: .45; clip-path: inset(0 round 32px); }
 }
+@keyframes pageUp {
+  from { transform: translateY(100%); clip-path: inset(0 round 32px 32px 0 0); }
+  to { transform: none; clip-path: inset(0 round 0); }
+}
+@keyframes shotUp { from { transform: translateY(100vh); } }
+@keyframes shotOut { to { opacity: 0; transform: scale(.88); } }
+@keyframes mainIn { from { opacity: 0; } }
+
+[data-shot], [data-shot-dest] { view-transition-class: shot; }
+/* Two-column layouts only: stacked (≤900px) the arriving phone sits a
+   screen below the fold, so the morph would fly it out of view. Same
+   breakpoint as app.js. */
+@media (min-width: 901px) {
+  [data-shot-dest="recovery"] { view-transition-name: shot-recovery; }
+  [data-shot-dest="community"] { view-transition-name: shot-community; }
+}
+::view-transition-group(*.shot) { animation-duration: .9s; animation-timing-function: var(--ease-page); }
 
 /* ── Boot screen — the app's loader (MyVitalityLoader.large) ──
    First page of a visit only: a white screen with the 56px mark, the M
@@ -251,7 +283,10 @@ nav.site-nav {
 .nav-cta:hover { background: var(--primary-hover); }
 .nav-cta:active { transform: scale(.97); }
 
-/* Hamburger (injected by app.js) */
+/* Hamburger and language menu: in the markup so the header never shifts
+   when they arrive, hidden until app.js / i18n.js wire them up (.ready) */
+.nav-toggle:not(.ready), .lang-select:not(.ready) { visibility: hidden; }
+
 .nav-toggle {
   display: none; width: 42px; height: 42px; margin: -8px -8px -8px 0;
   align-items: center; justify-content: center; flex-direction: column; gap: 5px;
@@ -639,7 +674,7 @@ html.js [data-reveal].in .eyebrow::before { width: 22px; }
   .phone-screen, .phone-carousel, .chat-screen { border-radius: 36px; }
 }
 
-/* ── Language switcher (injected by i18n.js) ── */
+/* ── Language switcher (wired up by i18n.js) ── */
 .lang-select {
   flex-shrink: 0; cursor: pointer;
   background: var(--surface); color: var(--text);

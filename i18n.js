@@ -136,23 +136,30 @@
       .catch(function () { apply('en', {}); });
   }
 
+  // The pages carry the menu with every language (so the header never
+  // shifts when it arrives); it shows once wired up here. Markup without
+  // it gets one appended.
   function buildSwitcher(current) {
-    var existing = d.getElementById('langSelect');
-    if (existing) { existing.value = current; return; }
-    var nav = d.querySelector('.site-nav .nav-inner');
-    if (!nav) return;
-    var sel = d.createElement('select');
-    sel.id = 'langSelect';
-    sel.className = 'lang-select';
-    sel.setAttribute('aria-label', 'Choose language');
-    Object.keys(LANGS).forEach(function (code) {
-      var o = d.createElement('option');
-      o.value = code; o.textContent = LANGS[code];
-      if (code === current) o.selected = true;
-      sel.appendChild(o);
-    });
-    sel.addEventListener('change', function () { setLang(sel.value, true); });
-    nav.appendChild(sel);
+    var sel = d.getElementById('langSelect');
+    if (!sel) {
+      var nav = d.querySelector('.site-nav .nav-inner');
+      if (!nav) return;
+      sel = d.createElement('select');
+      sel.id = 'langSelect';
+      sel.className = 'lang-select';
+      sel.setAttribute('aria-label', 'Choose language');
+      Object.keys(LANGS).forEach(function (code) {
+        var o = d.createElement('option');
+        o.value = code; o.textContent = LANGS[code];
+        sel.appendChild(o);
+      });
+      nav.appendChild(sel);
+    }
+    sel.value = current;
+    if (!sel.classList.contains('ready')) {
+      sel.addEventListener('change', function () { setLang(sel.value, true); });
+      sel.classList.add('ready');
+    }
   }
 
   function init() {
